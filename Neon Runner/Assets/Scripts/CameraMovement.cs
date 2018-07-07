@@ -8,6 +8,8 @@ public class CameraMovement : MonoBehaviour {
     private Vector3 startOffset;
     private Vector3 moveVector;
 
+
+    //Camera Movement at the beginning
     private float transition = 0.0f;
     private float animationDuration = 2.0f; //Dauer der Kamera-Animation am Spielstart
     private Vector3 animationOffset = new Vector3(0, 5, 5);
@@ -24,6 +26,7 @@ public class CameraMovement : MonoBehaviour {
 
         moveVector = lookAt.position + startOffset;
 
+        //Camera Restriction
         // X
         //moveVector.x = 0;
         // Y
@@ -35,7 +38,7 @@ public class CameraMovement : MonoBehaviour {
         }
         else
         {
-            // Kamera-Animation beim Spielstart
+            // Animation at the´Start
             transform.position = Vector3.Lerp(moveVector + animationOffset, moveVector, transition);
             transition += Time.deltaTime * 1 / animationDuration;
             transform.LookAt(lookAt.position + Vector3.up);
