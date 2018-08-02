@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrackSpawnManager : MonoBehaviour {
 
     public GameObject[] trackSections;
+    // public Material trackMaterial; // Material für Streckenteile
     private Transform playerTransform;
     private float spawnZ = -15.0f; // -15, damit beim Start keine Lücke hinterm Spieler zu sehen ist
     private float trackSectionLength = 60.0f;
@@ -36,12 +37,15 @@ public class TrackSpawnManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        //If Player has passed the safeZone: a new track gets spawned and the first gets deleted
-        if(playerTransform.position.z > (spawnZ + safeZone - amountofRenderedTracks * trackSectionLength))
-        {
-            SpawnTrack();
-            DeleteTrack();
+        if (GameObject.Find("Ship")){
+            //If Player has passed the safeZone: a new track gets spawned and the first gets deleted
+            if (playerTransform.position.z > (spawnZ + safeZone - amountofRenderedTracks * trackSectionLength))
+            {
+                SpawnTrack();
+                DeleteTrack();
+            }
         }
+        
     }
     //Spanws a new Track
     private void SpawnTrack(int trackIndex = -1)
@@ -51,6 +55,13 @@ public class TrackSpawnManager : MonoBehaviour {
             gameobj = Instantiate(trackSections[RandomTrackGenerator()]) as GameObject;
         else
             gameobj = Instantiate(trackSections[0]) as GameObject;
+
+        //Renderer rend = gameobj.GetComponent<Renderer>(); //Verweist auf den Renderer des Gameobjects Track
+        //if(rend != null) //wenn der Renderer vorhanden ist, weise das Material zu
+        //{
+        //    rend.material = trackMaterial;
+        //    Debug.Log("Material geladen");
+        //}
 
         gameobj.transform.SetParent(transform);
         gameobj.transform.position = Vector3.forward * spawnZ;
