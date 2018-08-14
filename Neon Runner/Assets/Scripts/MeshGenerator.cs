@@ -4,8 +4,9 @@ using UnityEngine;
 
 public static class MeshGenerator {
 
-public static MeshData GenerateTerrainMesh(float [,] heightMap, float heightMultiplier, AnimationCurve heightCurve, int levelOfDetail)
+public static MeshData GenerateTerrainMesh(float [,] heightMap, float heightMultiplier, AnimationCurve oneheightCurve, int levelOfDetail)
     {
+        AnimationCurve heightCurve = new AnimationCurve(oneheightCurve.keys);// jeder Thread hat seine eigen heightCurve. ansonsten gibt es bugs und Das Mesh hat extreme spitzen.
         int width = heightMap.GetLength(0);
         int height = heightMap.GetLength(1);
 
@@ -14,7 +15,7 @@ public static MeshData GenerateTerrainMesh(float [,] heightMap, float heightMult
         float topLeftZ = (height - 1) / 2f;
 
         int meshSimplificationIncrement =(levelOfDetail == 0)?1:levelOfDetail * 2;
-        int verticiesPerLine = (width - 1) / meshSimplificationIncrement + 1;
+        int verticiesPerLine = (width - 1) / meshSimplificationIncrement + 1; //Berechnet die verticiesperLine um die größe der MeshData festlegen zu können 
 
         //ruft die MeshData Funktion auf und übergibt width und height der generierten Map
         MeshData meshData = new MeshData(verticiesPerLine, verticiesPerLine);
