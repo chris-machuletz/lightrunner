@@ -13,8 +13,8 @@ public class CharakterSteuerung : MonoBehaviour
     public float jumppower = 5; //sprunghöhe
     public float test = 0;
 
-    bool hover = false;
-    bool inputHover = false;
+    bool hover = true;
+    public bool inputHover = false;
     bool inputJump = false;
     float velocity = 0;
 

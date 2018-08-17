@@ -15162,6 +15162,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1563900058}
   - component: {fileID: 1563900059}
+  - component: {fileID: 1563900060}
   m_Layer: 0
   m_Name: HighscoreAnzeige
   m_TagString: Untagged
@@ -15197,6 +15198,21 @@ MonoBehaviour:
   highScore: {fileID: 1294437711}
   "z\xE4hler": 0
   zahl: 0
+--- !u!114 &1563900060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1563900057}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6afbb920327c6b459ddfd11612f7b11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHover: 100
+  aktuellHover: 0
+  hoverLeiste: {fileID: 1308916064}
+  CharakterScript: {fileID: 1955052165}
 --- !u!1 &1578390633
 GameObject:
   m_ObjectHideFlags: 0
