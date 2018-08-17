@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: "Assets/Scenes/Men\xFC.unity"
+    guid: d3823e51154599f48a29c1e7a361ce76
   m_configObjects: {}
