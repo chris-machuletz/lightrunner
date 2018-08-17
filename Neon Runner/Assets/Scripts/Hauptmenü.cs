@@ -25,3 +25,5 @@ public class Hauptmenü : MonoBehaviour {
         Application.Quit();
     }
 }
+
+//Quelle: https://www.youtube.com/watch?v=n11oq0Er9h4
