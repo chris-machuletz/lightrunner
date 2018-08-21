@@ -1,66 +1,53 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
-using System;
-using UnityEngine.SceneManagement;
 
-//FUNKTIONIERT NOCH GARNIX!!!!
-public class HoverUp : MonoBehaviour {
+[RequireComponent(typeof(MeshFilter)), RequireComponent(typeof(MeshRenderer))]
+public class HoverUp : MonoBehaviour
+{
 
-    bool flagW;
-    public static bool restart;
-    public static bool essen;
 
     public Mesh mesh;
 
-    public List<Vector3> vertices;
-    public List<int> triangles;
+    public static bool gegessen;
 
-    //Variablen
-    public int a = 0;           //zähler für die vertices der snake
-    public int i = 0;           // i muss immer zB 4 Felder kleiner sein als a wenn die Snake nur ein Block groß sein soll
-    public int zeit = 0;        //zeit für das wachsen der snake
-    GameObject turtle;
-    GameObject korper;  //test
-    public bool korperbol;
+    public GameObject spieler;
+    public GameObject cube;
 
-    float timeLeft = 1.0f;
+    private int entfernung = 1000;  //legt fest in bis zu welcher entfernung der cube spawnen soll
 
-
-    float length = 1f;          //Größe der Einheiten der Snake
-
-
-    // Use this for initialization
-    void Start () {
+    void Start()
+    {
         GetComponent<MeshFilter>().mesh = mesh = new Mesh();
-        List<Vector3> vertices = new List<Vector3>();
-        List<int> triangles = new List<int>();
 
-        //erstellung der turtle und positionierung + aufruf der koch funktion
-        turtle = new GameObject("Turtle");
-        //korper = new GameObject("korper"); //test
+        gegessen = false;
 
-        //Erstellung der Componenten für die Futter Aktion auf der Turtle----------------------------------------------------------------
-        Rigidbody rigi = turtle.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        BoxCollider box = turtle.AddComponent(typeof(BoxCollider)) as BoxCollider;
-        //turtle.AddComponent(typeof(test));
+        this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
 
-        rigi.useGravity = false;
+        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.localScale = new Vector3(1.0f, 1.0f, 2.0f);
+        cube.GetComponent<Renderer>().material.color = new Color(0.0f, 1.0f, 0.0f);
+        cube.transform.position = this.transform.position;
+
+        cube.tag = "HoverUp";
+        BoxCollider box = cube.GetComponent(typeof(BoxCollider)) as BoxCollider;    //aktiviert den collider im cube
         box.isTrigger = true;
-        //--------------------------------------------------------------------------------------------------------------------------------
-        flagW = false;
-        restart = false;
-        essen = false;
-
-        turtle.transform.Translate(new Vector3(1, 0, 0));
-        //korper.transform.position = turtle.transform.position - new Vector3(1, 0, 0);
-
-        InvokeRepeating("Move", 0.3f, 0.3f);    //Ruft die Move Methode auf und bestimmt die schnelligkeit des Repeatings
     }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private void Update()
+    {
+        //soll ausgeführt werden, wenn der block konsumiert wurde.
+        if (gegessen == true)
+        {
+            this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
+            gegessen = false;
+        }
+        if (GameObject.FindGameObjectWithTag("Player").transform.position.z >= this.transform.position.z)
+        {
+            this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
+            cube.transform.position = this.transform.position;
+        }
+    }
+ 
+
 }
