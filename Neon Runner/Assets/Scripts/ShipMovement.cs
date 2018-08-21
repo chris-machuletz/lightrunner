@@ -7,7 +7,7 @@ public class ShipMovement : MonoBehaviour {
     private CharacterController controller;
     private Vector3 moveVector;
 
-    private float velocity = 50.0f; //Geschwindigkeit des Spielers
+    public float velocity; //Geschwindigkeit des Spielers
     private float gravity = 10.0f;
     private float verticalVelocity = 0.0f;
 
@@ -55,7 +55,7 @@ public class ShipMovement : MonoBehaviour {
         }
 
         // X-Movement
-        moveVector.x = Input.GetAxisRaw("Horizontal") * velocity;
+        moveVector.x = Input.GetAxisRaw("Horizontal") * (velocity / 3);
 
         // Y-Movement
         moveVector.y = verticalVelocity;

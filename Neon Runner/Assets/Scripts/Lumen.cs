@@ -9,16 +9,19 @@ public class Lumen : MonoBehaviour {
     public Text lumenCountText;
     public Text deathText;
 
+    private float vel; //geschwindigkeit des Spielers (aus Shipmovement.cs)
+
     // Use this for initialization
     void Start () {
-        lumenCount = 50.0f;
+        vel = GameObject.Find("Ship").GetComponent<ShipMovement>().velocity;
+        lumenCount = 150.0f;
         SetCountText();
         deathText.text = "";
     }
 	
 	// Update is called once per frame
 	void Update () {
-        lumenCount -= Time.deltaTime * 10.0f;
+        lumenCount -= Time.deltaTime * (vel / 10);
         SetCountText();
         if (lumenCount <= 0)
         {
@@ -34,10 +37,10 @@ public class Lumen : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "LumenCube")
+        if (collision.gameObject.name == "LumenCube" || collision.gameObject.name == "LumenCube(Clone)")
         {
             Destroy(collision.gameObject);
-            GameObject.Find("Ship").GetComponent<Lumen>().lumenCount += 1000;
+            GameObject.Find("Ship").GetComponent<Lumen>().lumenCount += 100;
         }
     }
 }
