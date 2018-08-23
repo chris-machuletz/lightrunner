@@ -53,5 +53,5 @@ public class Highscore : MonoBehaviour {
 
 }
 
-
+//Programmierer Alex
 //Quellen: https://www.youtube.com/watch?v=vZU51tbgMXk

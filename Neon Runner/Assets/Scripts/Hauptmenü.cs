@@ -27,6 +27,14 @@ public class Hauptmenü : MonoBehaviour {
 
         Application.LoadLevel(0);
     }
+
+    //Raumschiff ändern Button
+    public void RaumschiffAuswahl()
+    {
+
+        Application.LoadLevel(3);
+    }
+
     //Exit Button
     //Dieser Button funktioniert nur wenn das Spiel fertig compiliert ist
     public void Spielbeenden()
@@ -47,4 +55,5 @@ public class Hauptmenü : MonoBehaviour {
     }
 }
 
+//Programmierer Alex
 //Quelle: https://www.youtube.com/watch?v=n11oq0Er9h4

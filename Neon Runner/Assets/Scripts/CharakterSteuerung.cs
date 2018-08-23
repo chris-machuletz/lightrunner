@@ -100,3 +100,5 @@ public class CharakterSteuerung : MonoBehaviour
 
     }
 }
+
+//Programmierer Alex
