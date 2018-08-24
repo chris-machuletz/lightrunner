@@ -4,29 +4,49 @@ using UnityEngine;
 
 public class EndlessTerrain : MonoBehaviour {
 
-    public const float maxViewDst = 300;
+    const float scale = 5f;
+
+    const float dstViewerHasToMove = 25f; // Distanz die sich der Spieler bewegen muss damit sich die Chunks Updaten
+    const float sqrDstViewerHasToMove = dstViewerHasToMove * dstViewerHasToMove;
+
+  
     public Transform viewer;
     public Material mapMaterial;
+    
+    public LODInfo[] detailLevels;
+    public static float maxViewDst; // gibt an wie viele Chunks um den Spieler generiert werden. ist ein höheres LOD im MapGenerator eingetragen wird dieser Wert verwendet.
 
-    public static Vector2 viewerPosition;
-    static MapGenerator mapGenerator;
     int chunkSize;
     int chunksVisibleinViewDst;
+
+    public static Vector2 viewerPosition;
+    Vector2 viewerPositionOld;
+    static MapGenerator mapGenerator;
+   
     //Liste mit allen Koordinaten und Chunks um unnötige Dopplungen zu vermeiden. 
     Dictionary<Vector2, TerrainChunk> terrainChunkDictonary = new Dictionary<Vector2, TerrainChunk>();
-    List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>(); // Liste an Chunks die vorher sichtbar waren. ohne diese werden die Meshs die außerhalb der ViewDistance sind nachdem sich das Schiff bewegt hat nicht ausgeblendet.
+    static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>(); // Liste an Chunks die vorher sichtbar waren. ohne diese werden die Meshs die außerhalb der ViewDistance sind nachdem sich das Schiff bewegt hat nicht ausgeblendet.
 
     void Start()
     {
-        mapGenerator = FindObjectOfType<MapGenerator>(); 
+        mapGenerator = FindObjectOfType<MapGenerator>();
+
+        maxViewDst = detailLevels[detailLevels.Length - 1].distanceToNextLOD;
         chunkSize = MapGenerator.mapChunkSize - 1; // chunkSize ist also 240 x 240 
         chunksVisibleinViewDst = Mathf.RoundToInt(maxViewDst / chunkSize); // gibt an wie viele Chunks um den Spieler herum zu sehen sind.
+        UpdateVisibleChunks();
     }
 
     void Update()
     {
-        viewerPosition = new Vector2(viewer.position.x, viewer.position.z); // sezt die Aktuelle Position des Viewers(Transform object) auf die viewerPosition. Da sich die Kamera quasi bewegt wird sie hier die Position übergeben
-        UpdateVisibleChunks();
+        viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale; // sezt die Aktuelle Position des Viewers(Transform object) auf die viewerPosition. Da sich die Kamera quasi bewegt wird sie hier die Position übergeben
+
+
+        if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrDstViewerHasToMove) // damit die Chunks nicht bei jedem Frame geupdated wird wird überprüft ob der Spieler sich eine gewisse Distanz bewegt hat.
+        {
+            viewerPositionOld = viewerPosition;
+            UpdateVisibleChunks();
+        }
     }
 
     void UpdateVisibleChunks()
@@ -50,14 +70,11 @@ public class EndlessTerrain : MonoBehaviour {
                 if (terrainChunkDictonary.ContainsKey(viewedChunkCoord))
                 {
                     terrainChunkDictonary[viewedChunkCoord].UpdateTerrainChunk();//wenn ein Chunk vorhanden ist überprüft er ob er sich in der View Distance befindet und setzt diesen ggf aktiv.
-                    if (terrainChunkDictonary[viewedChunkCoord].isVisible()) //wenn der Chunk aktiv ist wird er der Liste an terrainChunksVisibleLastupdate hinzugefügt.
-                    {
-                        terrainChunksVisibleLastUpdate.Add(terrainChunkDictonary[viewedChunkCoord]);
-                    }
+                    
                 }
                 else
                 {
-                    terrainChunkDictonary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, transform, mapMaterial));
+                    terrainChunkDictonary.Add(viewedChunkCoord, new TerrainChunk(viewedChunkCoord, chunkSize, detailLevels, transform, mapMaterial));
                 }
                
             }
@@ -70,12 +87,23 @@ public class EndlessTerrain : MonoBehaviour {
         Vector2 position;
         Bounds bounds;
 
+        LODMesh[] lodMeshes;
+        LODInfo[] detailLevels;
+
         MapData mapData;
+        bool mapDataRecieved;
+
         MeshRenderer meshRenderer;
         MeshFilter meshFilter;
 
-        public TerrainChunk(Vector2 coord, int size, Transform parent, Material material)
+        int prevLOD = -1; //specihert den LOD vor dem Update damit dieser bei überinstimmung nicht neu generiert wird. 
+
+
+
+        public TerrainChunk(Vector2 coord,  int size, LODInfo[] detailLevels, Transform parent, Material material)
         {
+            this.detailLevels = detailLevels;
+
             position = coord * size;
             bounds = new Bounds(position, Vector2.one * size);
             Vector3 positionV3 = new Vector3(position.x, 0, position.y);
@@ -85,31 +113,79 @@ public class EndlessTerrain : MonoBehaviour {
             meshRenderer.material = material;
             meshFilter = meshObject.AddComponent<MeshFilter>();
 
-            meshObject.transform.position = positionV3; //setzt die Position auf die Stelle an der das mesh generiert werden soll
+            meshObject.transform.position = positionV3 * scale; //setzt die Position auf die Stelle an der das mesh generiert werden soll
             meshObject.transform.parent = parent; //Sorgt dafür das alle erstellten Meshs unter dem parent Element angefügt werden 
+            meshObject.transform.localScale = Vector3.one * scale;//scalet die einzelnen Meshes auf die gewünschte größe
             SetVisible(false);//der TerrainChunk wird beim erstellen erstmals nicht angezeigt. 
 
-            mapGenerator.RequestMapData(OnMapDataRecieved);
+
+            // setzt den LOD des lvlOfDetailMeshes auf die im lvlOfDetails übergebenen Werte.
+            lodMeshes = new LODMesh[detailLevels.Length];
+
+            for (int i = 0; i < detailLevels.Length; i++)
+            {
+                lodMeshes[i] = new LODMesh(detailLevels[i].lod, UpdateTerrainChunk); //Update TerrainChunk wird als callback übergeben
+            }
+
+            mapGenerator.RequestMapData(position, OnMapDataRecieved);
         }
 
         // Wenn die Berechnungen des extra Threads fertig sind soll aus der MapData die MeshData generiert werden.
         void OnMapDataRecieved(MapData mapData)
         {
-            mapGenerator.RequestMeshData(mapData, OnMeshDataReceived);
+            this.mapData = mapData;
+            mapDataRecieved = true;
+
+            Texture2D texture = TextureGenerator.TextureFromColourMap(mapData.colourMap, MapGenerator.mapChunkSize, MapGenerator.mapChunkSize);
+            meshRenderer.material.mainTexture = texture;
+
+            UpdateTerrainChunk();//da nicht bei jedem Frame geupdatet wird, muss die methode manuell aufgerufen werden.
         }
 
-        //Wenn die MeshData erhalten wurde wird die funktion aufgerufen
-        void OnMeshDataReceived(MeshData meshData)
-        {
-            meshFilter.mesh = meshData.CreateMesh();
-        }
+   
 
         //überprüft ob der Punkt innehralb des aktuellen Chunks der am nähesten zum Spieler liegt innerhalb der maximalen View Distance liegt. Tut er das wird der Chunk angezeigt. Tut er das nicht ausgeblendet.
         public void UpdateTerrainChunk()
         {
-            float viewerDstFromNearestEdge = bounds.SqrDistance(viewerPosition); 
-            bool visible = viewerDstFromNearestEdge <= maxViewDst * maxViewDst;
-            SetVisible(visible);
+            if (mapDataRecieved)
+            { //nur wenn die MapData bereits vorhanden ist macht es Sinn diesen teil auszuführen. vorher können keine Meshes generiert werden.
+                float viewerDstFromNearestEdge = bounds.SqrDistance(viewerPosition); 
+                bool visible = viewerDstFromNearestEdge <= maxViewDst * maxViewDst;
+
+                //setzt den LOD der Meshes auf basis der Distanz zum Spieler und die eingestellten LOD im Editor;
+                if (visible)
+                {
+                    int lodindex = 0;//gibt an welcher LOD aufgrund der aktuellen Distanz zum Spieler dargestellt werden soll.
+                    for (int i = 0; i < detailLevels.Length -1 ; i++)
+                    {
+                        if(viewerDstFromNearestEdge > detailLevels[i].distanceToNextLOD * detailLevels[i].distanceToNextLOD)
+                        {
+                            lodindex = i + 1;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
+                    if(lodindex != prevLOD)
+                    {
+                        LODMesh lodMesh = lodMeshes[lodindex]; // wenn die beiden Werte nicht überinstimmen ist das neue Mesh das lvlOfDetailMesh mit dem aktuell benötigten LOD;
+                        if (lodMesh.hasMesh)
+                        {
+                            prevLOD = lodindex;
+                            meshFilter.mesh = lodMesh.mesh; //das "alte" Mesh wird mit dem neuen Mesh mit richtigen LOD ersetzt.
+                            
+                        }
+                        else if (!lodMesh.hasRequestedMesh)//wenn noch kein Mesh requested also generiert wurde wird heir ein neues erzeugt.
+                        {
+                            lodMesh.RequestMesh(mapData);
+                        }
+                    }
+                    terrainChunksVisibleLastUpdate.Add(this); //fügt sich selbst der liste hinzu um später ausgeblendet zu werden wenn der viewer nicht mehr in Reichweite ist.
+                }
+
+                SetVisible(visible);
+            }
         }
         //setzt das Mesh Aktiv je nachdem ob es sich in der Max View Distance befindet
         public void SetVisible(bool visible)
@@ -117,10 +193,51 @@ public class EndlessTerrain : MonoBehaviour {
             meshObject.SetActive(visible);
         } 
 
-        public bool isVisible()
+        public bool IsVisible()
         {
             return meshObject.activeSelf;
         }
 
     }
+
+    class LODMesh
+    {
+        public Mesh mesh;
+        public bool hasRequestedMesh;
+        public bool hasMesh;
+        int lod; // soll der RequestMesh Methode mitgegeben werden um festzulegen welcher LOD gerade benötigt wird. 
+        System.Action updateCallback;
+
+        public LODMesh(int lod, System.Action updateCallback)
+        {
+            this.lod = lod;
+            this.updateCallback = updateCallback;
+        }
+
+        //callback Funktion der RequestMesh Meshode 
+        void OnMeshDataReceived(MeshData meshData)
+        {
+            mesh = meshData.CreateMesh();
+            hasMesh = true;
+
+            updateCallback();
+        }
+
+        public void RequestMesh(MapData mapData)
+        {
+            hasRequestedMesh = true;
+            mapGenerator.RequestMeshData(mapData, lod, OnMeshDataReceived);
+        }
+
+    
+    }
+
+    [System.Serializable]
+    public struct LODInfo
+    {
+        public int lod;
+        public float distanceToNextLOD;
+    }
+
+
 }

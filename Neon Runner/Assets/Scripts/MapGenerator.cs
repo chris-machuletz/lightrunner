@@ -12,7 +12,7 @@ public class MapGenerator : MonoBehaviour {
 
     public const int mapChunkSize = 241; //241, da später weiter entfernte Chnuks mit weniger verticies dargestellt werden sollen. und die Formel ist width -1/i +1. und 240 ist gut teilbar. Gibt quasi länge und breite des Chunks an
     [Range(0,6)]
-    public int levelOfDetail; // umso entfernter der Hintertgrund umso weniger Verticies werden verwendet. ggf unnötig in unserem Projekt wegen der Geschwindigkeit
+    public int edit_LOD; // umso entfernter der Hintertgrund umso weniger Verticies werden verwendet. ggf unnötig in unserem Projekt wegen der Geschwindigkeit
     public float noiseScale;
 
     public int octaves;
@@ -36,7 +36,7 @@ public class MapGenerator : MonoBehaviour {
     public void DrawMapInEditor()
     {
         //stellt die verschiedenen Maps dar, je nachdem welcher Drawmode selectet ist.
-       MapData mapData = GenerateMapData();
+       MapData mapData = GenerateMapData(Vector2.zero); // da jetzt ein Vector2 benötigt wird übergeben wir einfach den 0 Vector2
         MapDisplay display = FindObjectOfType<MapDisplay>();
         if (drawMode == DrawMode.NoiseMap)
         {
@@ -48,27 +48,27 @@ public class MapGenerator : MonoBehaviour {
         }
         else if (drawMode == DrawMode.Mesh)
         {
-            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(mapData.heightMap, meshHeightMuliplier, meshHeightCurve, levelOfDetail), TextureGenerator.TextureFromColourMap(mapData.colourMap, mapChunkSize, mapChunkSize));
+            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(mapData.heightMap, meshHeightMuliplier, meshHeightCurve, edit_LOD), TextureGenerator.TextureFromColourMap(mapData.colourMap, mapChunkSize, mapChunkSize));
         }
     }
 
 
     // ---------------> THREADING MapData <------------------
-    public void RequestMapData(Action<MapData> callback)
+    public void RequestMapData(Vector2 centre, Action<MapData> callback)// Vector2 centre sorgt dafür, dass nicht dauernd die selbe Map generiert wird sondern andere. 
     {
         //repräsentiert den MapDataThread mit dem Callback  Parameter
         ThreadStart threadStart = delegate
         {
-            MapDataThread(callback);
+            MapDataThread(centre, callback);
         };
 
         new Thread(threadStart).Start();
            
     }
     //Diese Methode läuft nun auf einem anderen Thread als dem HauptThread von Unity
-    void MapDataThread(Action<MapData> callback)
+    void MapDataThread(Vector2 centre, Action<MapData> callback)// Vector2 centre sorgt dafür, dass nicht dauernd die selbe Map generiert wird sondern andere. 
     {
-        MapData mapData = GenerateMapData(); // durch das Aufrufen der Methode innehalb eines anderen threads wird diese in dem selben ausgeführt. 
+        MapData mapData = GenerateMapData(centre); // durch das Aufrufen der Methode innehalb eines anderen threads wird diese in dem selben ausgeführt. 
         lock (mapDataThradInfoQueue)//damit die Queue nicht von mehreren Stellen gleichzeitig genutzt wird, verwendet man das lock Keyword
         {
             //fügt die Mapdata mit dem Callback einer Queue hinzu um diese an der richtigen Stelle auszuführen. hierfür existiert das Struct was beide variablen enthält.
@@ -77,17 +77,17 @@ public class MapGenerator : MonoBehaviour {
     }
 
     //----------> Threading MeshData <------------
-    public void RequestMeshData(MapData mapData,  Action<MeshData> callback)
+    public void RequestMeshData(MapData mapData, int lod, Action<MeshData> callback)
     {
         ThreadStart threadStart = delegate {
-            MeshDataThread(mapData, callback);
+            MeshDataThread(mapData, lod, callback);
         };
         new Thread(threadStart).Start();
     }
 
-    void MeshDataThread(MapData mapData, Action<MeshData> callback)
+    void MeshDataThread(MapData mapData,int lod, Action<MeshData> callback)
     {
-        MeshData meshData = MeshGenerator.GenerateTerrainMesh(mapData.heightMap, meshHeightMuliplier, meshHeightCurve, levelOfDetail); //erstelt eine neues Mesh mithilfe der GenerateTerrainMesh Methode und specihert dieses in der meshData variable vom Typ meshData(stuct)
+        MeshData meshData = MeshGenerator.GenerateTerrainMesh(mapData.heightMap, meshHeightMuliplier, meshHeightCurve, lod); //erstelt eine neues Mesh mithilfe der GenerateTerrainMesh Methode und specihert dieses in der meshData variable vom Typ meshData(stuct)
         lock (meshDataThreadInfoQueue)
         {
             meshDataThreadInfoQueue.Enqueue(new MapThreadInfo<MeshData>(callback, meshData));
@@ -123,10 +123,10 @@ public class MapGenerator : MonoBehaviour {
 
 
     //
-    //generiert eine Neue Noise Map mit den in Unity eingegebenen Werten.
-    MapData GenerateMapData()
+    //generiert eine Neuee Map mit den in Unity eingegebenen Werten(der daraus generierten noisemap(heightmap)).
+    MapData GenerateMapData(Vector2 centre)// Vector2 centre sorgt dafür, dass nicht dauernd die selbe Map generiert wird sondern andere. 
     {
-        float[,] noiseMap = Noise.GenerateNoiseMap(mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, offset);
+        float[,] noiseMap = Noise.GenerateNoiseMap(mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, centre + offset);
 
         Color[] colourMap = new Color[mapChunkSize* mapChunkSize];
       // loopt durch alle Pixel der Noise Map und setzt den Wert auf die Farbe der Region je nachdem in welcher er sich aufgrund seiner höhe befindet
@@ -137,9 +137,12 @@ public class MapGenerator : MonoBehaviour {
                 float currentHeight = noiseMap[x, y];
                 for (int i = 0; i < regions.Length; i++)
                 {
-                    if(currentHeight <= regions[i].height)
+                    if(currentHeight >= regions[i].height)
                     {
                         colourMap[y * mapChunkSize + x] = regions[i].colour;
+                    }
+                    else
+                    {
                         break;
                     }
                 }

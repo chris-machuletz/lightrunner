@@ -15,6 +15,8 @@ public static class TextureGenerator{
         return texture;
     }
 
+
+    //generiert die typische NoiseMap mit Werten zwischen schwarz und weis.
     public static Texture2D TextureFromHeightMap(float[,] heightMap)
     {
         int width = heightMap.GetLength(0);
