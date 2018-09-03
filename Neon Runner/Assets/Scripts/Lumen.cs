@@ -37,10 +37,13 @@ public class Lumen : MonoBehaviour {
 
     private void OnTriggerEnter(Collider collision)
     {
+
         if (collision.gameObject.name == "LumenCube" || collision.gameObject.name == "LumenCube(Clone)")
         {
             Destroy(collision.gameObject);
-            GameObject.Find("Ship").GetComponent<Lumen>().lumenCount += 100;
+            GameObject.Find("Ship").GetComponent<Lumen>().lumenCount += Random.Range(5,10);
+            AudioSource source = GetComponent<AudioSource>();
+            source.Play();
         }
     }
 }
