@@ -6,13 +6,13 @@ public class TrackSpawnManager : MonoBehaviour {
 
     public GameObject[] trackSections;
     public GameObject lumenCube;
-    private int anzLumenCubes = 2;
+    private int anzLumenCubes = 20;
     // public Material trackMaterial; // Material für Streckenteile
     private Transform playerTransform;
-    private float spawnZ = -15.0f; // -15, damit beim Start keine Lücke hinterm Spieler zu sehen ist
-    private float trackSectionLength = 60.0f;
+    public float spawnZ = -15.0f; // -15, damit beim Start keine Lücke hinterm Spieler zu sehen ist
+    private float trackSectionLength = 400.0f;
     private int amountofRenderedTracks = 5;
-    private float safeZone = 90.0f; // Löscht Streckensegmente erst, nachdem Spieler sie passiert hat
+    private float safeZone = 500.0f; // Löscht Streckensegmente erst, nachdem Spieler sie passiert hat
     private int lastSpawnedTrack = 0;
 
     private List<GameObject> activeTracks;
@@ -29,13 +29,16 @@ public class TrackSpawnManager : MonoBehaviour {
         
         for(int i = 0; i < amountofRenderedTracks; i++)
         {
-            if (i < 2) // als erste 2 Tracksections werden tracksection[0] gespawnt, auf dem sich noch keine Hindernisse befinden
+            if (i < 1) // als erste 2 Tracksections werden tracksection[0] gespawnt, auf dem sich noch keine Hindernisse befinden
             { 
                 SpawnTrack(0);
+               
             }
             else
             {
                 SpawnTrack();
+                SpawnLumenCubes();
+                DeleteLumenCubes();
             }
             
         }
@@ -106,7 +109,7 @@ public class TrackSpawnManager : MonoBehaviour {
 
         for(int i = 0; i < anzLumenCubes; i++)
         {
-            Vector3 cubePos = new Vector3(Random.Range(-12.0f, 12.0f), 1, Random.Range(spawnZ - trackSectionLength, spawnZ));
+            Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 1, Random.Range(spawnZ - trackSectionLength, spawnZ));
 
             GameObject lcube;
             lcube = Instantiate(lumenCube, cubePos, Quaternion.identity) as GameObject;
