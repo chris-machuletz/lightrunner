@@ -7,6 +7,7 @@ public class CameraMovement : MonoBehaviour {
     private Transform lookAt;
     private Vector3 startOffset;
     private Vector3 moveVector;
+    private float lumenCounter;
 
 
     //Camera Movement at the beginning
@@ -18,12 +19,20 @@ public class CameraMovement : MonoBehaviour {
     void Start () {
         lookAt = GameObject.FindGameObjectWithTag("Player").transform;
         startOffset = transform.position - lookAt.position;
-		
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
+        if (GameObject.Find("Ship") != null) //Es kann nur zugegriffen werden, wenn das Schiff noch nicht zerstört wurde
+        {
+            moveCamera();
+        }
+
+	}
+
+    void moveCamera()
+    {
         moveVector = lookAt.position + startOffset;
 
         //Camera Restriction
@@ -32,17 +41,28 @@ public class CameraMovement : MonoBehaviour {
         // Y
         //moveVector.y = Mathf.Clamp(moveVector.y, 3, 5);
 
-        if (transition > 1.0f)
+        if (getLumen() <= 0)
         {
-            transform.position = moveVector;
+            Debug.Log("You Died");
         }
         else
         {
-            // Animation at the´Start
-            transform.position = Vector3.Lerp(moveVector + animationOffset, moveVector, transition);
-            transition += Time.deltaTime * 1 / animationDuration;
-            transform.LookAt(lookAt.position + Vector3.up);
+            if (transition > 1.0f)
+            {
+                transform.position = moveVector;
+            }
+            else
+            {
+                // Animation at the Start
+                transform.position = Vector3.Lerp(moveVector + animationOffset, moveVector, transition);
+                transition += Time.deltaTime * 1 / animationDuration;
+                transform.LookAt(lookAt.position + Vector3.up);
+            }
         }
+    }
 
-	}
+    float getLumen()
+    {
+        return GameObject.Find("Ship").GetComponent<Lumen>().lumenCount;
+    }
 }
