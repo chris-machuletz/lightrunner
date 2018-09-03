@@ -2,12 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EndlessTerrain : MonoBehaviour {
+//######Inhalt Skript#####
+// Variablen für Chunksize, viewdst, und dst die sich ein Spieler bis zum nächsten Update bewegen muss. 
+//detaillevles (ggf. noch entfernen da vlt unnötig)
+//Start Methode die verschiedene variablen initialisiert und erste Chunks generiert. (mithilfe UpdateVisibleChunks)
+// Update Methode, die wenn sich der Spieler genug bewegt hat die Chuks aktualisiert (mithilfe UpdateVisibleChunks). 
+// UpdateVisibleChunks Methode. setzt Chunks die im letzten Update visible waren auf false, überprüft ob alle umliegenden Chunks die sichtabr sein sollten, existieren und setzt diese auf visible (UpdateTerrainChunks wird aufgerufen). sollten sie noch nicht existieren wird an diesem Punkt ein neuier chunk generiert. 
+// Klasse TerrainChunk. Erzeugt einen neuen Chunk mit MeshFilter und MeshRenderer. Wenn die MapDatarecieved Methode aufgerufen wird, wird mithilfe des TextureGenerator.cs Skript einen neue textur erzeugt und dem MeshRenderer hinzugefügt. Anschließend wird die UpdateTerrainChunk Methode ausgeführt.
+// Beim Updaten des TerrainChunks, wird zuerst überprüft ob sich der Chunk im sichtbaren Bereich des Spielers befindet. Tut er das wird überprüft wie weit er von der aktuellen Spielerpposition entfernt ist und welches Mesh mit welchen Detaillevel aktuell angezeigt werden muss. ISt noch keines vorhanden wird ein passendes Mesh erzeugt und anschließend der liste aktiver Chunks hinzugefügt.
+// Klasse LODMesh welche weiter informationen üner die einzelnen MEshes wier LOD enthält und Methoden zum überprüfen sowie die OnMeshDataReceived und RequestMeshData Methoden. 
+// Diese benutzen die RequestMeshData Methode vom MapGenerator Skript und rufen anschließend die beim aufruf übergebene Callback funktion auf (UpdateTerrainChunk). 
+
+
+public class BackgroundTerrain : MonoBehaviour {
 
     const float scale = 5f;
 
     const float dstViewerHasToMove = 25f; // Distanz die sich der Spieler bewegen muss damit sich die Chunks Updaten
-    const float sqrDstViewerHasToMove = dstViewerHasToMove * dstViewerHasToMove;
+    const float sqrDstViewerHasToMove = dstViewerHasToMove * dstViewerHasToMove; 
 
   
     public Transform viewer;
@@ -136,7 +148,7 @@ public class EndlessTerrain : MonoBehaviour {
             this.mapData = mapData;
             mapDataRecieved = true;
 
-            Texture2D texture = TextureGenerator.TextureFromColourMap(mapData.colourMap, MapGenerator.mapChunkSize, MapGenerator.mapChunkSize);
+            Texture2D texture = TextureGenerator.TextureFromColourMap(mapData.colourMap, MapGenerator.mapChunkSize, MapGenerator.mapChunkSize); ///////// unnötigg
             meshRenderer.material.mainTexture = texture;
 
             UpdateTerrainChunk();//da nicht bei jedem Frame geupdatet wird, muss die methode manuell aufgerufen werden.

@@ -4,9 +4,20 @@ using UnityEngine;
 using System;
 using System.Threading;
 
+//######Inhalt Skript#######
+// Variablen die zum Generieren der NosieMap wichtig sind.
+//DrawInEditor Methode die je nach ausgewählter MEthode die NoiseMap, Die ColourMap oder das Mesh darstellt.
+// Threading von MapData und Meshdata in je eigenen Threads mit callback Funktionen auf die folgende Methode
+//Update Methode die sofern Vorhanden MeshData und MapData aus der Queueu in eine Variable eschriebt und die beim Aufruf übergebene Action ausführt. 
+// GenerateMapData Methode die Methden aus Noise.cs benutzt um eine Noisemap und Colourmap zurückgibt (Mapdata struct)
+// struct MapThreadInfo welches für Mesh und Mapdata verwendet wird um parameter und callback funktion zu übergeben
+// DrawMap Methode. weiter Infos unten. 
+
+
 
 public class MapGenerator : MonoBehaviour {
 
+    
     public enum DrawMode {NoiseMap, ColourMap, Mesh};
     public DrawMode drawMode;
 
@@ -33,11 +44,12 @@ public class MapGenerator : MonoBehaviour {
     Queue<MapThreadInfo<MapData>> mapDataThradInfoQueue = new Queue<MapThreadInfo<MapData>>();
     Queue<MapThreadInfo<MeshData>> meshDataThreadInfoQueue = new Queue<MapThreadInfo<MeshData>>();
 
-    public void DrawMapInEditor()
+    public void DrawInEditor()
     {
         //stellt die verschiedenen Maps dar, je nachdem welcher Drawmode selectet ist.
        MapData mapData = GenerateMapData(Vector2.zero); // da jetzt ein Vector2 benötigt wird übergeben wir einfach den 0 Vector2
-        MapDisplay display = FindObjectOfType<MapDisplay>();
+        DrawMap display = FindObjectOfType<DrawMap>();
+       
         if (drawMode == DrawMode.NoiseMap)
         {
             display.DrawTexture(TextureGenerator.TextureFromHeightMap(mapData.heightMap));
@@ -95,10 +107,6 @@ public class MapGenerator : MonoBehaviour {
     }
 
 
-
-
-
-
     private void Update()
     {
         if (mapDataThradInfoQueue.Count > 0) // wenn sich ein Element in der Warteschlange befindet
@@ -123,7 +131,7 @@ public class MapGenerator : MonoBehaviour {
 
 
     //
-    //generiert eine Neuee Map mit den in Unity eingegebenen Werten(der daraus generierten noisemap(heightmap)).
+    //generiert eine Neue Map mit den in Unity eingegebenen Werten(der daraus generierten noisemap(heightmap)).
     MapData GenerateMapData(Vector2 centre)// Vector2 centre sorgt dafür, dass nicht dauernd die selbe Map generiert wird sondern andere. 
     {
         float[,] noiseMap = Noise.GenerateNoiseMap(mapChunkSize, mapChunkSize, seed, noiseScale, octaves, persistance, lacunarity, centre + offset);
@@ -137,7 +145,7 @@ public class MapGenerator : MonoBehaviour {
                 float currentHeight = noiseMap[x, y];
                 for (int i = 0; i < regions.Length; i++)
                 {
-                    if(currentHeight >= regions[i].height)
+                    if(currentHeight >= regions[i].range)
                     {
                         colourMap[y * mapChunkSize + x] = regions[i].colour;
                     }
@@ -181,25 +189,50 @@ public class MapGenerator : MonoBehaviour {
 
 }
 
-
+//Wird oben als Aray deklariert um die Regionen wie gewünscht einzustellen, welche für das aussehen der ColourMap verantwortlich sind. 
 [System.Serializable]
 public struct TerrainType
 {
     public string name;
-    public float height;
+    public float range;
     public Color colour; 
 }
 
-
+// enthält sowohl height als auch ColourMap. Wird in vorallem im BackgroundTerrain Skript verwendet. 
 public struct MapData
 {
     public readonly float[,] heightMap;
     public readonly Color[] colourMap;
 
-    //beonhaltet die informationen um die einzelnen Maps im Editor zu erstellen.
+    //beinhaltet die informationen um die einzelnen Maps im Editor zu erstellen.
     public MapData(float[,] heightMap, Color[] colourMap)
     {
         this.heightMap = heightMap;
         this.colourMap = colourMap;
+    }
+}
+
+// die im texture Generator erzeugten Texturen werden mithilfe der DrawTexture Methode auf die Plane gebracht.
+// Das im MeshGenerator erzeugte Mesh wird mithilfe der Draw Mesh Methode erteugt. (Im Editor)
+// sharedMaterial sorgt dafür, dass auch im Editor Modus die NoiseMap zu sehen ist
+
+// Außerhalb des Editor werden die Funktionen nicht benötigt. 
+
+ public class DrawMap : MonoBehaviour
+{
+    public Renderer textureRender;
+    public MeshFilter meshFilter;
+    public MeshRenderer meshRenderer;
+
+    public void DrawMesh(MeshData data, Texture2D texture)
+    {
+        meshFilter.sharedMesh = data.CreateMesh();
+        meshRenderer.sharedMaterial.mainTexture = texture;
+    }
+
+    public void DrawTexture(Texture2D texture)
+    {
+        textureRender.sharedMaterial.mainTexture = texture;
+        textureRender.transform.localScale = new Vector3(texture.width, 1, texture.height);
     }
 }

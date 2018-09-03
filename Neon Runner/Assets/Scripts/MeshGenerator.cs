@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//#####Inhalt Skript######
+//Normalen werden berechnet. 
+//Methode zum Mesh erzeugen.
+// verticies und die daraus gebildeten triangles werden dem Mesh hinzugefügt. 
+// die MeshData Klasse befindet sich hier. (enthält triangles, verticies und uvs)
+// Die "Fertige" Meshdata wird zurückgegeben.
+
+
+
+
+
 public static class MeshGenerator {
 
 public static MeshData GenerateTerrainMesh(float [,] heightMap, float heightMultiplier, AnimationCurve oneheightCurve, int levelOfDetail)
@@ -39,7 +50,7 @@ public static MeshData GenerateTerrainMesh(float [,] heightMap, float heightMult
         }
         meshData.ThreadNormals(); // berechnet die normalen im selben Thread wo das Mesh generiert wird. 
 
-        return meshData; // Daten werden zurückgegeben statt dem fertigen Mesh für später vlt zu implementierendes Threading. man kann innerhalb des threads keine neuen meshes erzeugen. deswegen returnen wir die MeshData innerhalb und erzeugen außerhalb des Threads ein neues Mesh.
+        return meshData; // man kann innerhalb des threads keine neuen meshes erzeugen. deswegen returnen wir die MeshData innerhalb und erzeugen außerhalb des Threads ein neues Mesh.
     }
 }
 //Speichert die Daten des Meshs
@@ -104,16 +115,17 @@ public class MeshData
 
         Vector3 sideAB = pointB - pointA;
         Vector3 sideAC = pointC - pointA;
+
         return Vector3.Cross(sideAB, sideAC).normalized;
     }
-
+    //Extra MEthode die die Funktion aufruft da diese nicht im Main Thread ausgeführt wird. 
     public void ThreadNormals()
     {
         threadnormals = CalculateNormals();
     }
 
 
-    //Ertsellt ein Mesh und berechnet die normalen neu wegen Beleuchtung etc
+    //Ertsellt ein Mesh und berechnet die normalen (threadnormals)
     public Mesh CreateMesh ()
     {
         Mesh mesh = new Mesh();
