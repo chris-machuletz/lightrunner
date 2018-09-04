@@ -53,6 +53,12 @@ public class Hauptmenü : MonoBehaviour {
         PlayerPrefs.DeleteKey("HighScore");
         highScore.text = "0";
     }
+
+    //Hier entsteht die Hover funktion
+    public void MausDaruber()
+    {
+
+    }
 }
 
 //Programmierer Alex

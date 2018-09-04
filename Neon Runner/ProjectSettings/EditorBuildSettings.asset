@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/HighScore.unity
     guid: 229fc71a6aaa947449e29c1940a8835b
+  - enabled: 1
+    path: Assets/Scenes/Raumschiffauswahl.unity
+    guid: 3d4a3a0bd4635b84b994b3c984df7237
   m_configObjects: {}

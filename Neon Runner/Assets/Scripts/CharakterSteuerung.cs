@@ -95,6 +95,8 @@ public class CharakterSteuerung : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);   //deltaTime damit die bewegungen nicht von PC unterschiedlich sind
     }
 
+
+    //ohne funktion, vllt noch nötig??
     void SetAnimation()
     {
 
