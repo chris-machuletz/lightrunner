@@ -15,7 +15,7 @@ public class TrackSpawnManager : MonoBehaviour {
     private float safeZone = 500.0f; // Löscht Streckensegmente erst, nachdem Spieler sie passiert hat
     private int lastSpawnedTrack = 0;
 
-    private List<GameObject> activeTracks;
+    public List<GameObject> activeTracks;
     private List<GameObject> activeLumenCubes;
 
     // Use this for initialization
@@ -39,11 +39,10 @@ public class TrackSpawnManager : MonoBehaviour {
                 SpawnTrack();
                 SpawnLumenCubes();
                 DeleteLumenCubes();
+
             }
             
         }
-
-
     }
 
     // Update is called once per frame
@@ -56,20 +55,24 @@ public class TrackSpawnManager : MonoBehaviour {
                 SpawnTrack();
                 DeleteTrack();
                 SpawnLumenCubes();
-                DeleteLumenCubes();
+                DeleteLumenCubes(); 
             }
         }
     }
-
+                
     //Spanws a new Track
     private void SpawnTrack(int trackIndex = -1)
     {
         GameObject gameobj;
-        if(trackIndex == -1)
+
+        if (trackIndex == -1)
+        {
             gameobj = Instantiate(trackSections[RandomTrackGenerator()]) as GameObject;
+            
+        }
         else
             gameobj = Instantiate(trackSections[0]) as GameObject;
-
+            
         //Renderer rend = gameobj.GetComponent<Renderer>(); //Verweist auf den Renderer des Gameobjects Track
         //if(rend != null) //wenn der Renderer vorhanden ist, weise das Material zu
         //{
@@ -79,8 +82,12 @@ public class TrackSpawnManager : MonoBehaviour {
 
         gameobj.transform.SetParent(transform);
         gameobj.transform.position = Vector3.forward * spawnZ;
+
+
         spawnZ += trackSectionLength;
         activeTracks.Add(gameobj);
+        gameObject.AddComponent<randomSpawn>();
+        gameObject.GetComponent<randomSpawn>().Test();
     }
     //Deletes the Track the Player already passed
     private void DeleteTrack()
@@ -116,7 +123,7 @@ public class TrackSpawnManager : MonoBehaviour {
 
             activeLumenCubes.Add(lcube);
 
-            Debug.Log(activeLumenCubes.Count);
+            //Debug.Log(activeLumenCubes.Count);
 
         }        
     }

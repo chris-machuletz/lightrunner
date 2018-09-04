@@ -14,7 +14,7 @@ public class Lumen : MonoBehaviour {
     // Use this for initialization
     void Start () {
         vel = GameObject.Find("Ship").GetComponent<ShipMovement>().velocity;
-        lumenCount = 150.0f;
+        lumenCount = 15000.0f;
         SetCountText();
         deathText.text = "";
     }
