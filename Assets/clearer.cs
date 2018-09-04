@@ -28,7 +28,7 @@ public class clearer : MonoBehaviour {
         //    i++;
         //}
 
-        //BESTER WEG BISHER
+        //BESTER WEG BISHER:
 
         //funktioniert nur wenn fast alle gelöscht werden sollen bis zu best. Zeitpunkt
         for (int k = 1; k >= 0; k++)
