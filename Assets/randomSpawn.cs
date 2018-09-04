@@ -8,15 +8,15 @@ public class randomSpawn : MonoBehaviour {
     public float max = 0.5f; //höchstzeit die zum nächsten Spawn vergeht
     public GameObject obstacl; //ein nutzbares Gameobject
     public float ranx, rany, ranz; //achsen-werte die zufällig sein sollen
-    public float borderx = 3f; //obere Grenze für zufälligen x-wert
+    public float borderx = 250f; //obere Grenze für zufälligen x-wert
     public float bordery = 0f; //obere Grenze für y-wert
-    public float borderz = 5f; //obere Grenze für zufälligen z-wert
+    public float borderz = 1000f; //obere Grenze für zufälligen z-wert
     public Vector3 posVec; //Vector für neue Position
     public List<GameObject> obstacls = new List<GameObject>(); //macht die erzeugten gameObjects zugreifbar/ speichert sie
     public int obstcount; //Listenzähler --> nicht benutzt
 
 
-    public float RandomizeX() //setzt den zu verwendenden x-wert zufällig
+    public float RandomizeX() //setzt den zu verwendenden x-wert zufällig für spawn
     {
         ranx = Random.Range(-borderx, borderx);
         return ranx;
@@ -24,20 +24,21 @@ public class randomSpawn : MonoBehaviour {
 
     public float RandomizeY() //setzt den zu verwendenden x-wert zufällig
     {
-        rany = Random.Range(0, bordery);
+        //rany = Random.Range(0, bordery);
+        rany = -5;
         return rany;
     }
 
     public float RandomizeZ() //setzt den zu verwendenden z-wert zufällig
     {
-        ranz = Random.Range(-borderz, borderz);
+        ranz = Random.Range(0, borderz);
         return ranz;
     }
 
     public int NumberPlusOne = 5;
 
     // Use this for initialization
-    void Start()
+    public void Test()
     { 
         //Invoke("Instanciate", (Random.Range(min, max))); //ruft die fkt zu zufälligen Zeiten auf, was dazu führt, 
                                                            //dass zufällig viele Instanzen der Hindernisse zu zufälligen Zeiten gespawnt werden
@@ -56,6 +57,7 @@ public class randomSpawn : MonoBehaviour {
 
         //hier dazwischen den code für das spawnobject einfügen
 
+        //obstacl.AddComponent<cub>();
         obstacl = GetComponent<cub>().Create(); //ruft create funktion von cub auf und damit dessen gameObject
         obstacl.AddComponent<modifications>(); //fügt Skript mit Modifikationen hinzu
         obstacl.GetComponent<modifications>().Start();
@@ -70,10 +72,17 @@ public class randomSpawn : MonoBehaviour {
         RandomizeX();
         RandomizeY();
         RandomizeZ();
-       
+
+        obstacl.transform.position = GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks[GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks.Count-1].transform.position;
+
+        
+        //tsm.GetComponent<TrackSpawnManager>();
+        //obstacl = tsm.activeTracks[tsm.activeTracks.Count-1];
+
+
         posVec = new Vector3(ranx, rany, ranz);//speichern von zufälligen Werten in Vector
         obstacl.transform.position += posVec;//zufällige Position zuweisen
-        obstacl.transform.localScale += new Vector3(0, Random.Range(0, 4), 0); //skaliert die obstacles zufällig
+        obstacl.transform.localScale += new Vector3(3, Random.Range(0, 10), 3); //skaliert die obstacles zufällig
 
 
         //Invoke("Instanciate", rant); //ruft sich selber nochmal auf --> nicht benötigt, wenn die Hindernisse alle auf einmal spawnen sollen
