@@ -31,7 +31,7 @@ public class CameraMovement : MonoBehaviour {
 
 	}
 
-    void moveCamera()
+   public void moveCamera()
     {
         moveVector = lookAt.position + startOffset;
 
@@ -63,6 +63,6 @@ public class CameraMovement : MonoBehaviour {
 
     float getLumen()
     {
-        return GameObject.Find("Ship").GetComponent<Lumen>().lumenCount;
+        return GameObject.Find("Ship").GetComponent<PlayerProps>().lumen;
     }
 }

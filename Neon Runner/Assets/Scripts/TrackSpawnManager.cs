@@ -60,6 +60,8 @@ public class TrackSpawnManager : MonoBehaviour {
             }
         }
     }
+  
+
 
     //Spanws a new Track
     private void SpawnTrack(int trackIndex = -1)
@@ -116,7 +118,7 @@ public class TrackSpawnManager : MonoBehaviour {
 
             activeLumenCubes.Add(lcube);
 
-            Debug.Log(activeLumenCubes.Count);
+            
 
         }        
     }
