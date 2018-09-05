@@ -31,6 +31,7 @@ public class ShipMovement : MonoBehaviour {
         else
         {
             moveShip();
+            
         }
         
 	}
@@ -69,6 +70,6 @@ public class ShipMovement : MonoBehaviour {
 
     float getLumen()
     {
-        return GameObject.Find("Ship").GetComponent<Lumen>().lumenCount;
+        return GameObject.Find("Ship").GetComponent<PlayerProps>().lumen;
     }
 }

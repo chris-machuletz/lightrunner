@@ -26,13 +26,13 @@ public class TrackSpawnManager : MonoBehaviour {
         activeLumenCubes = new List<GameObject>();
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        
+
         for(int i = 0; i < amountofRenderedTracks; i++)
         {
             if (i < 1) // als erste 2 Tracksections werden tracksection[0] gespawnt, auf dem sich noch keine Hindernisse befinden
-            { 
+            {
                 SpawnTrack(0);
-               
+
             }
             else
             {
@@ -41,7 +41,7 @@ public class TrackSpawnManager : MonoBehaviour {
                 DeleteLumenCubes();
 
             }
-            
+
         }
     }
 
@@ -55,11 +55,13 @@ public class TrackSpawnManager : MonoBehaviour {
                 SpawnTrack();
                 DeleteTrack();
                 SpawnLumenCubes();
-                DeleteLumenCubes(); 
+                DeleteLumenCubes();
             }
         }
     }
-                
+
+
+
     //Spanws a new Track
     private void SpawnTrack(int trackIndex = -1)
     {
@@ -68,11 +70,11 @@ public class TrackSpawnManager : MonoBehaviour {
         if (trackIndex == -1)
         {
             gameobj = Instantiate(trackSections[RandomTrackGenerator()]) as GameObject;
-            
+
         }
         else
             gameobj = Instantiate(trackSections[0]) as GameObject;
-            
+
         //Renderer rend = gameobj.GetComponent<Renderer>(); //Verweist auf den Renderer des Gameobjects Track
         //if(rend != null) //wenn der Renderer vorhanden ist, weise das Material zu
         //{
@@ -101,7 +103,7 @@ public class TrackSpawnManager : MonoBehaviour {
     {
         if(trackSections.Length <= 1)
         return 0;
-        
+
         int rndIndex = lastSpawnedTrack;
         while(rndIndex == lastSpawnedTrack)
         {
@@ -123,9 +125,9 @@ public class TrackSpawnManager : MonoBehaviour {
 
             activeLumenCubes.Add(lcube);
 
-            //Debug.Log(activeLumenCubes.Count);
 
-        }        
+
+        }
     }
     private void DeleteLumenCubes()
     {
