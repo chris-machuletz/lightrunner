@@ -202,7 +202,7 @@ public class BackgroundTerrain : MonoBehaviour {
         //setzt das Mesh Aktiv je nachdem ob es sich in der Max View Distance befindet
         public void SetVisible(bool visible)
         {
-            meshObject.SetActive(visible);
+           // meshObject.SetActive(visible);        //  JOSTI ÄNDERUNG; AUSGEKLAMMERT WEIL DER HINTERGRUND SONST IMMER NUR 1X PRO SCENE SICHTBAR WAR
         } 
 
         public bool IsVisible()
