@@ -8,9 +8,9 @@ public class randomSpawn : MonoBehaviour {
     public float max = 0.5f; //höchstzeit die zum nächsten Spawn vergeht
     public GameObject obstacl; //ein nutzbares Gameobject
     public float ranx, rany, ranz; //achsen-werte die zufällig sein sollen
-    public float borderx = 250f; //obere Grenze für zufälligen x-wert
+    public float borderx = 100f; //obere Grenze für zufälligen x-wert
     public float bordery = 0f; //obere Grenze für y-wert
-    public float borderz = 1000f; //obere Grenze für zufälligen z-wert
+    public float borderz = 400f; //obere Grenze für zufälligen z-wert
     public Vector3 posVec; //Vector für neue Position
     public List<GameObject> obstacls = new List<GameObject>(); //macht die erzeugten gameObjects zugreifbar/ speichert sie
     public int obstcount; //Listenzähler --> nicht benutzt
@@ -25,7 +25,7 @@ public class randomSpawn : MonoBehaviour {
     public float RandomizeY() //setzt den zu verwendenden x-wert zufällig
     {
         //rany = Random.Range(0, bordery);
-        rany = -5;
+        rany = -0.5f;
         return rany;
     }
 
@@ -35,7 +35,7 @@ public class randomSpawn : MonoBehaviour {
         return ranz;
     }
 
-    public int NumberPlusOne = 5;
+    public int NumberPlusOne = 100;
 
     // Use this for initialization
     public void Test()
