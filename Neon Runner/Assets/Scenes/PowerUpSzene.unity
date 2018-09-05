@@ -2803,7 +2803,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   "vorw\xE4rtsspeed": 50
-  speed: 100
+  speed: 50
   gravity: 10
   jumppower: 7
   test: 0
