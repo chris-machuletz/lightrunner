@@ -11,11 +11,18 @@ public class HoverLeiste : MonoBehaviour {
     public float aktuellHover = 0.0f;
     public Image hoverLeiste;
 
+    //Lumen deffinition
+    public float maxFuel = 1000.0f;
+    public float aktuellFuel = 0.0f;
+    public Image fuelLeiste;
+
+
     public CharakterSteuerung CharakterScript;   //ermöglicht den Zugriff auf die Bool im anderen C#
 
     // Use this for initialization
     void Start () {
         aktuellHover = maxHover;
+        aktuellFuel = 150f;
     }
 
     // Update is called once per frame
@@ -37,7 +44,9 @@ public class HoverLeiste : MonoBehaviour {
               aktuellHover = aktuellHover - 0.1f;
               //hoverLeiste.fillAmount = aktuellHover / maxHover;
           }
+
         hoverLeiste.fillAmount = aktuellHover / maxHover;
+        fuelLeiste.fillAmount = GameObject.Find("Ship").GetComponent<PlayerProps>().lumen / maxFuel;
     }
 }
 

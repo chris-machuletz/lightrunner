@@ -7,11 +7,12 @@ public class CharakterSteuerung : MonoBehaviour
     //änderung für später: wenn die vorwärtsbewegung seeeehr schnell werden soll muss der speed nach links und rechts ebenfalls erhöt werden!!!!
 
 
-    public float vorwärtsspeed = 20.0f; //z
-    public float speed = 10;    //x
+    public float vorwärtsspeed = 50.0f; //z
+    public float speed = 100;    //x
     public float gravity = 10;
     public float jumppower = 5; //sprunghöhe
     public float test = 0;
+
 
     bool hover = true;
     public bool inputHover = false;
@@ -20,12 +21,49 @@ public class CharakterSteuerung : MonoBehaviour
 
     private float animationDuration = 2.0f; // Verhindern, dass das Schiff bewegt wird, wenn die Kamera-Animation läuft (übernommen(nötig??))
 
+    //test charakter änderungen
+    public MeshFilter mesh;
+    public Mesh mesh1;
+    public GameObject selectedShip;
+    public GameObject empty;
+    //
+
     Vector3 moveDirection = Vector3.zero;
     CharacterController characterController;
 
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+
+        //test bereich von den charakter änderungen 
+
+        empty = GameObject.FindGameObjectWithTag("Player");
+
+        selectedShip = GameObject.Find("ship01");
+
+        empty = selectedShip;
+        // = GameObject.Find("ship01");
+
+        //selectedShip.transform.position = gameObject.transform.position;
+        //empty = selectedShip;
+        //gameObject.GetComponent = GameObject.Find("ship01");
+        /*
+        if (1 == PlayerPrefs.GetInt("Schiff", 0))
+        {
+            selectedShip = GameObject.Find("ship01");
+        }
+        */
+
+        /* mesh = GameObject.Find("Ship").GetComponent<MeshFilter>();
+
+         //mesh1 = GameObject.Find("ship01").GetComponent<MeshFilter>().mesh;
+
+
+         transform.Rotate(new Vector3(-90, -90, 0));
+         transform.localScale = new Vector3(20f, 20f, 20f);
+         transform.position = new Vector3(0, 0f, 0);
+
+         mesh.mesh = mesh1;*/
     }
 
     void Update()
@@ -40,8 +78,9 @@ public class CharakterSteuerung : MonoBehaviour
     void FixedUpdate()
     {
         InputCheck();
-        vorwärtsspeed = vorwärtsspeed + 0.001f;    //beschleunigung mit der zeit
+        vorwärtsspeed = vorwärtsspeed + 0.01f;    //beschleunigung mit der zeit
         Move();
+        selectedShip = GameObject.Find("ship01");
     }
 
     void InputCheck()
@@ -91,6 +130,7 @@ public class CharakterSteuerung : MonoBehaviour
         moveDirection.y -= gravity * Time.deltaTime; //erzeugt eine Gravitation für den Charakter
         characterController.Move(moveDirection * Time.deltaTime);   //deltaTime damit die bewegungen nicht von PC unterschiedlich sind
     }
+
 
 
     //ohne funktion, vllt noch nötig??

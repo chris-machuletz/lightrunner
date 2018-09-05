@@ -12,7 +12,7 @@ public class Lumen : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        vel = GameObject.Find("Ship").GetComponent<ShipMovement>().velocity;
+        vel = GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed;
         SetCountText();
         deathText.text = "";
     }
@@ -23,14 +23,14 @@ public class Lumen : MonoBehaviour {
         SetCountText();
         if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 0)
         {
-            deathText.text = "YOU DIED. Score: 0";
+            Application.LoadLevel(4);
         }
 	}
 
     void SetCountText()
     {
         int lumenCountInt = (int)GameObject.Find("Ship").GetComponent<PlayerProps>().lumen;
-        lumenCountText.text = "Lumen: " + lumenCountInt.ToString();
+        lumenCountText.text = lumenCountInt.ToString();
     }
 
     private void OnTriggerEnter(Collider collision)
