@@ -11,6 +11,7 @@ public class Highscore : MonoBehaviour {
     private void Start()
     {
         highScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString(); //setzt beim ersten start den highscore auf 0
+        PlayerPrefs.DeleteKey("Score");
     }
 
     /*  zählt pkt pekr knopf druck bsp code nur!!
@@ -32,6 +33,7 @@ public class Highscore : MonoBehaviour {
         {
             zahl = zahl + 1;
             pktzahl.text = zahl.ToString();
+            PlayerPrefs.SetInt("Score", zahl);
             zähler = 0;
         } else
         {

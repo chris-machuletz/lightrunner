@@ -25,7 +25,7 @@ public class HoverUp : MonoBehaviour
         this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
 
         cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.localScale = new Vector3(1.0f, 1.0f, 2.0f);
+        cube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         cube.GetComponent<Renderer>().material.color = new Color(0.0f, 1.0f, 0.0f);
         cube.transform.position = this.transform.position;
 
@@ -36,7 +36,7 @@ public class HoverUp : MonoBehaviour
 
     private void Update()
     {
-        //soll ausgeführt werden, wenn der block konsumiert wurde.
+        //soll ausgeführt werden, wenn der block konsumiert wurde. und spawnt ihn neu
         if (gegessen == true)
         {
             this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
@@ -47,6 +47,8 @@ public class HoverUp : MonoBehaviour
             this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
             cube.transform.position = this.transform.position;
         }
+        //sorgt dafür das sich der cube dreht
+        cube.transform.Rotate(Vector3.up, 100 * Time.deltaTime);
     }
  
 

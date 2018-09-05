@@ -35,16 +35,13 @@ public class CharakterSteuerung : MonoBehaviour
             characterController.Move(Vector3.forward * Time.deltaTime * velocity);
             return;
         }
-
-        InputCheck();
-        Move();
-
-
     }
 
     void FixedUpdate()
     {
+        InputCheck();
         vorwärtsspeed = vorwärtsspeed + 0.001f;    //beschleunigung mit der zeit
+        Move();
     }
 
     void InputCheck()

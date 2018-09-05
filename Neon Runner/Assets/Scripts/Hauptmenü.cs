@@ -8,6 +8,7 @@ public class Hauptmenü : MonoBehaviour {
     //Script für die Funktionen des Hauptmenüs
     public Highscore otherscript;   //ermöglicht den Zugriff auf die Bool im anderen C#
     public Text highScore;
+    public Text score;
 
     //Start Button
     public void Spielstarten()
@@ -46,6 +47,7 @@ public class Hauptmenü : MonoBehaviour {
     private void Start()
     {
         highScore.text = PlayerPrefs.GetInt("HighScore").ToString();
+        score.text = PlayerPrefs.GetInt("Score").ToString();
     }
 
     public void Reset()     //reset funktion per button des highscores

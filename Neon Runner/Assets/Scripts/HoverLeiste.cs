@@ -35,8 +35,9 @@ public class HoverLeiste : MonoBehaviour {
          if (CharakterScript.inputHover == true)
           {
               aktuellHover = aktuellHover - 0.1f;
-              hoverLeiste.fillAmount = aktuellHover / maxHover;
-          } 
+              //hoverLeiste.fillAmount = aktuellHover / maxHover;
+          }
+        hoverLeiste.fillAmount = aktuellHover / maxHover;
     }
 }
 

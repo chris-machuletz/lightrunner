@@ -8,6 +8,7 @@ public class CharakterReaktion : MonoBehaviour {
 
     public HoverLeiste hoverleiste;   //ermöglicht den Zugriff auf die Bool im anderen C#
 
+
     private Scene scene;
 
     private void Start()
@@ -21,10 +22,18 @@ public class CharakterReaktion : MonoBehaviour {
         {
             Debug.Log(hoverleiste.aktuellHover);
             hoverleiste.aktuellHover = hoverleiste.aktuellHover + 50.0f;    //für jedes hoverup gibt es + 50 hoverpkt
+            if (hoverleiste.aktuellHover > 100)
+            {
+                hoverleiste.aktuellHover = 100;
+            }
         }
         if (collisionInfo.tag == "Wand")   //tag oder name
         {
 
+        }
+        if (collisionInfo.name == "Abgrund")   //tag oder name
+        {
+            Application.LoadLevel(4);
         }
     }
 }
