@@ -6,7 +6,13 @@ public class TrackSpawnManager : MonoBehaviour {
 
     public GameObject[] trackSections;
     public GameObject lumenCube;
-    private int anzLumenCubes = 20;
+    public GameObject lifeCube;
+    public GameObject indestructableCube;
+
+    private int anzLumenCubes = 50;
+    private int anzLifeCubes = 20;
+    private int anzIndestructableCubes = 20;
+
     // public Material trackMaterial; // Material für Streckenteile
     private Transform playerTransform;
     public float spawnZ = -15.0f; // -15, damit beim Start keine Lücke hinterm Spieler zu sehen ist
@@ -17,6 +23,8 @@ public class TrackSpawnManager : MonoBehaviour {
 
     public List<GameObject> activeTracks;
     private List<GameObject> activeLumenCubes;
+    private List<GameObject> activeLifeCubes;
+    private List<GameObject> activeIndestructableCubes;
 
     // Use this for initialization
     void Start()
@@ -24,6 +32,7 @@ public class TrackSpawnManager : MonoBehaviour {
         //Spawns the amount of Rendered Tracks at the beginning
         activeTracks = new List<GameObject>();
         activeLumenCubes = new List<GameObject>();
+        activeLifeCubes = new List<GameObject>();
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -37,9 +46,15 @@ public class TrackSpawnManager : MonoBehaviour {
             else
             {
                 SpawnTrack();
+
                 SpawnLumenCubes();
                 DeleteLumenCubes();
 
+                SpawnLifeCubes();
+                DeleteLifeCubes();
+
+                //SpawnIndestructableCubes();
+                //DeleteIndestructableCubes();
             }
 
         }
@@ -54,8 +69,15 @@ public class TrackSpawnManager : MonoBehaviour {
             {
                 SpawnTrack();
                 DeleteTrack();
+
                 SpawnLumenCubes();
                 DeleteLumenCubes();
+
+                SpawnLifeCubes();
+                DeleteLifeCubes();
+
+                SpawnIndestructableCubes();
+                DeleteIndestructableCubes();
             }
         }
     }
@@ -118,15 +140,12 @@ public class TrackSpawnManager : MonoBehaviour {
 
         for(int i = 0; i < anzLumenCubes; i++)
         {
-            Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 1, Random.Range(spawnZ - trackSectionLength, spawnZ));
+            Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
 
             GameObject lcube;
             lcube = Instantiate(lumenCube, cubePos, Quaternion.identity) as GameObject;
 
             activeLumenCubes.Add(lcube);
-
-
-
         }
     }
     private void DeleteLumenCubes()
@@ -135,6 +154,50 @@ public class TrackSpawnManager : MonoBehaviour {
         {
             Destroy(activeLumenCubes[0]);
             activeLumenCubes.RemoveAt(0);
+        }
+    }
+
+    private void SpawnLifeCubes()
+    {
+        for (int i = 0; i < anzLifeCubes; i++)
+        {
+            Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
+
+            GameObject licube;
+            licube = Instantiate(lifeCube, cubePos, Quaternion.identity) as GameObject;
+
+            activeLifeCubes.Add(licube);
+        }
+    }
+
+    private void DeleteLifeCubes()
+    {
+        while (activeLifeCubes.Count > (anzLifeCubes * 5)) // so werden Cubes hinterm spieler korrekt entfernt, unabhängig von der anzahl der Cubes die auf dem Tracksegment gespawnt werden sollen
+        {
+            Destroy(activeLifeCubes[0]);
+            activeLifeCubes.RemoveAt(0);
+        }
+    }
+
+    private void SpawnIndestructableCubes()
+    {
+
+        for (int i = 0; i < anzIndestructableCubes; i++)
+        {
+            Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
+
+            GameObject indcube;
+            indcube = Instantiate(indestructableCube, cubePos, Quaternion.identity) as GameObject;
+
+            activeIndestructableCubes.Add(indcube);
+        }
+    }
+    private void DeleteIndestructableCubes()
+    {
+        while (activeIndestructableCubes.Count > (anzLumenCubes * 5)) // so werden Cubes hinterm spieler korrekt entfernt, unabhängig von der anzahl der Cubes die auf dem Tracksegment gespawnt werden sollen
+        {
+            Destroy(activeIndestructableCubes[0]);
+            activeIndestructableCubes.RemoveAt(0);
         }
     }
 }

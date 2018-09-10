@@ -37,13 +37,11 @@ public class BackgroundTerrain : MonoBehaviour {
    
     //Liste mit allen Koordinaten und Chunks um unnötige Dopplungen zu vermeiden. 
     Dictionary<Vector2, TerrainChunk> terrainChunkDictonary = new Dictionary<Vector2, TerrainChunk>();
-    static List<TerrainChunk> terrainChunksVisibleLastUpdate = new List<TerrainChunk>(); // Liste an Chunks die vorher sichtbar waren. ohne diese werden die Meshs die außerhalb der ViewDistance sind nachdem sich das Schiff bewegt hat nicht ausgeblendet.
+    static List<TerrainChunk> terrainChunksVisibleLastUpdate; // Liste an Chunks die vorher sichtbar waren. ohne diese werden die Meshs die außerhalb der ViewDistance sind nachdem sich das Schiff bewegt hat nicht ausgeblendet.
 
     void Start()
     {
-        mapGenerator = FindObjectOfType<MapGenerator>();
-
-        maxViewDst = detailLevels[detailLevels.Length - 1].distanceToNextLOD;
+        Reset();
         chunkSize = MapGenerator.mapChunkSize - 1; // chunkSize ist also 240 x 240 
         chunksVisibleinViewDst = Mathf.RoundToInt(maxViewDst / chunkSize); // gibt an wie viele Chunks um den Spieler herum zu sehen sind.
         UpdateVisibleChunks();
@@ -51,8 +49,8 @@ public class BackgroundTerrain : MonoBehaviour {
 
     void Update()
     {
-        viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale; // sezt die Aktuelle Position des Viewers(Transform object) auf die viewerPosition. Da sich die Kamera quasi bewegt wird sie hier die Position übergeben
 
+        Position();
 
         if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrDstViewerHasToMove) // damit die Chunks nicht bei jedem Frame geupdated wird wird überprüft ob der Spieler sich eine gewisse Distanz bewegt hat.
         {
@@ -61,12 +59,29 @@ public class BackgroundTerrain : MonoBehaviour {
         }
     }
 
+
+    public void Reset()
+    {
+        mapGenerator = FindObjectOfType<MapGenerator>();
+        maxViewDst = detailLevels[detailLevels.Length - 1].distanceToNextLOD;
+        terrainChunksVisibleLastUpdate = new List<TerrainChunk>();
+        Position();
+    }
+
+    public void Position()
+    {
+        viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale; // sezt die Aktuelle Position des Viewers(Transform object) auf die viewerPosition. Da sich die Kamera quasi bewegt wird sie hier die Position übergeben
+    }
+
+
+
     void UpdateVisibleChunks()
     {
         //Blendet alle Chunks aus die im Update vorher visible waren
         for (int i = 0; i < terrainChunksVisibleLastUpdate.Count; i++)
         {
             terrainChunksVisibleLastUpdate[i].SetVisible(false);
+            
         }
         terrainChunksVisibleLastUpdate.Clear();//cleart die Liste an Chunks die visible waren
 
@@ -95,7 +110,7 @@ public class BackgroundTerrain : MonoBehaviour {
     //Erstellt einen neuen TerrainChunk. Also ein neues Mesh anhand einer NoiseMap und den in den anderen Skripten übergebenen Methoden 
     public class TerrainChunk
     {
-        GameObject meshObject;
+        public GameObject meshObject;
         Vector2 position;
         Bounds bounds;
 
@@ -202,13 +217,23 @@ public class BackgroundTerrain : MonoBehaviour {
         //setzt das Mesh Aktiv je nachdem ob es sich in der Max View Distance befindet
         public void SetVisible(bool visible)
         {
-            meshObject.SetActive(visible);
-        } 
-
-        public bool IsVisible()
-        {
-            return meshObject.activeSelf;
+           
+           meshObject.SetActive(visible);
         }
+
+        public void DetroyMeshes()
+        {
+            for (int i = 0; i < terrainChunksVisibleLastUpdate.Count; i++)
+            {
+                Destroy(terrainChunksVisibleLastUpdate[i].meshObject);
+            }
+
+        }
+
+        //public bool IsVisible()
+        //{
+        //    return meshObject.activeSelf;
+        //}
 
     }
 

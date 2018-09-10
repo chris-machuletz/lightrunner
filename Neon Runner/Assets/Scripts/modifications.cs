@@ -72,7 +72,7 @@ public class modifications : MonoBehaviour {
 
         if (randi == 0)
         {
-            Debug.Log("x rechts randi = " + randi);
+            //Debug.Log("x rechts randi = " + randi);
             
             xrb = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird
                         //Debug.Log("XmoveRight");
@@ -80,7 +80,7 @@ public class modifications : MonoBehaviour {
 
         if (randi == 1)
         {
-            Debug.Log("x links randi = " + randi);
+            //Debug.Log("x links randi = " + randi);
             
             xlb = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird
                         //Debug.Log("XmoveLeft");
@@ -88,7 +88,7 @@ public class modifications : MonoBehaviour {
 
         if (randi == 2)
         {
-            Debug.Log("x beide randi = " + randi);
+            //Debug.Log("x beide randi = " + randi);
             
             xbb = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird
                         //Debug.Log("XmoveBoth");
@@ -96,7 +96,7 @@ public class modifications : MonoBehaviour {
 
         if (randi == 3)
         {
-            Debug.Log("y hoch randi = " + randi);
+            //Debug.Log("y hoch randi = " + randi);
             
             yub = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird
                         //Debug.Log("YmoveUp");
@@ -104,7 +104,7 @@ public class modifications : MonoBehaviour {
 
         if (randi == 4)
         {
-            Debug.Log("y runter randi = " + randi);
+            //Debug.Log("y runter randi = " + randi);
             
             ydb = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird
                         //Debug.Log("YmoveDown");
@@ -112,7 +112,7 @@ public class modifications : MonoBehaviour {
 
         if (randi == 5)
         {
-            Debug.Log("y beide randi = " + randi);
+            //Debug.Log("y beide randi = " + randi);
             
             ybb = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird
                         //Debug.Log("YmoveBoth");
@@ -120,28 +120,28 @@ public class modifications : MonoBehaviour {
 
         if (randi == 6)
         {
-            Debug.Log("nichts randi = " + randi);
+            //Debug.Log("nichts randi = " + randi);
 
             n1 = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird         
         }
 
         if (randi == 7)
         {
-            Debug.Log("nichts randi = " + randi);
+            //Debug.Log("nichts randi = " + randi);
 
             n2 = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird         
         }
 
         if (randi == 8)
         {
-            Debug.Log("nichts randi = " + randi);
+            //Debug.Log("nichts randi = " + randi);
 
             n3 = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird         
         }
 
         if (randi == 9)
         {
-            Debug.Log("nichts randi = " + randi);
+            //Debug.Log("nichts randi = " + randi);
 
             n4 = true; //sorgt dafür dass die Funktion die in der Update wartet, ausgeführt wird         
         }

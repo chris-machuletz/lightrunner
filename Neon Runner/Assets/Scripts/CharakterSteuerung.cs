@@ -77,7 +77,7 @@ public class CharakterSteuerung : MonoBehaviour
     void FixedUpdate()
     {
         InputCheck();
-        vorwärtsspeed = vorwärtsspeed + 0.01f;    //beschleunigung mit der zeit
+        vorwärtsspeed = vorwärtsspeed + 0.005f;    //beschleunigung mit der zeit
         Move();
     }
 
