@@ -13,7 +13,7 @@ public class CameraMovement : MonoBehaviour {
     //Camera Movement at the beginning
     private float transition = 0.0f;
     private float animationDuration = 2.0f; //Dauer der Kamera-Animation am Spielstart
-    private Vector3 animationOffset = new Vector3(0, 5, 5);
+    private Vector3 animationOffset = new Vector3(0, 5, 3);
 
     // Use this for initialization
     void Start () {

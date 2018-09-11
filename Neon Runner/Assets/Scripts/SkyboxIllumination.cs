@@ -6,8 +6,7 @@ public class SkyboxIllumination : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        RenderSettings.skybox.SetFloat("_Exposure", 1);
-        RenderSettings.skybox.SetColor("_Tint", Color.red);
+
     }
 	
 	// Update is called once per frame
