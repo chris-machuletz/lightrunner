@@ -8,16 +8,14 @@ public class Lumen : MonoBehaviour {
 
     public Text lumenCountText;
     public Text deathText;
-    public AudioClip kollision, lumenCollect, lifeCollect, indestructableCollect;
+    public AudioClip kollision, lumenCollect, lifeCollect, indestructableCollect, hoverCubeCollect;
     private float vel; //geschwindigkeit des Spielers (aus Shipmovement.cs)
+    public bool colWithObstacle = true;
 
     // Use this for initialization
     void Start () {
         vel = GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed;
         SetCountText();
-        deathText.text = "";
-
-        GetComponent<AudioSource>().playOnAwake = false;
     }
 
 	// Update is called once per frame
@@ -62,38 +60,46 @@ public class Lumen : MonoBehaviour {
         if (collision.gameObject.name == "IndestructableCube" || collision.gameObject.name == "IndestructableCube(Clone)")
         {
             Destroy(collision.gameObject);
-            GameObject.Find("Ship").GetComponent<PlayerProps>().lifes = 3;
-            GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
 
             AudioSource source = GetComponent<AudioSource>();
             GetComponent<AudioSource>().PlayOneShot(indestructableCollect);
 
-            GameObject.Find("Ship").GetComponent<PowerUpSpawnManager>().Indestructable();
+            StartCoroutine(GameObject.Find("Ship").GetComponent<PowerUpSpawnManager>().Indestructable());
         }
 
         if (collision.gameObject.name == "Obstacle")
         {
-            if (GameObject.Find("Ship").GetComponent<PlayerProps>().lifes > 0) // Wenn noch leben vorhanden sind, ziehe eins ab und führe Spiel fort
+            if (colWithObstacle)
             {
-                Destroy(collision.gameObject);
-                GameObject.Find("Ship").GetComponent<PlayerProps>().lifes--;
-                GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
-                GetComponent<AudioSource>().PlayOneShot(kollision);
+                if (GameObject.Find("Ship").GetComponent<PlayerProps>().lifes > 0) // Wenn noch leben vorhanden sind, ziehe eins ab und führe Spiel fort
+                {
+                    Destroy(collision.gameObject);
+                    GameObject.Find("Ship").GetComponent<PlayerProps>().lifes--;
+                    GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
+                    GetComponent<AudioSource>().PlayOneShot(kollision);
 
-                if ((GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed * 0.75f) <= 50) //Berechnung der neuen Spielergeschwindigkeit
-                {
-                    GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 50;
+                    if ((GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed * 0.75f) <= 50) //Berechnung der neuen Spielergeschwindigkeit
+                    {
+                        GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 50;
+                    }
+                    else
+                    {
+                        GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed *= 0.75f;
+                    }
                 }
-                else
+                else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
                 {
-                    GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed *= 0.75f;
+
+                    Application.LoadLevel(4);
                 }
             }
-            else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
-            {
-                
-                Application.LoadLevel(4);
-            }
+            
+        }
+
+        if (collision.gameObject.name == "HoverCube" || collision.gameObject.name == "HoverCube(Clone)")
+        {
+            Destroy(collision.gameObject);
+            GetComponent<AudioSource>().PlayOneShot(hoverCubeCollect);
         }
     }
 }

@@ -22,16 +22,16 @@ public class HoverUp : MonoBehaviour
 
         gegessen = false;
 
-        this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
+        //this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
 
-        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        cube.GetComponent<Renderer>().material.color = new Color(0.0f, 1.0f, 0.0f);
-        cube.transform.position = this.transform.position;
+        //cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        //cube.GetComponent<Renderer>().material.color = new Color(0.0f, 1.0f, 0.0f);
+        //cube.transform.position = this.transform.position;
 
-        cube.tag = "HoverUp";
-        BoxCollider box = cube.GetComponent(typeof(BoxCollider)) as BoxCollider;    //aktiviert den collider im cube
-        box.isTrigger = true;
+        //cube.tag = "HoverUp";
+        //BoxCollider box = cube.GetComponent(typeof(BoxCollider)) as BoxCollider;    //aktiviert den collider im cube
+        //box.isTrigger = true;
     }
 
     private void Update()
@@ -45,10 +45,10 @@ public class HoverUp : MonoBehaviour
         if (GameObject.FindGameObjectWithTag("Player").transform.position.z >= this.transform.position.z)
         {
             this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
-            cube.transform.position = this.transform.position;
+            //cube.transform.position = this.transform.position;
         }
         //sorgt dafür das sich der cube dreht
-        cube.transform.Rotate(Vector3.up, 100 * Time.deltaTime);
+        //cube.transform.Rotate(Vector3.up, 100 * Time.deltaTime);
     }
  
 

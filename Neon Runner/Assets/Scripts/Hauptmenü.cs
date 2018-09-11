@@ -49,6 +49,7 @@ public class Hauptmenü : MonoBehaviour {
     //Highscore Anzeige
     private void Start()
     {
+      
         highScore.text = PlayerPrefs.GetInt("HighScore").ToString();
         score.text = PlayerPrefs.GetInt("Score").ToString();
     }

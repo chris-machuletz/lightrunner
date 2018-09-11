@@ -5,6 +5,15 @@ using UnityEngine;
 public class PowerUpSpawnManager : MonoBehaviour
 {
     int counter = 1;
+    public AudioClip useLifeSound;
+    private GameObject indestructableLight;
+
+    private void Start()
+    {
+        indestructableLight = GameObject.Find("IndestructableLight");
+        indestructableLight.SetActive(false);
+    }
+
     private void Update()
     {
         if (counter % 20 == 0)
@@ -35,6 +44,8 @@ public class PowerUpSpawnManager : MonoBehaviour
             GameObject.Find("Ship").GetComponent<PlayerProps>().lifes--; // Zieht dem Spieler ein Extraleben ab
             GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
             GameObject.Find("Ship").GetComponent<PlayerProps>().lumen += 50; //Fügt dem Spieler 50 Lumen hinzu
+            AudioSource source = GetComponent<AudioSource>();
+            GetComponent<AudioSource>().PlayOneShot(useLifeSound);
             Debug.Log("Used a Life");
         }
     }
@@ -56,15 +67,15 @@ public class PowerUpSpawnManager : MonoBehaviour
 
     public IEnumerator Indestructable()
     {
-        Debug.Log("Indestructable: on");
+        GameObject.Find("Ship").GetComponent<Lumen>().colWithObstacle = false;
+        indestructableLight.SetActive(true);
+        GameObject.Find("Ship").GetComponent<PlayerProps>().lifes = 3;
+        GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
 
         yield return new WaitForSeconds(10);
 
-        Debug.Log("Indestructable: off");
+        indestructableLight.SetActive(false);
+        GameObject.Find("Ship").GetComponent<Lumen>().colWithObstacle = true;
     }
-
-
-   
-
 
 }
