@@ -46,7 +46,6 @@ public class PowerUpSpawnManager : MonoBehaviour
             GameObject.Find("Ship").GetComponent<PlayerProps>().lumen += 50; //Fügt dem Spieler 50 Lumen hinzu
             AudioSource source = GetComponent<AudioSource>();
             GetComponent<AudioSource>().PlayOneShot(useLifeSound);
-            Debug.Log("Used a Life");
         }
     }
 
