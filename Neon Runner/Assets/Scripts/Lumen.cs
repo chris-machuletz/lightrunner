@@ -119,12 +119,18 @@ public class Lumen : MonoBehaviour {
         }
     }
 
-    //public IEnumerator PitchBackgroundSound ()
+    //public IEnumerator PitchBackgroundSound()
     //{
-    //    backgroundMusic.pitch = Mathf.Lerp(backgroundMusic.pitch, 0.5f, Time.deltaTime);
-        
-    //    backgroundMusic.pitch = Mathf.Lerp(backgroundMusic.pitch, 1.0f, Time.deltaTime);
-
-    //    yield return new WaitForSeconds(1);
+    //    while(backgroundMusic.pitch >= 0.5f)
+    //    {
+    //        Debug.Log("Pitch decreasing");
+    //        backgroundMusic.pitch -= 0.001f;
+    //    }
+    //    while (backgroundMusic.pitch <= 1.0f)
+    //    {
+    //        Debug.Log("Pitch increasing");
+    //        backgroundMusic.pitch += 0.001f;
+    //    }
+    //    yield return new WaitForSeconds(2);        
     //}
 }

@@ -10,10 +10,10 @@ public class TrackSpawnManager : MonoBehaviour {
     public GameObject indestructableCube;
     public GameObject hoverCube;
 
-    private int anzLumenCubes = 50;
-    private int anzLifeCubes = 3;
+    private int anzLumenCubes = 40;
+    private int anzLifeCubes = 2;
     private int anzIndestructableCubes = 1;
-    private int anzHoverCubes = 3;
+    private int anzHoverCubes = 1;
 
     // public Material trackMaterial; // Material für Streckenteile
     private Transform playerTransform;
@@ -201,13 +201,17 @@ public class TrackSpawnManager : MonoBehaviour {
 
         for (int i = 0; i < anzIndestructableCubes; i++)
         {
-            Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
+            int spawnraffle = Random.Range(0, 10);
+            if(spawnraffle > 7)
+            {
+                Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
 
-            GameObject indcube;
-            indcube = Instantiate(indestructableCube, cubePos, Quaternion.identity) as GameObject;
-            indcube.transform.parent = GameObject.Find("IndestructableCubes").transform;
+                GameObject indcube;
+                indcube = Instantiate(indestructableCube, cubePos, Quaternion.identity) as GameObject;
+                indcube.transform.parent = GameObject.Find("IndestructableCubes").transform;
 
-            activeIndestructableCubes.Add(indcube);
+                activeIndestructableCubes.Add(indcube);
+            }
         }
     }
     private void DeleteIndestructableCubes()

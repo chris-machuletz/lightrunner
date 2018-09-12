@@ -43,7 +43,7 @@ public class PowerUpSpawnManager : MonoBehaviour
         {
             GameObject.Find("Ship").GetComponent<PlayerProps>().lifes--; // Zieht dem Spieler ein Extraleben ab
             GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
-            GameObject.Find("Ship").GetComponent<PlayerProps>().lumen += 50; //Fügt dem Spieler 50 Lumen hinzu
+            GameObject.Find("Ship").GetComponent<PlayerProps>().lumen += 20; //Fügt dem Spieler 20 Lumen hinzu
             AudioSource source = GetComponent<AudioSource>();
             GetComponent<AudioSource>().PlayOneShot(useLifeSound);
         }

@@ -3257,7 +3257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifes: 0
-  lumen: 1000
+  lumen: 500
   selectedShip: {fileID: 0}
 --- !u!114 &1955052169
 MonoBehaviour:
