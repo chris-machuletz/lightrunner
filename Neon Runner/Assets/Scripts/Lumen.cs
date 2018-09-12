@@ -9,6 +9,7 @@ public class Lumen : MonoBehaviour {
     public Text lumenCountText;
     public Text deathText;
     public AudioClip kollision, lumenCollect, lifeCollect, indestructableCollect, hoverCubeCollect;
+    //AudioSource backgroundMusic;
     private float vel; //geschwindigkeit des Spielers (aus Shipmovement.cs)
     public bool colWithObstacle = true;
 
@@ -16,6 +17,8 @@ public class Lumen : MonoBehaviour {
     void Start () {
         vel = GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed;
         SetCountText();
+
+        //backgroundMusic = GameObject.Find("Main Camera").GetComponent<AudioSource>();
     }
 
 	// Update is called once per frame
@@ -55,7 +58,6 @@ public class Lumen : MonoBehaviour {
             Destroy(collision.gameObject);
             GameObject.Find("Ship").GetComponent<PlayerProps>().lumen += Random.Range(0,20);
             GetComponent<AudioSource>().PlayOneShot(lumenCollect);
-            Debug.Log("Trigger LumenCube");
         }
 
         if (collision.gameObject.name == "LifeCube" || collision.gameObject.name == "LifeCube(Clone)")
@@ -67,13 +69,11 @@ public class Lumen : MonoBehaviour {
                 GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
                 AudioSource source = GetComponent<AudioSource>();
                 GetComponent<AudioSource>().PlayOneShot(lifeCollect);
-                Debug.Log("Trigger LifeCube");
             }
         }
 
         if (collision.gameObject.name == "IndestructableCube" || collision.gameObject.name == "IndestructableCube(Clone)")
         {
-            Debug.Log("Trigger IndCube");
             Destroy(collision.gameObject);
 
             AudioSource source = GetComponent<AudioSource>();
@@ -88,8 +88,8 @@ public class Lumen : MonoBehaviour {
             {
                 if (GameObject.Find("Ship").GetComponent<PlayerProps>().lifes > 0) // Wenn noch leben vorhanden sind, ziehe eins ab und führe Spiel fort
                 {
-                    Debug.Log("Trigger Obstacle");
                     Destroy(collision.gameObject);
+                    //StartCoroutine(PitchBackgroundSound());
                     GameObject.Find("Ship").GetComponent<PlayerProps>().lifes--;
                     GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
                     GetComponent<AudioSource>().PlayOneShot(kollision);
@@ -114,9 +114,17 @@ public class Lumen : MonoBehaviour {
 
         if (collision.gameObject.name == "HoverCube" || collision.gameObject.name == "HoverCube(Clone)")
         {
-            Debug.Log("Trigger HoverCube");
             Destroy(collision.gameObject);
             GetComponent<AudioSource>().PlayOneShot(hoverCubeCollect);
         }
     }
+
+    //public IEnumerator PitchBackgroundSound ()
+    //{
+    //    backgroundMusic.pitch = Mathf.Lerp(backgroundMusic.pitch, 0.5f, Time.deltaTime);
+        
+    //    backgroundMusic.pitch = Mathf.Lerp(backgroundMusic.pitch, 1.0f, Time.deltaTime);
+
+    //    yield return new WaitForSeconds(1);
+    //}
 }
