@@ -53,8 +53,9 @@ public class Lumen : MonoBehaviour {
         if (collision.gameObject.name == "LumenCube" || collision.gameObject.name == "LumenCube(Clone)")
         {
             Destroy(collision.gameObject);
-            GameObject.Find("Ship").GetComponent<PlayerProps>().lumen += Random.Range(5,10);
+            GameObject.Find("Ship").GetComponent<PlayerProps>().lumen += Random.Range(0,20);
             GetComponent<AudioSource>().PlayOneShot(lumenCollect);
+            Debug.Log("Trigger LumenCube");
         }
 
         if (collision.gameObject.name == "LifeCube" || collision.gameObject.name == "LifeCube(Clone)")
@@ -66,11 +67,13 @@ public class Lumen : MonoBehaviour {
                 GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
                 AudioSource source = GetComponent<AudioSource>();
                 GetComponent<AudioSource>().PlayOneShot(lifeCollect);
+                Debug.Log("Trigger LifeCube");
             }
         }
 
         if (collision.gameObject.name == "IndestructableCube" || collision.gameObject.name == "IndestructableCube(Clone)")
         {
+            Debug.Log("Trigger IndCube");
             Destroy(collision.gameObject);
 
             AudioSource source = GetComponent<AudioSource>();
@@ -85,6 +88,7 @@ public class Lumen : MonoBehaviour {
             {
                 if (GameObject.Find("Ship").GetComponent<PlayerProps>().lifes > 0) // Wenn noch leben vorhanden sind, ziehe eins ab und führe Spiel fort
                 {
+                    Debug.Log("Trigger Obstacle");
                     Destroy(collision.gameObject);
                     GameObject.Find("Ship").GetComponent<PlayerProps>().lifes--;
                     GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
@@ -110,6 +114,7 @@ public class Lumen : MonoBehaviour {
 
         if (collision.gameObject.name == "HoverCube" || collision.gameObject.name == "HoverCube(Clone)")
         {
+            Debug.Log("Trigger HoverCube");
             Destroy(collision.gameObject);
             GetComponent<AudioSource>().PlayOneShot(hoverCubeCollect);
         }

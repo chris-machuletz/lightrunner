@@ -11,9 +11,9 @@ public class TrackSpawnManager : MonoBehaviour {
     public GameObject hoverCube;
 
     private int anzLumenCubes = 50;
-    private int anzLifeCubes = 10;
+    private int anzLifeCubes = 3;
     private int anzIndestructableCubes = 1;
-    private int anzHoverCubes = 20;
+    private int anzHoverCubes = 3;
 
     // public Material trackMaterial; // Material für Streckenteile
     private Transform playerTransform;

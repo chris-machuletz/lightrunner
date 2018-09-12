@@ -3128,7 +3128,7 @@ MonoBehaviour:
   deathText: {fileID: 0}
   kollision: {fileID: 8300000, guid: 26ed761cb2476ca42ad4481dd7e5a7f6, type: 3}
   lumenCollect: {fileID: 8300000, guid: c164402ea90c49043a3bb6e1223b4713, type: 3}
-  lifeCollect: {fileID: 8300000, guid: c164402ea90c49043a3bb6e1223b4713, type: 3}
+  lifeCollect: {fileID: 8300000, guid: 406c0c4983b82f6498a0919bd2e83e02, type: 3}
   indestructableCollect: {fileID: 8300000, guid: cb838db426bd3ab4287b8cd95d77465c,
     type: 3}
   hoverCubeCollect: {fileID: 8300000, guid: cb838db426bd3ab4287b8cd95d77465c, type: 3}
