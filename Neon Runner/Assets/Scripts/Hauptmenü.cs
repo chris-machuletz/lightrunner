@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Hauptmenü : MonoBehaviour {
@@ -13,7 +14,9 @@ public class Hauptmenü : MonoBehaviour {
     //Start Button
     public void Spielstarten()
     {
-        Application.LoadLevel(1);
+        
+        SceneManager.LoadScene(1);
+
     }
 
     //Highscore Button
@@ -46,6 +49,7 @@ public class Hauptmenü : MonoBehaviour {
     //Highscore Anzeige
     private void Start()
     {
+      
         highScore.text = PlayerPrefs.GetInt("HighScore").ToString();
         score.text = PlayerPrefs.GetInt("Score").ToString();
     }

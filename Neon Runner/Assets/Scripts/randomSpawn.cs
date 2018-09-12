@@ -65,6 +65,15 @@ public class randomSpawn : MonoBehaviour {
         //obstacl.AddComponent<col_self>(); // fügt selbstkollisions-script hinzu EDIT: RAUSGENOMMEN WEIL HINDERLICH/ VERWIRREND BEI BEWEGL. HINDERNISSEN
         obstacls.Add(obstacl);  //fügt grade erschaffenes obstacle der Liste hinzu
 
+        if(obstacls.Count >= 350 )
+        {
+            for (int i = 0; i < 10; i++)
+            {
+                Destroy(obstacls[0]);
+                obstacls.RemoveAt(0);
+            }
+        }
+
         //obstcount = obstacls.Count-1; //funktioniert nur für das zum Zeitpunkt des Löschens aktuellste erschaffene Obstacle... nicht nacheinander in der Reihenfolge
         //obstcount++;
 

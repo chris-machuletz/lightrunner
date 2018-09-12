@@ -17,6 +17,9 @@ public class cub : MonoBehaviour {
     public GameObject Create()
     {
         GameObject cu = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cu.transform.parent = GameObject.Find("Obstacles").transform;
+        cu.name = "Obstacle";
+        cu.GetComponent<BoxCollider>().isTrigger = true;
         return cu;
     }
 }

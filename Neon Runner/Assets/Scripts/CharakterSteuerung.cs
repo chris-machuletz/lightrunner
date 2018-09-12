@@ -39,27 +39,21 @@ public class CharakterSteuerung : MonoBehaviour
         switch (PlayerPrefs.GetInt("Schiff", 0))
         {
             case 1:
-                print("Schiff 1 ausgewählt");
                 Schiff1.SetActive(true);
                 break;
             case 2:
-                print("Schiff 2 ausgewählt");
                 Schiff2.SetActive(true);
                 break;
             case 3:
-                print("Schiff 3 ausgewählt");
                 Schiff3.SetActive(true);
                 break;
             case 4:
-                print("Schiff 4 ausgewählt");
                 Schiff4.SetActive(true);
                 break;
             case 5:
-                print("Schiff 5 ausgewählt");
                 Schiff5.SetActive(true);
                 break;
             default:
-                print("Kein Schiff ausgewählt");
                 Schiff1.SetActive(true);
                 break;
         }
@@ -77,14 +71,14 @@ public class CharakterSteuerung : MonoBehaviour
     void FixedUpdate()
     {
         InputCheck();
-        vorwärtsspeed = vorwärtsspeed + 0.01f;    //beschleunigung mit der zeit
+        vorwärtsspeed = vorwärtsspeed + 0.005f;    //beschleunigung mit der zeit
         Move();
     }
 
     void InputCheck()
     {
         velocity = Input.GetAxis("Horizontal") * speed;      //nach links bedeutet - 1 und nach rechts bedeutet +1 so erkennt das prog den unterschied
-
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             inputJump = true;
