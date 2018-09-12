@@ -52,8 +52,8 @@ public class TrackSpawnManager : MonoBehaviour {
             else
             {
                 SpawnTrack();
-                gameObject.AddComponent<randomSpawn>();
-                gameObject.GetComponent<randomSpawn>().Test();
+                //gameObject.AddComponent<randomSpawn>();
+                //gameObject.GetComponent<randomSpawn>().Test();
 
                 SpawnLumenCubes();
                 DeleteLumenCubes();
@@ -79,8 +79,8 @@ public class TrackSpawnManager : MonoBehaviour {
             if (playerTransform.position.z > (spawnZ + safeZone - amountofRenderedTracks * trackSectionLength))
             {
                 SpawnTrack();
-                gameObject.AddComponent<randomSpawn>();
-                gameObject.GetComponent<randomSpawn>().Test();
+                //gameObject.AddComponent<randomSpawn>();
+                //gameObject.GetComponent<randomSpawn>().Test();
                 DeleteTrack();
 
                 SpawnLumenCubes();
