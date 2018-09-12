@@ -57,6 +57,7 @@ public class CharakterSteuerung : MonoBehaviour
                 Schiff1.SetActive(true);
                 break;
         }
+
     }
 
     void Update()
@@ -78,7 +79,7 @@ public class CharakterSteuerung : MonoBehaviour
     void InputCheck()
     {
         velocity = Input.GetAxis("Horizontal") * speed;      //nach links bedeutet - 1 und nach rechts bedeutet +1 so erkennt das prog den unterschied
-
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             inputJump = true;
