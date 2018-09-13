@@ -6,64 +6,108 @@ using UnityEngine.UI;
 
 public class Hauptmenü : MonoBehaviour {
 
+    //warten
+    float waitT = 0.45f; //wartezeit zwischen dem umschalten
+
     //Script für die Funktionen des Hauptmenüs
     public Highscore otherscript;   //ermöglicht den Zugriff auf die Bool im anderen C#
     public Text highScore;
     public Text score;
 
+    //drücksound
+    public AudioClip music;
+    public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
+
     //Start Button
     public void Spielstarten()
     {
-        
-        SceneManager.LoadScene(1);
-
+        StartCoroutine("Map1");
     }
 
     //Highscore Button
     public void BesterPunktestand()
     {
-        Application.LoadLevel(2);
+        StartCoroutine("Map2");
     }
 
     //Bringt zum Hauptmenü zurück
     public void Zurück()
     {
-
-        Application.LoadLevel(0);
+        StartCoroutine("Map3");
     }
 
     //Raumschiff ändern Button
     public void RaumschiffAuswahl()
     {
-
-        Application.LoadLevel(3);
+        StartCoroutine("Map4");
     }
 
     //Exit Button
     //Dieser Button funktioniert nur wenn das Spiel fertig compiliert ist
     public void Spielbeenden()
     {
-        Application.Quit();
+        StartCoroutine("Map5");
     }
 
     //Highscore Anzeige
     private void Start()
     {
-      
-        highScore.text = PlayerPrefs.GetInt("HighScore").ToString();
-        score.text = PlayerPrefs.GetInt("Score").ToString();
+      if (highScore != null)
+        {
+            highScore.text = PlayerPrefs.GetInt("HighScore").ToString();
+        }
+      if (score != null)
+        {
+            score.text = PlayerPrefs.GetInt("Score").ToString();
+        }
+
+        gameObject.AddComponent<AudioSource>();
+        quelle.clip = music;
+        quelle.playOnAwake = false;
     }
 
     public void Reset()     //reset funktion per button des highscores
     {
+        StartCoroutine("Map6");
+    }
+    //aufrufe mit warteschleifen, damit man den ton hört und er nicht unterbrochen wird
+
+    IEnumerator Map1() 
+    {
+        quelle.PlayOneShot(music);
+        yield return new WaitForSeconds(waitT); //wartet 
+        SceneManager.LoadScene(1);
+    }
+    IEnumerator Map2()
+    {
+        quelle.PlayOneShot(music);
+        yield return new WaitForSeconds(waitT); //wartet 
+        Application.LoadLevel(2);
+    }
+    IEnumerator Map3()
+    {
+        quelle.PlayOneShot(music);
+        yield return new WaitForSeconds(waitT); //wartet 
+        Application.LoadLevel(0);
+    }
+    IEnumerator Map4() 
+    {
+        quelle.PlayOneShot(music);
+        yield return new WaitForSeconds(waitT); //wartet 
+        Application.LoadLevel(3);
+    }
+    IEnumerator Map5()
+    {
+        quelle.PlayOneShot(music);
+        yield return new WaitForSeconds(waitT); //wartet 
+        Application.Quit();
+    }
+    IEnumerator Map6()
+    {
+        quelle.PlayOneShot(music);
+        yield return new WaitForSeconds(waitT); //wartet 
         PlayerPrefs.DeleteKey("HighScore");
         highScore.text = "0";
-    }
-
-    //Hier entsteht die Hover funktion
-    public void MausDaruber()
-    {
-
     }
 }
 

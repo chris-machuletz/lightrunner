@@ -14,9 +14,16 @@ public class ship_manager : MonoBehaviour {
     bool s5 = false;
     float waitT = 0.7f; //wartezeit zwischen dem umschalten
 
+    //sound
+    public AudioClip music2;
+    public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
 
     // Use this for initialization
     void Start () {
+
+        gameObject.AddComponent<AudioSource>();
+        quelle.clip = music2;
+        quelle.playOnAwake = false;
 
         Instanciation();
 
@@ -62,6 +69,7 @@ public class ship_manager : MonoBehaviour {
                     Debug.Log("ship01 selected");
                     s1 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 1);
+                    quelle.PlayOneShot(music2);
 
                     //ship1.transform.Rotate(new Vector3(0, 0, 20 * Time.deltaTime));
                 }
@@ -70,6 +78,7 @@ public class ship_manager : MonoBehaviour {
                     Debug.Log("ship01_neonframe selected");
                     s2 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 2);
+                    quelle.PlayOneShot(music2);
                 }
 
                 if (hit.transform.name == "ship02")
@@ -77,6 +86,7 @@ public class ship_manager : MonoBehaviour {
                     Debug.Log("ship02 selected");
                     s3 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 3);
+                    quelle.PlayOneShot(music2);
                 }
 
                 if (hit.transform.name == "ship03")
@@ -84,6 +94,7 @@ public class ship_manager : MonoBehaviour {
                     Debug.Log("ship03 selected");
                     s4 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 4);
+                    quelle.PlayOneShot(music2);
                 }
 
                 if (hit.transform.name == "ship03_neonframe")
@@ -91,6 +102,7 @@ public class ship_manager : MonoBehaviour {
                     Debug.Log("ship03_neonframe selected");
                     s5 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 5);
+                    quelle.PlayOneShot(music2);
                 }
 
 

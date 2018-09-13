@@ -14,6 +14,7 @@ public class HoverUp : MonoBehaviour
     public static bool gegessen;
 
     private GameObject cube;
+    private GameObject lightGameObject;
 
     private int entfernung = 300;  //legt fest in bis zu welcher entfernung der cube spawnen soll
 
@@ -27,13 +28,20 @@ public class HoverUp : MonoBehaviour
 
         cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         cube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        //cube.GetComponent<Renderer>().material.color = new Color(0.0f, 1.0f, 0.0f);
         cube.GetComponent<Renderer>().material = mats;
         cube.transform.position = this.transform.position;
 
         cube.tag = "HoverUp";
         BoxCollider box = cube.GetComponent(typeof(BoxCollider)) as BoxCollider;    //aktiviert den collider im cube
         box.isTrigger = true;
+
+        //Leuchten des Cubes
+        lightGameObject = new GameObject("The Light");
+        Light lightComp = lightGameObject.AddComponent<Light>();
+        lightComp.color = Color.green;
+        lightComp.intensity = 8.5f;
+        lightComp.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+        lightGameObject.transform.position = this.transform.position;
     }
 
     private void FixedUpdate()
@@ -42,12 +50,15 @@ public class HoverUp : MonoBehaviour
         if (gegessen == true)
         {
             this.transform.position = new Vector3(Random.Range(-50.0f, 50.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
+            cube.transform.position = this.transform.position;
+            lightGameObject.transform.position = this.transform.position;
             gegessen = false;
         }
         if (GameObject.FindGameObjectWithTag("Player").transform.position.z-30 >= this.transform.position.z)
         {
             this.transform.position = new Vector3(Random.Range(-50.0f, 50.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
             cube.transform.position = this.transform.position;
+            lightGameObject.transform.position = this.transform.position;
         }
 
         //sorgt dafür das sich der cube dreht

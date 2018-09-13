@@ -223,7 +223,7 @@ public class TrackSpawnManager : MonoBehaviour {
         }
     }
 
-   /* private void SpawnHoverCubes()
+   /* private void SpawnHoverCubes() wird in HoverUp anders erstellt und verwaltet
     {
 
         for (int i = 0; i < anzHoverCubes; i++)

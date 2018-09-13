@@ -14,13 +14,14 @@ public class CharakterSteuerung : MonoBehaviour
     public float test = 0;
     private float bewegungszähler = 0;
 
+    //schwenkbewegungen 
     int schwenkung = 0;
     int schwenkende = 3;
 
-    bool hover = true;
-    public bool inputHover = false;
-    bool inputJump = false;
-    float velocity = 0;
+    public bool hover = true;           //darf er hovern?
+    public bool inputHover = false;     //wird hovertaste gedrückt
+    bool inputJump = false;             //springt er?
+    float velocity = 0;                 //links, rechts, gerade aus
 
     private float animationDuration = 2.0f; // Verhindern, dass das Schiff bewegt wird, wenn die Kamera-Animation läuft (übernommen(nötig??))
 
@@ -36,6 +37,8 @@ public class CharakterSteuerung : MonoBehaviour
 
     void Start()
     {
+        //GUI test = LeftShift;
+
         characterController = GetComponent<CharacterController>();
 
         //Fragt die Schiffeinstellungen ab
@@ -94,7 +97,27 @@ public class CharakterSteuerung : MonoBehaviour
 
         // if (Input.GetButton("Jump")) wenn eine taste gedrückt gehalten wird 
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))  //strg
+        //hover bei gehaltener shift taste
+        if (Input.GetButton("Fire3"))
+        {
+            if (hover == true)
+            {
+                gravity = 0;
+                inputHover = true;
+                moveDirection.y = jumppower;
+                moveDirection.y = 0;
+            }
+            else
+            {
+                gravity = 10;
+                //inputHover = false;
+            }
+        } else
+        {
+            gravity = 10;
+            inputHover = false;
+        }
+           /* if (Input.GetKeyDown(KeyCode.LeftControl))  //strg
         {
             if (inputHover == false)
             {
@@ -108,7 +131,7 @@ public class CharakterSteuerung : MonoBehaviour
                 gravity = 10;
                 inputHover = false;
             }
-        }
+        } */
     }
 
     void Move()

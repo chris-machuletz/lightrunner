@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class ButtonSounds : MonoBehaviour {
 
     public AudioClip music;
-    public AudioClip music2;
-    private Button button { get { return GetComponent<Button>(); } }
     public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
 
     // Use this for initialization
@@ -21,16 +19,5 @@ public class ButtonSounds : MonoBehaviour {
     public void MausDarüber()
     {
         quelle.PlayOneShot(music);
-        //    Image test = this.GetComponent(typeof(Image)) as Image;
-        //     test.fillCenter = true;
     }
-
-    public void drücken()
-    {
-        quelle.PlayOneShot(music2);
-    }
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }
