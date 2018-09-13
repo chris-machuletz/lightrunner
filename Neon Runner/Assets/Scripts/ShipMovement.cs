@@ -7,11 +7,13 @@ public class ShipMovement : MonoBehaviour {
     private CharacterController controller;
     private Vector3 moveVector;
 
-    private float velocity = 10.0f;
+    public float velocity; //Geschwindigkeit des Spielers
     private float gravity = 10.0f;
     private float verticalVelocity = 0.0f;
 
     private float animationDuration = 2.0f; // Verhindern, dass das Schiff bewegt wird, wenn die Kamera-Animation läuft
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +24,20 @@ public class ShipMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if(getLumen() <= 0)
+        {
+            Destroy(GameObject.Find("Ship"));
+        }
+        else
+        {
+            moveShip();
+            
+        }
+        
+	}
+
+    void moveShip()
+    {
         if (Time.time < animationDuration) // Verhindern, dass das Schiff bewegt wird, wenn die Kamera-Animation läuft
         {
             controller.Move(Vector3.forward * Time.deltaTime * velocity);
@@ -40,7 +56,7 @@ public class ShipMovement : MonoBehaviour {
         }
 
         // X-Movement
-        moveVector.x = Input.GetAxisRaw("Horizontal") * velocity * 2;
+        moveVector.x = Input.GetAxisRaw("Horizontal") * (velocity / 3);
 
         // Y-Movement
         moveVector.y = verticalVelocity;
@@ -50,5 +66,10 @@ public class ShipMovement : MonoBehaviour {
         moveVector.z = velocity;
 
         controller.Move(moveVector * Time.deltaTime);
-	}
+    }
+
+    float getLumen()
+    {
+        return GameObject.Find("Ship").GetComponent<PlayerProps>().lumen;
+    }
 }
