@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.04588575, g: 0.0917302, b: 0.28067982, a: 1}
+  m_IndirectSpecularColor: {r: 0.045885578, g: 0.09172987, b: 0.28067908, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -850,7 +850,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1099.8181, y: -691.3506}
+  m_AnchoredPosition: {x: 1107.9098, y: -687.90814}
   m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &297976961
@@ -892,8 +892,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: "Zur\xFCck"
+      - m_Target: {fileID: 1618649981}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1196,7 +1196,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1099.8181, y: -251.35062}
+  m_AnchoredPosition: {x: 1107.9098, y: -247.90814}
   m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &499390696
@@ -3164,7 +3164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1099.8181, y: -471.35062}
+  m_AnchoredPosition: {x: 1107.9098, y: -467.90814}
   m_SizeDelta: {x: 700, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1607342793
@@ -3321,8 +3321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   otherscript: {fileID: 0}
-  highScore: {fileID: 0}
-  score: {fileID: 0}
+  highScore: {fileID: 447229463}
+  score: {fileID: 1695788948}
 --- !u!4 &1618649983
 Transform:
   m_ObjectHideFlags: 0
@@ -3472,7 +3472,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1
+  m_Text: 0
 --- !u!222 &1695788949
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4009,6 +4009,7 @@ MonoBehaviour:
   lifes: 0
   lumen: 50
   selectedShip: {fileID: 0}
+  isAlive: 0
 --- !u!114 &1955052169
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class PlayerProps : MonoBehaviour {
     private GameObject life1;
     private GameObject life2;
     private GameObject life3;
+    public bool isAlive;
 
     // Use this for initialization
     void Start () {
@@ -21,6 +22,8 @@ public class PlayerProps : MonoBehaviour {
         life1.SetActive(false);
         life2.SetActive(false);
         life3.SetActive(false);
+
+        isAlive = true;
     }
 
     // Update is called once per frame

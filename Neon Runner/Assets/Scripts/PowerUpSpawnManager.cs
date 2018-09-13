@@ -24,7 +24,10 @@ public class PowerUpSpawnManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            UseALife();
+            if(GameObject.Find("Ship").GetComponent<PlayerProps>().isAlive == true)
+            {
+                UseALife();
+            }
         }
     }
 

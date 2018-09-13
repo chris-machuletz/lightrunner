@@ -25,28 +25,33 @@ public class Lumen : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-        GameObject.Find("Ship").GetComponent<PlayerProps>().lumen -= Time.deltaTime * (vel / 10); // Verringert Lumen mit der Zeit
-        SetCountText();
-
-        if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 100)
+        if (GameObject.Find("Ship").GetComponent<PlayerProps>().isAlive == true)
         {
-            GameObject.Find("FuelBackground").GetComponent<Image>().color = Color.Lerp(Color.white, Color.red, 1f);
-            GameObject.Find("FuelFront").GetComponent<Image>().color = Color.Lerp(Color.white, Color.red, 1f);
-        }
+            GameObject.Find("Ship").GetComponent<PlayerProps>().lumen -= Time.deltaTime * (vel / 10); // Verringert Lumen mit der Zeit
+            SetCountText();
 
-        if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen > 100)
-        {
-            GameObject.Find("FuelBackground").GetComponent<Image>().color = Color.Lerp(Color.red, Color.white, 1f);
-            GameObject.Find("FuelFront").GetComponent<Image>().color = Color.Lerp(Color.red, Color.white, 1f);
+            if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 100)
+            {
+                GameObject.Find("FuelBackground").GetComponent<Image>().color = Color.Lerp(Color.white, Color.red, 1f);
+                GameObject.Find("FuelFront").GetComponent<Image>().color = Color.Lerp(Color.white, Color.red, 1f);
+            }
+
+            if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen > 100)
+            {
+                GameObject.Find("FuelBackground").GetComponent<Image>().color = Color.Lerp(Color.red, Color.white, 1f);
+                GameObject.Find("FuelFront").GetComponent<Image>().color = Color.Lerp(Color.red, Color.white, 1f);
+            }
         }
 
         if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 0)
         {
             GameObject.Find("Main Camera").GetComponent<CameraMovement>().DeathCam();
             GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 0f;
+
+            GameObject.Find("Ship").GetComponent<PlayerProps>().isAlive = false;
             //Application.LoadLevel(4);
         }
-	}
+    }
 
     void SetCountText()
     {
@@ -113,6 +118,7 @@ public class Lumen : MonoBehaviour {
                     
                     GameObject.Find("Main Camera").GetComponent<CameraMovement>().DeathCam();
                     GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 0f;
+                    GameObject.Find("Ship").GetComponent<PlayerProps>().isAlive = false;
 
                     //Application.LoadLevel(4);
                 }
