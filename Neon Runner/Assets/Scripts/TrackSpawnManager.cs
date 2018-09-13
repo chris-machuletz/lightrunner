@@ -67,8 +67,8 @@ public class TrackSpawnManager : MonoBehaviour {
                 SpawnIndestructableCubes();
                 DeleteIndestructableCubes();
 
-                SpawnHoverCubes();
-                DeleteHoverCubes();
+                //SpawnHoverCubes();
+                //DeleteHoverCubes();
             }
 
         }
@@ -95,8 +95,8 @@ public class TrackSpawnManager : MonoBehaviour {
                 SpawnIndestructableCubes();
                 DeleteIndestructableCubes();
 
-                SpawnHoverCubes();
-                DeleteHoverCubes();
+                //SpawnHoverCubes();
+                //DeleteHoverCubes();
 
                 GameObject.FindGameObjectsWithTag("track");
 
@@ -224,6 +224,7 @@ public class TrackSpawnManager : MonoBehaviour {
         }
     }
 
+    /* Findet in Hover UP statt
     private void SpawnHoverCubes()
     {
 
@@ -245,5 +246,5 @@ public class TrackSpawnManager : MonoBehaviour {
             Destroy(activeHoverCubes[0]);
             activeHoverCubes.RemoveAt(0);
         }
-    }
+    } */
 }

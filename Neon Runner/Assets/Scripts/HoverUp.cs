@@ -16,7 +16,7 @@ public class HoverUp : MonoBehaviour
     private GameObject cube;
     private GameObject lightGameObject;
 
-    private int entfernung = 300;  //legt fest in bis zu welcher entfernung der cube spawnen soll
+    private int entfernung = 500;  //legt fest in bis zu welcher entfernung der cube spawnen soll
 
     void Start()
     {

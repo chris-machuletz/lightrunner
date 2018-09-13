@@ -112,11 +112,12 @@ public class Lumen : MonoBehaviour {
             
         }
 
+        /*
         if (collision.gameObject.name == "HoverCube" || collision.gameObject.name == "HoverCube(Clone)")
         {
             Destroy(collision.gameObject);
             GetComponent<AudioSource>().PlayOneShot(hoverCubeCollect);
-        }
+        }*/
     }
 
     //public IEnumerator PitchBackgroundSound()
