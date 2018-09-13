@@ -7,7 +7,6 @@ TagManager:
   - HoverUp
   - Collectible
   - Schiff
-  - track
   layers:
   - Default
   - TransparentFX

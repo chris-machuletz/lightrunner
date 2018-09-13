@@ -30,8 +30,11 @@ public class HoverLeiste : MonoBehaviour {
 
           if (aktuellHover <= 0)
           {
-            CharakterScript.inputHover = false;
+            CharakterScript.hover = false;
             CharakterScript.gravity = 10;
+          } else
+          {
+            CharakterScript.hover = true;
           }
           
     }

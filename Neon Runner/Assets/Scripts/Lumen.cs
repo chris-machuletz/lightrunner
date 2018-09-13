@@ -105,6 +105,7 @@ public class Lumen : MonoBehaviour {
                 }
                 else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
                 {
+
                     Application.LoadLevel(4);
                 }
             }
@@ -115,11 +116,6 @@ public class Lumen : MonoBehaviour {
         {
             Destroy(collision.gameObject);
             GetComponent<AudioSource>().PlayOneShot(hoverCubeCollect);
-        }
-
-        if(collision.gameObject.tag == "track")
-        {
-            Application.LoadLevel(4);
         }
     }
 

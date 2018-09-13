@@ -8,6 +8,9 @@ public class CharakterReaktion : MonoBehaviour {
 
     public HoverLeiste hoverleiste;   //ermöglicht den Zugriff auf die Bool im anderen C#
 
+    //einsammel sound
+    public AudioClip music;
+    public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
 
     private Scene scene;
 
@@ -20,16 +23,13 @@ public class CharakterReaktion : MonoBehaviour {
     {
         if (collisionInfo.tag == "HoverUp")   //tag oder name
         {
-            Debug.Log(hoverleiste.aktuellHover);
-            hoverleiste.aktuellHover = hoverleiste.aktuellHover + 50.0f;    //für jedes hoverup gibt es + 50 hoverpkt
+            quelle.PlayOneShot(music);  //einsammel sound
+
+            hoverleiste.aktuellHover = hoverleiste.aktuellHover + 20.0f;    //für jedes hoverup gibt es + 20 hoverpkt
             if (hoverleiste.aktuellHover > 100)
             {
                 hoverleiste.aktuellHover = 100;
             }
-        }
-        if (collisionInfo.tag == "Wand")   //tag oder name
-        {
-
         }
         if (collisionInfo.name == "Abgrund")   //tag oder name
         {

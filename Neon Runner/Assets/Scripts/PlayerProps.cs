@@ -7,6 +7,7 @@ public class PlayerProps : MonoBehaviour {
 
     public int lifes = 0; // Anzahl der Leben des Spielers
     public float lumen = 150.0f; // Anzahl der Lumen des Spielers
+    public GameObject selectedShip;
     private GameObject life1;
     private GameObject life2;
     private GameObject life3;
