@@ -8,15 +8,17 @@ public class Lumen : MonoBehaviour {
 
     public Text lumenCountText;
     public Text deathText;
-    public AudioClip kollision, lumenCollect, lifeCollect, indestructableCollect, hoverCubeCollect;
+    public AudioClip kollision, lumenCollect, lifeCollect, indestructableCollect, hoverCubeCollect, indestructableSound;
     //AudioSource backgroundMusic;
     private float vel; //geschwindigkeit des Spielers (aus Shipmovement.cs)
     public bool colWithObstacle = true;
 
+  
     // Use this for initialization
     void Start () {
         vel = GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed;
         SetCountText();
+       
 
         //backgroundMusic = GameObject.Find("Main Camera").GetComponent<AudioSource>();
     }
@@ -40,7 +42,9 @@ public class Lumen : MonoBehaviour {
 
         if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 0)
         {
-            Application.LoadLevel(4);
+            GameObject.Find("Main Camera").GetComponent<CameraMovement>().DeathCam();
+            GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 0f;
+            //Application.LoadLevel(4);
         }
 	}
 
@@ -78,6 +82,7 @@ public class Lumen : MonoBehaviour {
 
             AudioSource source = GetComponent<AudioSource>();
             GetComponent<AudioSource>().PlayOneShot(indestructableCollect);
+            GetComponent<AudioSource>().PlayOneShot(indestructableSound);
 
             StartCoroutine(GameObject.Find("Ship").GetComponent<PowerUpSpawnManager>().Indestructable());
         }
@@ -105,8 +110,11 @@ public class Lumen : MonoBehaviour {
                 }
                 else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
                 {
+                    
+                    GameObject.Find("Main Camera").GetComponent<CameraMovement>().DeathCam();
+                    GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 0f;
 
-                    Application.LoadLevel(4);
+                    //Application.LoadLevel(4);
                 }
             }
             

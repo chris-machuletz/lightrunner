@@ -9,7 +9,7 @@ public class CameraMovement : MonoBehaviour {
     private Vector3 moveVector;
     private float lumenCounter;
 
-
+    public bool test;
     //Camera Movement at the beginning
     private float transition = 0.0f;
     private float animationDuration = 2.0f; //Dauer der Kamera-Animation am Spielstart
@@ -19,6 +19,7 @@ public class CameraMovement : MonoBehaviour {
     void Start () {
         lookAt = GameObject.FindGameObjectWithTag("Player").transform;
         startOffset = transform.position - lookAt.position;
+        test = true;
     }
 	
 	// Update is called once per frame
@@ -30,6 +31,17 @@ public class CameraMovement : MonoBehaviour {
         }
 
 	}
+
+    public void DeathCam()
+    {
+        if (test)
+        {
+            transform.Rotate(4.45f, 155.7f, -8.2f);
+            
+        }
+        test = false;
+        
+    }
 
    public void moveCamera()
     {
