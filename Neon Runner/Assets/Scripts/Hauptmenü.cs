@@ -54,11 +54,11 @@ public class Hauptmenü : MonoBehaviour {
     {
       if (highScore != null)
         {
-            highScore.text = PlayerPrefs.GetInt("HighScore").ToString();
+            highScore.text = PlayerPrefs.GetFloat("HighScore").ToString();
         }
       if (score != null)
         {
-            score.text = PlayerPrefs.GetInt("Score").ToString();
+            score.text = PlayerPrefs.GetFloat("Score").ToString();
         }
 
         gameObject.AddComponent<AudioSource>();

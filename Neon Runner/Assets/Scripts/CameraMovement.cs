@@ -49,6 +49,7 @@ public class CameraMovement : MonoBehaviour {
         }
         test = false;
         SwitchDeathCanvas();
+        
     }
 
     public void SwitchDeathCanvas()

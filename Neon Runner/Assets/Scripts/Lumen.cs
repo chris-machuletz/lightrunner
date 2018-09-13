@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Lumen : MonoBehaviour {
 
     public Text lumenCountText;
-    public Text deathText;
+    public Text deathScore, deathHighScore;
     public AudioClip kollision, lumenCollect, lifeCollect, indestructableCollect, hoverCubeCollect, indestructableSound;
     //AudioSource backgroundMusic;
     private float vel; //geschwindigkeit des Spielers (aus Shipmovement.cs)
@@ -45,10 +45,16 @@ public class Lumen : MonoBehaviour {
 
         if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 0)
         {
+            deathHighScore.text = PlayerPrefs.GetFloat("Highscore").ToString("F2");
+            Debug.Log(PlayerPrefs.GetFloat("Highscore").ToString());
+            deathScore.text = PlayerPrefs.GetFloat("Score").ToString();
+            Debug.Log(deathScore);
+
             GameObject.Find("Main Camera").GetComponent<CameraMovement>().DeathCam();
             GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 0f;
 
             GameObject.Find("Ship").GetComponent<PlayerProps>().isAlive = false;
+
             //Application.LoadLevel(4);
         }
     }
