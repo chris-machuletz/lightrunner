@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ship_manager : MonoBehaviour {
 
+    public Camera camera;
     GameObject ship1, ship2, ship3, ship4;
     Vector3 camRayVec = new Vector3(0.5f, 0.5f, 0);
     bool s1 = false;
@@ -12,9 +13,16 @@ public class ship_manager : MonoBehaviour {
     bool s4 = false;
     float waitT = 0.7f; //wartezeit zwischen dem umschalten
 
+    //sound
+    public AudioClip music2;
+    public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
 
     // Use this for initialization
     void Start () {
+
+        gameObject.AddComponent<AudioSource>();
+        quelle.clip = music2;
+        quelle.playOnAwake = false;
 
         Instanciation();
 
@@ -26,17 +34,17 @@ public class ship_manager : MonoBehaviour {
         //findet das entsprechende GameObject und weist ihm eine neue Position zu
 
         ship1 = GameObject.Find("ship01");
-        ship1.transform.position = new Vector3(0,0,-22);
+        ship1.transform.position = new Vector3(0,1,-22);
 
 
         ship2 = GameObject.Find("ship01_neonframe");
-        ship2.transform.position = new Vector3(0, 0, -10);
+        ship2.transform.position = new Vector3(0, 1, -10);
 
         ship3 = GameObject.Find("ship02");
-        ship3.transform.position = new Vector3(0, 0, 2);
+        ship3.transform.position = new Vector3(0, 1, 2);
 
         ship4 = GameObject.Find("ship03");
-        ship4.transform.position = new Vector3(0, 0, 14);
+        ship4.transform.position = new Vector3(0, 1, 14);
 
     }
 
@@ -47,8 +55,8 @@ public class ship_manager : MonoBehaviour {
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("space"))
         {
             RaycastHit hit;
-            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition); //nimmt Ray von der aktuellen Mausposition auf, um EIngabe über Mausklick zu ermöglichen
-            Ray camRay = Camera.main.ViewportPointToRay(camRayVec); //nimmt Ray von der Kameraposition auf, um Eingabe über Enter-Taste zu ermöglichen
+            Ray mouseRay = camera.ScreenPointToRay(Input.mousePosition); //nimmt Ray von der aktuellen Mausposition auf, um EIngabe über Mausklick zu ermöglichen
+            Ray camRay = camera.ViewportPointToRay(camRayVec); //nimmt Ray von der Kameraposition auf, um Eingabe über Enter-Taste zu ermöglichen
 
             if (Physics.Raycast(mouseRay, out hit) || Physics.Raycast(camRay, out hit)) //sucht sich entsprechende Eingabe aus und gibt den Schiffsnamen zurück
             {
@@ -56,12 +64,14 @@ public class ship_manager : MonoBehaviour {
                     Debug.Log("ship01 selected");
                     s1 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 1);
+                    quelle.PlayOneShot(music2);
                 }
 
                 if (hit.transform.name == "ship01_neonframe") {
                     Debug.Log("ship01_neonframe selected");
                     s2 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 2);
+                    quelle.PlayOneShot(music2);
                 }
 
                 if (hit.transform.name == "ship02")
@@ -69,6 +79,7 @@ public class ship_manager : MonoBehaviour {
                     Debug.Log("ship02 selected");
                     s3 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 3);
+                    quelle.PlayOneShot(music2);
                 }
 
                 if (hit.transform.name == "ship03")
@@ -76,6 +87,7 @@ public class ship_manager : MonoBehaviour {
                     Debug.Log("ship03 selected");
                     s4 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 4);
+                    quelle.PlayOneShot(music2);
                 }
 
             }

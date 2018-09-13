@@ -2622,6 +2622,7 @@ MonoBehaviour:
   otherscript: {fileID: 0}
   highScore: {fileID: 0}
   score: {fileID: 0}
+  music: {fileID: 0}
 --- !u!4 &1618649983
 Transform:
   m_ObjectHideFlags: 0
@@ -3258,6 +3259,7 @@ MonoBehaviour:
   gravity: 10
   jumppower: 7
   test: 0
+  hover: 1
   inputHover: 0
   Schiff1: {fileID: 74351631}
   Schiff2: {fileID: 553908219}
@@ -3275,7 +3277,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0d96ebd00763a244834708a66a6ed76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hoverleiste: {fileID: 0}
+  hoverleiste: {fileID: 1563900060}
+  music: {fileID: 8300000, guid: c164402ea90c49043a3bb6e1223b4713, type: 3}
 --- !u!1 &1956443035
 GameObject:
   m_ObjectHideFlags: 0
@@ -3319,8 +3322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 0}
-  spieler: {fileID: 0}
-  cube: {fileID: 0}
+  mats: {fileID: 0}
 --- !u!33 &1956443038
 MeshFilter:
   m_ObjectHideFlags: 0
