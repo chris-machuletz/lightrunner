@@ -5,13 +5,12 @@ using UnityEngine;
 public class ship_manager : MonoBehaviour {
 
     public Camera camera;
-    GameObject ship1, ship2, ship3, ship4, ship5;
+    GameObject ship1, ship2, ship3, ship4;
     Vector3 camRayVec = new Vector3(0.5f, 0.5f, 0);
     bool s1 = false;
     bool s2 = false;
     bool s3 = false;
     bool s4 = false;
-    bool s5 = false;
     float waitT = 0.7f; //wartezeit zwischen dem umschalten
 
     //sound
@@ -35,20 +34,17 @@ public class ship_manager : MonoBehaviour {
         //findet das entsprechende GameObject und weist ihm eine neue Position zu
 
         ship1 = GameObject.Find("ship01");
-        ship1.transform.position = new Vector3(0,0,-22);
+        ship1.transform.position = new Vector3(0,1,-22);
 
 
         ship2 = GameObject.Find("ship01_neonframe");
-        ship2.transform.position = new Vector3(0, 0, -10);
+        ship2.transform.position = new Vector3(0, 1, -10);
 
         ship3 = GameObject.Find("ship02");
-        ship3.transform.position = new Vector3(0, 0, 2);
+        ship3.transform.position = new Vector3(0, 1, 2);
 
         ship4 = GameObject.Find("ship03");
-        ship4.transform.position = new Vector3(0, 0, 14);
-
-        ship5 = GameObject.Find("ship03_neonframe");
-        ship5.transform.position = new Vector3(0, 0, 26);
+        ship4.transform.position = new Vector3(0, 1, 14);
 
     }
 
@@ -56,9 +52,8 @@ public class ship_manager : MonoBehaviour {
 
     void OnClick()
     {
-        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown("space"))
         {
-
             RaycastHit hit;
             Ray mouseRay = camera.ScreenPointToRay(Input.mousePosition); //nimmt Ray von der aktuellen Mausposition auf, um EIngabe über Mausklick zu ermöglichen
             Ray camRay = camera.ViewportPointToRay(camRayVec); //nimmt Ray von der Kameraposition auf, um Eingabe über Enter-Taste zu ermöglichen
@@ -70,8 +65,6 @@ public class ship_manager : MonoBehaviour {
                     s1 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 1);
                     quelle.PlayOneShot(music2);
-
-                    //ship1.transform.Rotate(new Vector3(0, 0, 20 * Time.deltaTime));
                 }
 
                 if (hit.transform.name == "ship01_neonframe") {
@@ -96,15 +89,6 @@ public class ship_manager : MonoBehaviour {
                     PlayerPrefs.SetInt("Schiff", 4);
                     quelle.PlayOneShot(music2);
                 }
-
-                if (hit.transform.name == "ship03_neonframe")
-                {
-                    Debug.Log("ship03_neonframe selected");
-                    s5 = true; //Coroutinen-Aktivierung
-                    PlayerPrefs.SetInt("Schiff", 5);
-                    quelle.PlayOneShot(music2);
-                }
-
 
             }
         }
@@ -153,16 +137,6 @@ public class ship_manager : MonoBehaviour {
         Application.LoadLevel(0);
     }
 
-    IEnumerator turnS5() //coroutine für Drehung von Schiff 5
-    {
-        ship5.transform.Rotate(0, 0, 500 * Time.deltaTime); //lässt sich das Schiff einmal schnell Drehen (für Auswahlanimation)
-
-        yield return new WaitForSeconds(waitT); //wartet 
-
-        s5 = false; //setzt den bool auf false und löst damit wieder die Drehung vom Anfang aus
-        Application.LoadLevel(0);
-    }
-
 
 
     // Update is called once per frame
@@ -175,9 +149,7 @@ public class ship_manager : MonoBehaviour {
         //lässt die Raumschiffe sich um 1 pro Sekunde um die y Achse drehen (wenn nichts ausgewählt wird
 
         if (s1 == false) { ship1.transform.Rotate(0, 0, 5 * Time.deltaTime); }
-        if (s1 == true) { StartCoroutine("turnS1");
-
-        }
+        if (s1 == true) { StartCoroutine("turnS1"); }
 
         if (s2 == false) { ship2.transform.Rotate(0, 0, 5 * Time.deltaTime); }
         if (s2 == true) { StartCoroutine("turnS2"); }
@@ -187,10 +159,6 @@ public class ship_manager : MonoBehaviour {
 
         if (s4 == false) { ship4.transform.Rotate(0, 0, 5 * Time.deltaTime); }
         if (s4 == true) { StartCoroutine("turnS4"); }
-
-        if (s5 == false) { ship5.transform.Rotate(0, 0, 5 * Time.deltaTime); }
-        if (s5 == true) { StartCoroutine("turnS5"); }
-
 
     }
 }

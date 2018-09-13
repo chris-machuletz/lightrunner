@@ -26,6 +26,7 @@ public class CharakterReaktion : MonoBehaviour {
             quelle.PlayOneShot(music);  //einsammel sound
 
             hoverleiste.aktuellHover = hoverleiste.aktuellHover + 20.0f;    //für jedes hoverup gibt es + 20 hoverpkt
+            HoverUp.gegessen = true;
             if (hoverleiste.aktuellHover > 100)
             {
                 hoverleiste.aktuellHover = 100;

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TrackSpawnManager : MonoBehaviour {
 
     public GameObject[] trackSections;
+
     public GameObject lumenCube;
     public GameObject lifeCube;
     public GameObject indestructableCube;
@@ -30,6 +31,7 @@ public class TrackSpawnManager : MonoBehaviour {
     private List<GameObject> activeIndestructableCubes;
     private List<GameObject> activeHoverCubes;
 
+
     // Use this for initialization
     void Start()
     {
@@ -40,11 +42,12 @@ public class TrackSpawnManager : MonoBehaviour {
         activeIndestructableCubes = new List<GameObject>();
         activeHoverCubes = new List<GameObject>();
 
+
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         for(int i = 0; i < amountofRenderedTracks; i++)
         {
-            if (i < 1) // als erste 2 Tracksections werden tracksection[0] gespawnt, auf dem sich noch keine Hindernisse befinden
+            if (i < 2) // als erste 2 Tracksections werden tracksection[0] gespawnt, auf dem sich noch keine Hindernisse befinden
             {
                 SpawnTrack(0);
 
@@ -52,8 +55,8 @@ public class TrackSpawnManager : MonoBehaviour {
             else
             {
                 SpawnTrack();
-                //gameObject.AddComponent<randomSpawn>();
-                //gameObject.GetComponent<randomSpawn>().Test();
+                gameObject.AddComponent<randomSpawn>();
+                gameObject.GetComponent<randomSpawn>().Test();
 
                 SpawnLumenCubes();
                 DeleteLumenCubes();
@@ -79,8 +82,8 @@ public class TrackSpawnManager : MonoBehaviour {
             if (playerTransform.position.z > (spawnZ + safeZone - amountofRenderedTracks * trackSectionLength))
             {
                 SpawnTrack();
-                //gameObject.AddComponent<randomSpawn>();
-                //gameObject.GetComponent<randomSpawn>().Test();
+                gameObject.AddComponent<randomSpawn>();
+                gameObject.GetComponent<randomSpawn>().Test();
                 DeleteTrack();
 
                 SpawnLumenCubes();
@@ -94,11 +97,14 @@ public class TrackSpawnManager : MonoBehaviour {
 
                 //SpawnHoverCubes();
                 //DeleteHoverCubes();
+
+                GameObject.FindGameObjectsWithTag("track");
+
             }
         }
     }
 
-
+    
 
     //Spanws a new Track
     private void SpawnTrack(int trackIndex = -1)
@@ -113,14 +119,9 @@ public class TrackSpawnManager : MonoBehaviour {
         else
             gameobj = Instantiate(trackSections[0]) as GameObject;
 
-        //Renderer rend = gameobj.GetComponent<Renderer>(); //Verweist auf den Renderer des Gameobjects Track
-        //if(rend != null) //wenn der Renderer vorhanden ist, weise das Material zu
-        //{
-        //    rend.material = trackMaterial;
-        //    Debug.Log("Material geladen");
-        //}
 
         gameobj.transform.SetParent(transform);
+        gameobj.AddComponent<MeshCollider>();
         gameobj.transform.position = Vector3.forward * spawnZ;
 
 
@@ -223,7 +224,8 @@ public class TrackSpawnManager : MonoBehaviour {
         }
     }
 
-   /* private void SpawnHoverCubes() wird in HoverUp anders erstellt und verwaltet
+    /* Findet in Hover UP statt
+    private void SpawnHoverCubes()
     {
 
         for (int i = 0; i < anzHoverCubes; i++)

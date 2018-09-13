@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class cub : MonoBehaviour {
 
+    public GameObject[] obstacles;
+
     // Use this for initialization
     void Start () {
     }
@@ -16,10 +18,22 @@ public class cub : MonoBehaviour {
 
     public GameObject Create()
     {
-        GameObject cu = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        float ransc = Random.Range(100, 800); //setzt Raum für zufällige Skalierung fest (wobei 100 = normalgröße)
+        GameObject cu;
+        int rndIndex = Random.Range(0, obstacles.Length);
+        //GameObject cu = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+
+        cu = Instantiate(obstacles[rndIndex]) as GameObject; //erzeugt ein hindernis aus dem array befüllt mit den einzelnen Hindernissen
         cu.transform.parent = GameObject.Find("Obstacles").transform;
         cu.name = "Obstacle";
-        cu.GetComponent<BoxCollider>().isTrigger = true;
+        cu.AddComponent<MeshCollider>(); //fügt collider hinzu
+        cu.GetComponent<MeshCollider>().convex = true;
+        cu.GetComponent<MeshCollider>().isTrigger = true; //fügt trigger hinzu
+        cu.transform.localScale = new Vector3(ransc, ransc, ransc); //skaliert die obstacles zufällig
+        cu.transform.Rotate(0 , 0, Random.Range(0, 180)); //dreht die Obstacles zufällig
+
+
         return cu;
     }
 }
