@@ -9,16 +9,25 @@ public class CameraMovement : MonoBehaviour {
     private Vector3 moveVector;
     private float lumenCounter;
 
-
+    public bool test;
     //Camera Movement at the beginning
     private float transition = 0.0f;
     private float animationDuration = 2.0f; //Dauer der Kamera-Animation am Spielstart
     private Vector3 animationOffset = new Vector3(0, 5, 3);
 
+    private GameObject aliveCanvas;
+    private GameObject deathCanvas;
+
     // Use this for initialization
     void Start () {
         lookAt = GameObject.FindGameObjectWithTag("Player").transform;
         startOffset = transform.position - lookAt.position;
+        test = true;
+
+        aliveCanvas = GameObject.Find("Canvas");
+        deathCanvas = GameObject.Find("DeathCanvas");
+
+        deathCanvas.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -31,6 +40,23 @@ public class CameraMovement : MonoBehaviour {
 
 	}
 
+    public void DeathCam()
+    {
+        if (test)
+        {
+            transform.Rotate(4.45f, 155.7f, -8.2f);
+            
+        }
+        test = false;
+        SwitchDeathCanvas();
+    }
+
+    public void SwitchDeathCanvas()
+    {
+        aliveCanvas.SetActive(false);
+        deathCanvas.SetActive(true);
+    }
+
    public void moveCamera()
     {
         moveVector = lookAt.position + startOffset;
@@ -41,11 +67,7 @@ public class CameraMovement : MonoBehaviour {
         // Y
         //moveVector.y = Mathf.Clamp(moveVector.y, 3, 5);
 
-        if (getLumen() <= 0)
-        {
-            Debug.Log("You Died");
-        }
-        else
+        if (getLumen() > 0)
         {
             if (transition > 1.0f)
             {

@@ -6,11 +6,11 @@ public class Highscore : MonoBehaviour {
     public Text pktzahl;
     public Text highScore;
     public float zähler = 0;
-    public int zahl = 0; 
+    public float zahl = 0; 
 
     private void Start()
     {
-        highScore.text = PlayerPrefs.GetInt("HighScore", 0).ToString(); //setzt beim ersten start den highscore auf 0
+        highScore.text = PlayerPrefs.GetFloat("HighScore", 0).ToString("F2"); //setzt beim ersten start den highscore auf 0
         PlayerPrefs.DeleteKey("Score");
     }
 
@@ -27,23 +27,20 @@ public class Highscore : MonoBehaviour {
         }
     }
     */
-    void FixedUpdate()
+    void Update()
     {
-        if (zähler >= 1)    //zeitverzögerung zählt die pkt
+        if (GameObject.Find("Ship").GetComponent<PlayerProps>().isAlive == true)
         {
-            zahl = zahl + 1;
-            pktzahl.text = zahl.ToString();
-            PlayerPrefs.SetInt("Score", zahl);
+            zahl += Time.deltaTime;
+            pktzahl.text = zahl.ToString("F2");
+            PlayerPrefs.SetFloat("Score", zahl);
             zähler = 0;
-        } else
-        {
-            zähler = zähler + 0.05f;    //beschleunigung
-        }
 
-        if (zahl > PlayerPrefs.GetInt("HighScore", 0))  //highscore, falls höher wird erhöt
-        {
-            PlayerPrefs.SetInt("HighScore", zahl);
-            highScore.text = zahl.ToString();
+            if (zahl > PlayerPrefs.GetFloat("HighScore", 0))  //highscore, falls höher wird erhöt
+            {
+                PlayerPrefs.SetFloat("HighScore", zahl);
+                highScore.text = zahl.ToString("F2");
+            }
         }
     }
 

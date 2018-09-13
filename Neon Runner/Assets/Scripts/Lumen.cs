@@ -8,41 +8,50 @@ public class Lumen : MonoBehaviour {
 
     public Text lumenCountText;
     public Text deathText;
-    public AudioClip kollision, lumenCollect, lifeCollect, indestructableCollect, hoverCubeCollect;
+    public AudioClip kollision, lumenCollect, lifeCollect, indestructableCollect, hoverCubeCollect, indestructableSound;
     //AudioSource backgroundMusic;
     private float vel; //geschwindigkeit des Spielers (aus Shipmovement.cs)
     public bool colWithObstacle = true;
 
+  
     // Use this for initialization
     void Start () {
         vel = GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed;
         SetCountText();
+       
 
         //backgroundMusic = GameObject.Find("Main Camera").GetComponent<AudioSource>();
     }
 
 	// Update is called once per frame
 	void Update () {
-        GameObject.Find("Ship").GetComponent<PlayerProps>().lumen -= Time.deltaTime * (vel / 10); // Verringert Lumen mit der Zeit
-        SetCountText();
-
-        if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 100)
+        if (GameObject.Find("Ship").GetComponent<PlayerProps>().isAlive == true)
         {
-            GameObject.Find("FuelBackground").GetComponent<Image>().color = Color.Lerp(Color.white, Color.red, 1f);
-            GameObject.Find("FuelFront").GetComponent<Image>().color = Color.Lerp(Color.white, Color.red, 1f);
-        }
+            GameObject.Find("Ship").GetComponent<PlayerProps>().lumen -= Time.deltaTime * (vel / 10); // Verringert Lumen mit der Zeit
+            SetCountText();
 
-        if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen > 100)
-        {
-            GameObject.Find("FuelBackground").GetComponent<Image>().color = Color.Lerp(Color.red, Color.white, 1f);
-            GameObject.Find("FuelFront").GetComponent<Image>().color = Color.Lerp(Color.red, Color.white, 1f);
+            if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 100)
+            {
+                GameObject.Find("FuelBackground").GetComponent<Image>().color = Color.Lerp(Color.white, Color.red, 1f);
+                GameObject.Find("FuelFront").GetComponent<Image>().color = Color.Lerp(Color.white, Color.red, 1f);
+            }
+
+            if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen > 100)
+            {
+                GameObject.Find("FuelBackground").GetComponent<Image>().color = Color.Lerp(Color.red, Color.white, 1f);
+                GameObject.Find("FuelFront").GetComponent<Image>().color = Color.Lerp(Color.red, Color.white, 1f);
+            }
         }
 
         if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 0)
         {
-            Application.LoadLevel(4);
+            GameObject.Find("Main Camera").GetComponent<CameraMovement>().DeathCam();
+            GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 0f;
+
+            GameObject.Find("Ship").GetComponent<PlayerProps>().isAlive = false;
+            //Application.LoadLevel(4);
         }
-	}
+    }
 
     void SetCountText()
     {
@@ -78,6 +87,7 @@ public class Lumen : MonoBehaviour {
 
             AudioSource source = GetComponent<AudioSource>();
             GetComponent<AudioSource>().PlayOneShot(indestructableCollect);
+            GetComponent<AudioSource>().PlayOneShot(indestructableSound);
 
             StartCoroutine(GameObject.Find("Ship").GetComponent<PowerUpSpawnManager>().Indestructable());
         }
@@ -105,8 +115,12 @@ public class Lumen : MonoBehaviour {
                 }
                 else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
                 {
+                    
+                    GameObject.Find("Main Camera").GetComponent<CameraMovement>().DeathCam();
+                    GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 0f;
+                    GameObject.Find("Ship").GetComponent<PlayerProps>().isAlive = false;
 
-                    Application.LoadLevel(4);
+                    //Application.LoadLevel(4);
                 }
             }
             

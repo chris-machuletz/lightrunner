@@ -12,7 +12,7 @@ public class TrackSpawnManager : MonoBehaviour {
 
     private int anzLumenCubes = 40;
     private int anzLifeCubes = 2;
-    private int anzIndestructableCubes = 1;
+    private int anzIndestructableCubes = 20;
     private int anzHoverCubes = 1;
 
     // public Material trackMaterial; // Material für Streckenteile
@@ -126,7 +126,7 @@ public class TrackSpawnManager : MonoBehaviour {
 
         spawnZ += trackSectionLength;
         activeTracks.Add(gameobj);
-        
+
     }
     //Deletes the Track the Player already passed
     private void DeleteTrack()
