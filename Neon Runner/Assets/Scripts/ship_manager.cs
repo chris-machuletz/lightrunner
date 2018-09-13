@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ship_manager : MonoBehaviour {
 
+    public Camera camera;
     GameObject ship1, ship2, ship3, ship4, ship5;
     Vector3 camRayVec = new Vector3(0.5f, 0.5f, 0);
     bool s1 = false;
@@ -50,9 +51,10 @@ public class ship_manager : MonoBehaviour {
     {
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Return))
         {
+
             RaycastHit hit;
-            Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition); //nimmt Ray von der aktuellen Mausposition auf, um EIngabe über Mausklick zu ermöglichen
-            Ray camRay = Camera.main.ViewportPointToRay(camRayVec); //nimmt Ray von der Kameraposition auf, um Eingabe über Enter-Taste zu ermöglichen
+            Ray mouseRay = camera.ScreenPointToRay(Input.mousePosition); //nimmt Ray von der aktuellen Mausposition auf, um EIngabe über Mausklick zu ermöglichen
+            Ray camRay = camera.ViewportPointToRay(camRayVec); //nimmt Ray von der Kameraposition auf, um Eingabe über Enter-Taste zu ermöglichen
 
             if (Physics.Raycast(mouseRay, out hit) || Physics.Raycast(camRay, out hit)) //sucht sich entsprechende Eingabe aus und gibt den Schiffsnamen zurück
             {

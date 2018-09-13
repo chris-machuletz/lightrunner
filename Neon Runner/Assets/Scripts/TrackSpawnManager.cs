@@ -64,8 +64,8 @@ public class TrackSpawnManager : MonoBehaviour {
                 SpawnIndestructableCubes();
                 DeleteIndestructableCubes();
 
-                SpawnHoverCubes();
-                DeleteHoverCubes();
+                //SpawnHoverCubes();
+                //DeleteHoverCubes();
             }
 
         }
@@ -92,8 +92,8 @@ public class TrackSpawnManager : MonoBehaviour {
                 SpawnIndestructableCubes();
                 DeleteIndestructableCubes();
 
-                SpawnHoverCubes();
-                DeleteHoverCubes();
+                //SpawnHoverCubes();
+                //DeleteHoverCubes();
             }
         }
     }
@@ -223,7 +223,7 @@ public class TrackSpawnManager : MonoBehaviour {
         }
     }
 
-    private void SpawnHoverCubes()
+   /* private void SpawnHoverCubes()
     {
 
         for (int i = 0; i < anzHoverCubes; i++)
@@ -244,5 +244,5 @@ public class TrackSpawnManager : MonoBehaviour {
             Destroy(activeHoverCubes[0]);
             activeHoverCubes.RemoveAt(0);
         }
-    }
+    } */
 }

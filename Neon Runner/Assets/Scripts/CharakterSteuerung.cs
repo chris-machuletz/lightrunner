@@ -12,7 +12,10 @@ public class CharakterSteuerung : MonoBehaviour
     public float gravity = 10;
     public float jumppower = 10; //sprunghöhe
     public float test = 0;
+    private float bewegungszähler = 0;
 
+    int schwenkung = 0;
+    int schwenkende = 3;
 
     bool hover = true;
     public bool inputHover = false;
@@ -89,7 +92,9 @@ public class CharakterSteuerung : MonoBehaviour
             inputJump = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.X))
+        // if (Input.GetButton("Jump")) wenn eine taste gedrückt gehalten wird 
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))  //strg
         {
             if (inputHover == false)
             {
@@ -117,6 +122,87 @@ public class CharakterSteuerung : MonoBehaviour
             {
                 moveDirection.y = jumppower;
             }
+        }
+
+        //schwenk bewegung des schiffes
+        //alles auskommentierte war der verusch, die rückschwenk bewegung des schiffes auch in einer flüssigen bewegung zu machen
+        //hat aber zu rotations bugs geführt
+        if (velocity == 0)
+        { /*
+            if (schwenkende == 1)
+            {
+                bewegungszähler = 0;
+                schwenkende = 2;
+            }
+            if (schwenkung == 1)        //schwenkung = 1 bedeutet links, schwenkung = 2 bedeutet rechts
+            {
+                for (int i = 0; i <= 10; i++)
+                {
+                    this.transform.Rotate(-1, 0, 0);
+                    bewegungszähler = bewegungszähler + 1;
+                }
+               /* if (bewegungszähler <= 10)  //links
+                {
+                    this.transform.Rotate(-1, 0, 0);
+                    bewegungszähler = bewegungszähler + 1;
+                    
+                } else {
+                    bewegungszähler = 0;
+                    schwenkung = 3;
+                    schwenkende = 3;
+                } 
+                bewegungszähler = 0;
+                schwenkung = 3;
+                schwenkende = 3;
+            }
+            if (schwenkung == 2)        //schwenkung = 1 bedeutet links, schwenkung = 2 bedeutet rechts
+            {
+                if (bewegungszähler <= 10)  //links
+                {
+                    this.transform.Rotate(1, 0, 0);
+                    bewegungszähler = bewegungszähler + 1;
+                }
+                else
+                {
+                    bewegungszähler = 0;
+                    schwenkung = 3;
+                    schwenkende = 3;
+                }
+            } */
+            bewegungszähler = 0;
+            var rotationVector = transform.rotation.eulerAngles;
+            rotationVector.x = 0;
+            transform.rotation = Quaternion.Euler(rotationVector);
+        }
+        if (velocity < 0)
+        {
+           /* if (schwenkende == 3)
+            {*/
+                if (bewegungszähler <= 10)  //links
+                {
+                    this.transform.Rotate(1, 0, 0);
+                    bewegungszähler = bewegungszähler + 1;
+                }/* else
+                {
+                    schwenkung = 1;
+                    schwenkende = 1;
+                }
+            }*/
+        }
+        if (velocity > 0)
+        {
+            /*if (schwenkende == 3)
+            {*/
+                if (bewegungszähler <= 10)  //rechts
+                {
+                    this.transform.Rotate(-1, 0, 0);
+                    bewegungszähler = bewegungszähler + 1;
+                } /*else
+                {
+                    schwenkung = 2;
+                    schwenkende = 1;
+                }*/
+           // }
         }
 
         moveDirection.x = velocity;

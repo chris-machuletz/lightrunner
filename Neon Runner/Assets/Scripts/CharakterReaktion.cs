@@ -21,7 +21,7 @@ public class CharakterReaktion : MonoBehaviour {
         if (collisionInfo.tag == "HoverUp")   //tag oder name
         {
             Debug.Log(hoverleiste.aktuellHover);
-            hoverleiste.aktuellHover = hoverleiste.aktuellHover + 50.0f;    //für jedes hoverup gibt es + 50 hoverpkt
+            hoverleiste.aktuellHover = hoverleiste.aktuellHover + 20.0f;    //für jedes hoverup gibt es + 20 hoverpkt
             if (hoverleiste.aktuellHover > 100)
             {
                 hoverleiste.aktuellHover = 100;

@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class camera_manager : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+    public GameObject Zurück;
+    public GameObject Weiter;
+
+    // Use this for initialization
+    void Start () {
         Cam();
 	}
 	
@@ -29,6 +32,7 @@ public class camera_manager : MonoBehaviour {
                 {
                     gameObject.transform.position = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z - 12); //bewegt das Objekt um 10 Einheiten nach links
             }
+
             }
 
             if (Input.GetKeyDown("d"))
@@ -47,5 +51,21 @@ public class camera_manager : MonoBehaviour {
     void Update () {
         
         Keyboard();
-	}
+
+        if (gameObject.transform.position == borVecl)
+        {
+            Zurück.SetActive(false);
+        } else
+        {
+            Zurück.SetActive(true);
+        }
+
+        if (gameObject.transform.position == borVecr)
+        {
+            Weiter.SetActive(false);
+        } else
+        {
+            Weiter.SetActive(true);
+        }
+    }
 }

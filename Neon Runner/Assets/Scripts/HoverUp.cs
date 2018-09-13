@@ -5,16 +5,17 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter)), RequireComponent(typeof(MeshRenderer))]
 public class HoverUp : MonoBehaviour
 {
+    //das leuchten der Cubes muss noch hinzugefügt werden
 
 
     public Mesh mesh;
+    public Material mats;
 
     public static bool gegessen;
 
-    public GameObject spieler;
-    public GameObject cube;
+    private GameObject cube;
 
-    private int entfernung = 1000;  //legt fest in bis zu welcher entfernung der cube spawnen soll
+    private int entfernung = 300;  //legt fest in bis zu welcher entfernung der cube spawnen soll
 
     void Start()
     {
@@ -22,33 +23,35 @@ public class HoverUp : MonoBehaviour
 
         gegessen = false;
 
-        //this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
+        this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
 
-        //cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         //cube.GetComponent<Renderer>().material.color = new Color(0.0f, 1.0f, 0.0f);
-        //cube.transform.position = this.transform.position;
+        cube.GetComponent<Renderer>().material = mats;
+        cube.transform.position = this.transform.position;
 
-        //cube.tag = "HoverUp";
-        //BoxCollider box = cube.GetComponent(typeof(BoxCollider)) as BoxCollider;    //aktiviert den collider im cube
-        //box.isTrigger = true;
+        cube.tag = "HoverUp";
+        BoxCollider box = cube.GetComponent(typeof(BoxCollider)) as BoxCollider;    //aktiviert den collider im cube
+        box.isTrigger = true;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //soll ausgeführt werden, wenn der block konsumiert wurde. und spawnt ihn neu
         if (gegessen == true)
         {
-            this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
+            this.transform.position = new Vector3(Random.Range(-50.0f, 50.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
             gegessen = false;
         }
-        if (GameObject.FindGameObjectWithTag("Player").transform.position.z >= this.transform.position.z)
+        if (GameObject.FindGameObjectWithTag("Player").transform.position.z-30 >= this.transform.position.z)
         {
-            this.transform.position = new Vector3(Random.Range(-3.0f, 3.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
-            //cube.transform.position = this.transform.position;
+            this.transform.position = new Vector3(Random.Range(-50.0f, 50.0f), 1, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung));
+            cube.transform.position = this.transform.position;
         }
+
         //sorgt dafür das sich der cube dreht
-        //cube.transform.Rotate(Vector3.up, 100 * Time.deltaTime);
+        cube.transform.Rotate(Vector3.up, 100 * Time.deltaTime);
     }
  
 
