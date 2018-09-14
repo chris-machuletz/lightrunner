@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TrackSpawnManager : MonoBehaviour {
 
@@ -31,6 +32,7 @@ public class TrackSpawnManager : MonoBehaviour {
     private List<GameObject> activeIndestructableCubes;
     private List<GameObject> activeHoverCubes;
 
+    Scene scen; //Scenen-Element, um zu prüfen, ob der aktuelle Code im Menü ausgeführt wird, wo er deaktiviert werden soll
 
     // Use this for initialization
     void Start()
@@ -153,16 +155,19 @@ public class TrackSpawnManager : MonoBehaviour {
 
     private void SpawnLumenCubes()
     {
-
-        for(int i = 0; i < anzLumenCubes; i++)
+        scen = SceneManager.GetActiveScene();
+        if (scen.name != "ship_switch" && scen.name != "Menü") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
         {
-            Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
+            for (int i = 0; i < anzLumenCubes; i++)
+            {
+                Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
 
-            GameObject lcube;
-            lcube = Instantiate(lumenCube, cubePos, Quaternion.identity) as GameObject;
-            lcube.transform.parent = GameObject.Find("LumenCubes").transform;
+                GameObject lcube;
+                lcube = Instantiate(lumenCube, cubePos, Quaternion.identity) as GameObject;
+                lcube.transform.parent = GameObject.Find("LumenCubes").transform;
 
-            activeLumenCubes.Add(lcube);
+                activeLumenCubes.Add(lcube);
+            }
         }
     }
     private void DeleteLumenCubes()
@@ -176,15 +181,19 @@ public class TrackSpawnManager : MonoBehaviour {
 
     private void SpawnLifeCubes()
     {
-        for (int i = 0; i < anzLifeCubes; i++)
+        scen = SceneManager.GetActiveScene();
+        if (scen.name != "ship_switch" && scen.name != "Menü") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
         {
-            Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
+            for (int i = 0; i < anzLifeCubes; i++)
+            {
+                Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
 
-            GameObject licube;
-            licube = Instantiate(lifeCube, cubePos, Quaternion.identity) as GameObject;
-            licube.transform.parent = GameObject.Find("LifeCubes").transform;
+                GameObject licube;
+                licube = Instantiate(lifeCube, cubePos, Quaternion.identity) as GameObject;
+                licube.transform.parent = GameObject.Find("LifeCubes").transform;
 
-            activeLifeCubes.Add(licube);
+                activeLifeCubes.Add(licube);
+            }
         }
     }
 
@@ -199,19 +208,22 @@ public class TrackSpawnManager : MonoBehaviour {
 
     private void SpawnIndestructableCubes()
     {
-
-        for (int i = 0; i < anzIndestructableCubes; i++)
+        scen = SceneManager.GetActiveScene();
+        if (scen.name != "ship_switch" && scen.name != "Menü") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
         {
-            int spawnraffle = Random.Range(0, 10);
-            if(spawnraffle > 7)
+            for (int i = 0; i < anzIndestructableCubes; i++)
             {
-                Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
+                int spawnraffle = Random.Range(0, 10);
+                if (spawnraffle > 7)
+                {
+                    Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
 
-                GameObject indcube;
-                indcube = Instantiate(indestructableCube, cubePos, Quaternion.identity) as GameObject;
-                indcube.transform.parent = GameObject.Find("IndestructableCubes").transform;
+                    GameObject indcube;
+                    indcube = Instantiate(indestructableCube, cubePos, Quaternion.identity) as GameObject;
+                    indcube.transform.parent = GameObject.Find("IndestructableCubes").transform;
 
-                activeIndestructableCubes.Add(indcube);
+                    activeIndestructableCubes.Add(indcube);
+                }
             }
         }
     }
@@ -226,17 +238,23 @@ public class TrackSpawnManager : MonoBehaviour {
 
     private void SpawnHoverCubes()
     {
-
-        for (int i = 0; i < anzHoverCubes; i++)
+        scen = SceneManager.GetActiveScene();
+        if (scen.name != "Menü" && scen.name != "Ende" && scen.name != "ship_switch") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
         {
-            Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
 
-            GameObject hovcube;
-            hovcube = Instantiate(hoverCube, cubePos, Quaternion.identity) as GameObject;
-            hovcube.transform.parent = GameObject.Find("HoverCubes").transform;
+            for (int i = 0; i < anzHoverCubes; i++)
+            {
+                Vector3 cubePos = new Vector3(Random.Range(-100.0f, 100.0f), 0.6f, Random.Range(spawnZ - trackSectionLength, spawnZ));
 
-            activeHoverCubes.Add(hovcube);
+                GameObject hovcube;
+                hovcube = Instantiate(hoverCube, cubePos, Quaternion.identity) as GameObject;
+                hovcube.transform.parent = GameObject.Find("HoverCubes").transform;
+
+                activeHoverCubes.Add(hovcube);
+            }
+
         }
+        
     }
     private void DeleteHoverCubes()
     {
