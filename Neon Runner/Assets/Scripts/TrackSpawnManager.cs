@@ -104,7 +104,7 @@ public class TrackSpawnManager : MonoBehaviour {
         }
     }
 
-    
+
 
     //Spanws a new Track
     private void SpawnTrack(int trackIndex = -1)
@@ -127,7 +127,7 @@ public class TrackSpawnManager : MonoBehaviour {
 
         spawnZ += trackSectionLength;
         activeTracks.Add(gameobj);
-        
+
     }
     //Deletes the Track the Player already passed
     private void DeleteTrack()
@@ -224,7 +224,7 @@ public class TrackSpawnManager : MonoBehaviour {
         }
     }
 
-    /* Findet in Hover UP statt
+    /* Findet in Hover UP statt!!
     private void SpawnHoverCubes()
     {
 
