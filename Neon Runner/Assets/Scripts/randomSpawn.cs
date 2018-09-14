@@ -54,7 +54,7 @@ public class randomSpawn : MonoBehaviour {
     {
         scen = SceneManager.GetActiveScene();
 
-        if (scen.name != "Menü" && scen.name != "Ende" && scen.name != "ship_switch") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
+        if (scen.name != "Menü" && scen.name != "Ende" && scen.name != "ship_switch" && scen.name != "Hilfemenü" && scen.name != "HighScore") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
         {
 
             //obstacl.AddComponent<cub>();

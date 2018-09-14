@@ -31,6 +31,7 @@ public class TrackSpawnManager : MonoBehaviour {
     private List<GameObject> activeLifeCubes;
     private List<GameObject> activeIndestructableCubes;
     private List<GameObject> activeHoverCubes;
+    bool rs_check = true;
 
     Scene scen; //Scenen-Element, um zu prüfen, ob der aktuelle Code im Menü ausgeführt wird, wo er deaktiviert werden soll
 
@@ -44,6 +45,7 @@ public class TrackSpawnManager : MonoBehaviour {
         activeIndestructableCubes = new List<GameObject>();
         activeHoverCubes = new List<GameObject>();
 
+        
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -57,8 +59,13 @@ public class TrackSpawnManager : MonoBehaviour {
             else
             {
                 SpawnTrack();
-                gameObject.AddComponent<randomSpawn>();
-                gameObject.GetComponent<randomSpawn>().Test();
+
+                if (rs_check == true)
+                {
+                    gameObject.AddComponent<randomSpawn>();
+                    gameObject.GetComponent<randomSpawn>().Test();
+                    rs_check = false;
+                }
 
                 SpawnLumenCubes();
                 DeleteLumenCubes();
@@ -84,8 +91,14 @@ public class TrackSpawnManager : MonoBehaviour {
             if (playerTransform.position.z > (spawnZ + safeZone - amountofRenderedTracks * trackSectionLength))
             {
                 SpawnTrack();
-                gameObject.AddComponent<randomSpawn>();
-                gameObject.GetComponent<randomSpawn>().Test();
+
+                //if (rs_check == true)
+                //{
+                //    gameObject.AddComponent<randomSpawn>();
+                //    gameObject.GetComponent<randomSpawn>().Test();
+                //    rs_check = false;
+                //}
+
                 DeleteTrack();
 
                 SpawnLumenCubes();
@@ -156,7 +169,7 @@ public class TrackSpawnManager : MonoBehaviour {
     private void SpawnLumenCubes()
     {
         scen = SceneManager.GetActiveScene();
-        if (scen.name != "ship_switch" && scen.name != "Menü") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
+        if (scen.name != "ship_switch" && scen.name != "Menü" && scen.name != "Hilfemenü" && scen.name != "HighScore") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
         {
             for (int i = 0; i < anzLumenCubes; i++)
             {
@@ -182,7 +195,7 @@ public class TrackSpawnManager : MonoBehaviour {
     private void SpawnLifeCubes()
     {
         scen = SceneManager.GetActiveScene();
-        if (scen.name != "ship_switch" && scen.name != "Menü") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
+        if (scen.name != "ship_switch" && scen.name != "Menü" && scen.name != "Hilfemenü" && scen.name != "HighScore") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
         {
             for (int i = 0; i < anzLifeCubes; i++)
             {
@@ -209,7 +222,7 @@ public class TrackSpawnManager : MonoBehaviour {
     private void SpawnIndestructableCubes()
     {
         scen = SceneManager.GetActiveScene();
-        if (scen.name != "ship_switch" && scen.name != "Menü") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
+        if (scen.name != "ship_switch" && scen.name != "Menü" && scen.name != "Hilfemenü" && scen.name != "HighScore") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
         {
             for (int i = 0; i < anzIndestructableCubes; i++)
             {

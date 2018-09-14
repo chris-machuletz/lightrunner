@@ -118,6 +118,7 @@ public class Lumen : MonoBehaviour {
             Destroy(collision.gameObject);
             GetComponent<AudioSource>().PlayOneShot(hoverCubeCollect);
         }
+        */
 
         if (collision.gameObject.tag == "track")
         {
