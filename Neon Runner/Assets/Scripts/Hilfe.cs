@@ -33,7 +33,7 @@ public class Hilfe : MonoBehaviour {
         HoverCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         HoverCube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         HoverCube.GetComponent<Renderer>().material = HoverMats;
-        HoverCube.transform.position = new Vector3(-5, 18, 8);
+        HoverCube.transform.position = new Vector3(1, 14, 8);      //14
         HoverCube.transform.Rotate(25, 0, 0);
         HoverCube.name = "HoverUp";
 
@@ -48,7 +48,7 @@ public class Hilfe : MonoBehaviour {
         LebenCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         LebenCube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         LebenCube.GetComponent<Renderer>().material = LebenMats;
-        LebenCube.transform.position = new Vector3(-5, 16, 8);
+        LebenCube.transform.position = new Vector3(1, 12, 7);      //12
         LebenCube.transform.Rotate(25, 0, 0);
         LebenCube.name = "LebenUp";
 
@@ -63,7 +63,7 @@ public class Hilfe : MonoBehaviour {
         SafeCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         SafeCube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         SafeCube.GetComponent<Renderer>().material = SafeMats;
-        SafeCube.transform.position = new Vector3(-5, 14, 8);
+        SafeCube.transform.position = new Vector3(-1, 14, 8);       //14
         SafeCube.transform.Rotate(25, 0, 0);
         SafeCube.name = "SafeUp";
 
@@ -78,7 +78,7 @@ public class Hilfe : MonoBehaviour {
         LumenCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
         LumenCube.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         LumenCube.GetComponent<Renderer>().material = LumenMats;
-        LumenCube.transform.position = new Vector3(-5, 12, 8);
+        LumenCube.transform.position = new Vector3(-1, 12, 7);      //12
         LumenCube.transform.Rotate(25, 0, 0);
         LumenCube.name = "LumenUp";
 
