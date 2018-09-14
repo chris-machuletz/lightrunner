@@ -109,7 +109,7 @@ public class Lumen : MonoBehaviour {
                     Application.LoadLevel(4);
                 }
             }
-            
+
         }
 
         /*
@@ -117,7 +117,13 @@ public class Lumen : MonoBehaviour {
         {
             Destroy(collision.gameObject);
             GetComponent<AudioSource>().PlayOneShot(hoverCubeCollect);
-        }*/
+        }
+
+        if (collision.gameObject.tag == "track")
+        {
+            Application.LoadLevel(4);
+        }
+
     }
 
     //public IEnumerator PitchBackgroundSound()
@@ -132,6 +138,6 @@ public class Lumen : MonoBehaviour {
     //        Debug.Log("Pitch increasing");
     //        backgroundMusic.pitch += 0.001f;
     //    }
-    //    yield return new WaitForSeconds(2);        
+    //    yield return new WaitForSeconds(2);
     //}
 }

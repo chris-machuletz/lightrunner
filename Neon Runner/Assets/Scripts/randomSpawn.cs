@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class randomSpawn : MonoBehaviour {
 
@@ -47,40 +48,50 @@ public class randomSpawn : MonoBehaviour {
 
     }
 
+    Scene scen;
+
     public void Instanciate()
     {
+        scen = SceneManager.GetActiveScene();
 
-        //obstacl.AddComponent<cub>();
-        obstacl = GetComponent<cub>().Create(); //ruft create funktion von cub auf und damit dessen gameObject
-        obstacl.AddComponent<modifications>(); //fügt Skript mit Modifikationen hinzu
-        obstacl.GetComponent<modifications>().Start();
-
-        obstacls.Add(obstacl);  //fügt grade erschaffenes obstacle der Liste hinzu
-
-        if(obstacls.Count >= 350 ) //Zerstörung der Obstacles, wenn mehr als 350 Elemente existieren
+        if (scen.name != "Menü" && scen.name != "Ende" && scen.name != "ship_switch") //nur ausführen, wenn der Code nicht im Menü ist, da er nicht gebraucht wird - sonst Fehlermeldungen
         {
-            for (int i = 0; i < 10; i++)
+
+            //obstacl.AddComponent<cub>();
+            obstacl = GetComponent<cub>().Create(); //ruft create funktion von cub auf und damit dessen gameObject
+            obstacl.AddComponent<modifications>(); //fügt Skript mit Modifikationen hinzu
+            obstacl.GetComponent<modifications>().Start();
+
+            obstacls.Add(obstacl);  //fügt grade erschaffenes obstacle der Liste hinzu
+
+
+
+
+            if (obstacls.Count >= 350) //Zerstörung der Obstacles, wenn mehr als 350 Elemente existieren
             {
-                Destroy(obstacls[0]);
-                obstacls.RemoveAt(0);
+                for (int i = 0; i < 10; i++)
+                {
+                    Destroy(obstacls[0]);
+                    obstacls.RemoveAt(0);
+                }
             }
+
+            //Code für zufällige Position aufrufen
+            RandomizeX();
+            RandomizeY();
+            RandomizeZ();
+
+
+            obstacl.transform.position = GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks[GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks.Count - 1].transform.position;
+
+
+            //tsm.GetComponent<TrackSpawnManager>();
+            //obstacl = tsm.activeTracks[tsm.activeTracks.Count-1];
+
+
+            posVec = new Vector3(ranx, rany, ranz);//speichern von zufälligen Werten in Vector
+            obstacl.transform.position += posVec;//zufällige Position zuweisen
         }
-
-        //Code für zufällige Position aufrufen
-        RandomizeX();
-        RandomizeY();
-        RandomizeZ();
-
-        obstacl.transform.position = GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks[GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks.Count-1].transform.position;
-
-        
-        //tsm.GetComponent<TrackSpawnManager>();
-        //obstacl = tsm.activeTracks[tsm.activeTracks.Count-1];
-
-
-        posVec = new Vector3(ranx, rany, ranz);//speichern von zufälligen Werten in Vector
-        obstacl.transform.position += posVec;//zufällige Position zuweisen
-
     }
 
 }
