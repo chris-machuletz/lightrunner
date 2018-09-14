@@ -30,6 +30,12 @@ public class Hauptmenü : MonoBehaviour {
         StartCoroutine("Map2");
     }
 
+    //Hilfe Button
+    public void Hilfe()
+    {
+        StartCoroutine("Map7");
+    }
+
     //Bringt zum Hauptmenü zurück
     public void Zurück()
     {
@@ -108,6 +114,12 @@ public class Hauptmenü : MonoBehaviour {
         yield return new WaitForSeconds(waitT); //wartet 
         PlayerPrefs.DeleteKey("HighScore");
         highScore.text = "0";
+    }
+    IEnumerator Map7()
+    {
+        quelle.PlayOneShot(music);
+        yield return new WaitForSeconds(waitT); //wartet 
+        Application.LoadLevel(5);
     }
 }
 

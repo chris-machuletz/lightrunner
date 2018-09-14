@@ -224,7 +224,7 @@ public class TrackSpawnManager : MonoBehaviour {
         }
     }
 
-    /* Findet in Hover UP statt
+    /* Findet in Hover UP statt!!
     private void SpawnHoverCubes()
     {
 
