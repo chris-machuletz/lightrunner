@@ -60,12 +60,8 @@ public class TrackSpawnManager : MonoBehaviour {
             {
                 SpawnTrack();
 
-                if (rs_check == true)
-                {
-                    gameObject.AddComponent<randomSpawn>();
-                    gameObject.GetComponent<randomSpawn>().Test();
-                    rs_check = false;
-                }
+                gameObject.AddComponent<randomSpawn>();
+                gameObject.GetComponent<randomSpawn>().Test();
 
                 SpawnLumenCubes();
                 DeleteLumenCubes();
@@ -92,12 +88,8 @@ public class TrackSpawnManager : MonoBehaviour {
             {
                 SpawnTrack();
 
-                //if (rs_check == true)
-                //{
-                //    gameObject.AddComponent<randomSpawn>();
-                //    gameObject.GetComponent<randomSpawn>().Test();
-                //    rs_check = false;
-                //}
+                gameObject.AddComponent<randomSpawn>();
+                gameObject.GetComponent<randomSpawn>().Test();
 
                 DeleteTrack();
 

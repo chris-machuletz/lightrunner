@@ -41,7 +41,7 @@ public class randomSpawn : MonoBehaviour {
     public void Test()
     { 
 
-        for(int i = 0; i<= NumberPlusOne; i++) //ruft nur einmal zu Beginn die Hindernissfkt. auf und erzeugt i+1 Instanzen von ihnen 
+        for(int i = 0; i<= NumberPlusOne; i++) //ruft nur einmal zu Beginn die Hindernisfkt. auf und erzeugt i+1 Instanzen von ihnen 
         {
             Instanciate();
         }
