@@ -36,6 +36,10 @@ public class CharakterReaktion : MonoBehaviour {
         {
             Application.LoadLevel(4);
         }
+        if (collisionInfo.name == "Feind")   //tag oder name
+        {
+            Application.LoadLevel(4);
+        }
     }
 }
 

@@ -6,13 +6,24 @@ public class CharakterSteuerung : MonoBehaviour
 {
     //änderung für später: wenn die vorwärtsbewegung seeeehr schnell werden soll muss der speed nach links und rechts ebenfalls erhöt werden!!!!
 
-
     public float vorwärtsspeed = 50.0f; //z
     public float speed = 100;    //x
     public float gravity = 10;
     public float jumppower = 10; //sprunghöhe
     public float test = 0;
     private float bewegungszähler = 0;
+
+    //gegner / schuss funktion
+    private bool abschuss = false;
+    public Mesh mesh;
+    public Material mats;
+    private GameObject schuss;
+    private GameObject lightGameObject;
+    private float n;
+
+    public GameObject laserPrefab;
+    public Transform spawnPoint;
+    public GameObject Feuer;
 
     //schwenkbewegungen 
     int schwenkung = 0;
@@ -30,7 +41,7 @@ public class CharakterSteuerung : MonoBehaviour
     public GameObject Schiff2;
     public GameObject Schiff3;
     public GameObject Schiff4;
-    public GameObject Schiff5;
+   // public GameObject Schiff5;
 
     Vector3 moveDirection = Vector3.zero;
     CharacterController characterController;
@@ -56,9 +67,9 @@ public class CharakterSteuerung : MonoBehaviour
             case 4:
                 Schiff4.SetActive(true);
                 break;
-            case 5:
-                Schiff5.SetActive(true);
-                break;
+          //  case 5:
+            //    Schiff5.SetActive(true);
+            //    break;
             default:
                 Schiff1.SetActive(true);
                 break;
@@ -68,6 +79,30 @@ public class CharakterSteuerung : MonoBehaviour
 
     void Update()
     {
+
+      /*  if (abschuss == true)
+        {
+            //Lösung    GameObject.FindGameObjectWithTag("Schuss").transform.position = new Vector3(GameObject.FindGameObjectWithTag("Schuss").transform.position.x, GameObject.FindGameObjectWithTag("Schuss").transform.position.y, n);
+            GameObject.FindGameObjectWithTag("Schuss").transform.position = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y, n);
+            n = n + 4;
+            lightGameObject.transform.position = schuss.transform.position;
+            if (schuss.transform.position.z >= GameObject.FindGameObjectWithTag("Player").transform.position.z + 100)
+            {
+                Destroy(GameObject.FindWithTag("Schuss"));
+                Destroy(GameObject.FindWithTag("SchussLicht"));
+                abschuss = false;
+            }
+        } */
+     /*   if (schuss != null)
+        {
+            if (schuss.transform.position.z >= GameObject.FindGameObjectWithTag("Player").transform.position.z + 100)
+            {
+                Destroy(GameObject.FindWithTag("Schuss"));
+                Destroy(GameObject.FindWithTag("SchussLicht"));
+                abschuss = false;
+            }
+        } */
+
         if (Time.time < animationDuration) // Verhindern, dass das Schiff bewegt wird, wenn die Kamera-Animation läuft (übernommen(nötig??))
         {
             characterController.Move(Vector3.forward * Time.deltaTime * velocity);
@@ -86,6 +121,43 @@ public class CharakterSteuerung : MonoBehaviour
     {
         velocity = Input.GetAxis("Horizontal") * speed;      //nach links bedeutet - 1 und nach rechts bedeutet +1 so erkennt das prog den unterschied
         
+        //besoffener code!!!!
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+         /*   Feuer = Instantiate(laserPrefab, spawnPoint.position + new Vector3(0,0,10), Quaternion.identity);
+            Feuer.tag = "Schuss";
+            abschuss = true;
+            n = this.transform.position.z + 1;
+            //laser.transform.position = */
+
+            
+            GetComponent<MeshFilter>().mesh = mesh = new Mesh();
+
+            schuss = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            schuss.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+            schuss.GetComponent<Renderer>().material = mats;
+            schuss.transform.position = new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z + 2);
+
+            schuss.tag = "Schuss";
+            SphereCollider kugel = schuss.GetComponent(typeof(SphereCollider)) as SphereCollider;    //aktiviert den collider im cube
+            Rigidbody body = schuss.AddComponent<Rigidbody>();  //aktiviert den collider im cube
+            body.useGravity = false;
+            kugel.isTrigger = true;
+            test aa = schuss.AddComponent<test>();
+
+            //Leuchten des Cubes 
+            /*lightGameObject = new GameObject("Schusslicht");
+            lightGameObject.tag = "SchussLicht";
+            Light lightComp = lightGameObject.AddComponent<Light>();
+            lightComp.color = Color.red;
+            lightComp.intensity = 8.5f;
+            lightComp.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+            lightGameObject.transform.position = schuss.transform.position;
+            */
+            n = this.transform.position.z + 2;
+            abschuss = true; 
+        }
+        //!!!!!!!!!!!!!!!!!!!!!
         if (Input.GetKeyDown(KeyCode.Space))
         {
             inputJump = true;
@@ -117,21 +189,6 @@ public class CharakterSteuerung : MonoBehaviour
             gravity = 10;
             inputHover = false;
         }
-           /* if (Input.GetKeyDown(KeyCode.LeftControl))  //strg
-        {
-            if (inputHover == false)
-            {
-                gravity = 0;
-                inputHover = true;
-                moveDirection.y = jumppower;
-                moveDirection.y = 0;
-            }
-            else
-            {
-                gravity = 10;
-                inputHover = false;
-            }
-        } */
     }
 
     void Move()
