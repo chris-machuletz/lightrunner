@@ -4,7 +4,7 @@ using UnityEngine;
 
 //######Inhalt Skript#####
 // Variablen für Chunksize, viewdst, und dst die sich ein Spieler bis zum nächsten Update bewegen muss. 
-//detaillevles (ggf. noch entfernen da vlt unnötig)
+// detaillevles (ggf. noch entfernen da der Geschwindigkeit unnötig. 
 //Start Methode die verschiedene variablen initialisiert und erste Chunks generiert. (mithilfe UpdateVisibleChunks)
 // Update Methode, die wenn sich der Spieler genug bewegt hat die Chuks aktualisiert (mithilfe UpdateVisibleChunks). 
 // UpdateVisibleChunks Methode. setzt Chunks die im letzten Update visible waren auf false, überprüft ob alle umliegenden Chunks die sichtabr sein sollten, existieren und setzt diese auf visible (UpdateTerrainChunks wird aufgerufen). sollten sie noch nicht existieren wird an diesem Punkt ein neuier chunk generiert. 
@@ -59,7 +59,7 @@ public class BackgroundTerrain : MonoBehaviour {
         }
     }
 
-
+    // function welche die stativ variablen resettet. Ansonsten wird das Mesh beim Szenenwechsel nicht erzeugt. 
     public void Reset()
     {
         mapGenerator = FindObjectOfType<MapGenerator>();
@@ -163,8 +163,8 @@ public class BackgroundTerrain : MonoBehaviour {
             this.mapData = mapData;
             mapDataRecieved = true;
 
-            Texture2D texture = TextureGenerator.TextureFromColourMap(mapData.colourMap, MapGenerator.mapChunkSize, MapGenerator.mapChunkSize); ///////// unnötigg
-            meshRenderer.material.mainTexture = texture;
+            //Texture2D texture = TextureGenerator.TextureFromColourMap(mapData.colourMap, MapGenerator.mapChunkSize, MapGenerator.mapChunkSize); ///////// unnötigg
+            //meshRenderer.material.mainTexture = texture;
 
             UpdateTerrainChunk();//da nicht bei jedem Frame geupdatet wird, muss die methode manuell aufgerufen werden.
         }
