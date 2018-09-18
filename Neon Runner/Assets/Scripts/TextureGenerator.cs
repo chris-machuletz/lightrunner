@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// Wird NICHT während der Laufzeit des Spiels genutzt.
 //#####Inhalt Skript:#####
 //erzeugen der NoiseMap auf Basis der Werte die im Noise.cs Skripot generiert werden. 
 //erzeugen der Textur mit einer Color Map welche in der GenerateMapData Funktion des MapGenerator Skript erezugt wird. 
