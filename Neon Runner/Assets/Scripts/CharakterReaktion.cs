@@ -10,6 +10,7 @@ public class CharakterReaktion : MonoBehaviour {
 
     //einsammel sound
     public AudioClip music;
+    public AudioClip kollision;
     public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
 
     private Scene scene;
@@ -36,9 +37,29 @@ public class CharakterReaktion : MonoBehaviour {
         {
             Application.LoadLevel(4);
         }
-        if (collisionInfo.name == "Feind")   //tag oder name
+        if (collisionInfo.tag == "Feind")   //tag oder name
         {
-            Application.LoadLevel(4);
+            if (GameObject.Find("Ship").GetComponent<PlayerProps>().lifes > 0) // Wenn noch leben vorhanden sind, ziehe eins ab und führe Spiel fort
+            {
+                //StartCoroutine(PitchBackgroundSound());
+                GameObject.Find("Ship").GetComponent<PlayerProps>().lifes--;
+                GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
+                GetComponent<AudioSource>().PlayOneShot(kollision);
+
+                if ((GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed * 0.75f) <= 50) //Berechnung der neuen Spielergeschwindigkeit
+                {
+                    GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed = 50;
+                }
+                else
+                {
+                    GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed *= 0.75f;
+                }
+            }
+            else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
+            {
+
+                Application.LoadLevel(4);
+            }
         }
     }
 }

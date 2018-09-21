@@ -10,6 +10,7 @@ TagManager:
   - track
   - Schuss
   - SchussLicht
+  - Feind
   layers:
   - Default
   - TransparentFX

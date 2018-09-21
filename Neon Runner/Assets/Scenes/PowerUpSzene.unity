@@ -1324,7 +1324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0577bc25f06dfc42a2253bc7b784d63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 0}
+  test: {fileID: 0}
+  mesh: {fileID: 4300002, guid: e45be6e04f06ce341b286fc8b1c80a37, type: 3}
   mats: {fileID: 2100000, guid: 000df850c7851c04aabc270b532bfbc4, type: 2}
   gegner1: {fileID: 0}
   gegner2: {fileID: 0}
@@ -3466,6 +3467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverleiste: {fileID: 1563900060}
   music: {fileID: 8300000, guid: c164402ea90c49043a3bb6e1223b4713, type: 3}
+  kollision: {fileID: 8300000, guid: 26ed761cb2476ca42ad4481dd7e5a7f6, type: 3}
 --- !u!1 &1956443035
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Gegner : MonoBehaviour {
 
+    public test test;
+
     public Mesh mesh;
 
     public Material mats;
@@ -95,64 +97,94 @@ public class Gegner : MonoBehaviour {
 
     }
 
-    //Fein Spawn
+    //Feind Spawn
     void spawnen1()
     {
-        gegner1 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        gegner1.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 5, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
-        gegner1.transform.localScale = new Vector3(10f, 10f, 10f);
+        gegner1 = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        gegner1.GetComponent<MeshFilter>().sharedMesh = mesh;
+        gegner1.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
+        gegner1.transform.localScale = new Vector3(100f, 100f, 100f);
+        gegner1.transform.Rotate(90, 0, 0);
         gegner1.GetComponent<Renderer>().material.color = Color.yellow;
 
         gegner1.name = "Feind1";
-        SphereCollider box = gegner1.GetComponent(typeof(SphereCollider)) as SphereCollider;    //aktiviert den collider im cube
+        gegner1.tag = "Feind";
+        CapsuleCollider box = gegner1.GetComponent(typeof(CapsuleCollider)) as CapsuleCollider;    //aktiviert den collider im cube
+        box.radius = 0.03f;
+        box.height = 0.09f;
+        box.center = new Vector3(0, -0.03f, 0);
         box.isTrigger = true;
         GegnerScript aa = gegner1.AddComponent<GegnerScript>();
     }
     void spawnen2()
     {
-        gegner2 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        gegner2.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 5, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
-        gegner2.transform.localScale = new Vector3(10f, 10f, 10f);
+        gegner2 = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        gegner2.GetComponent<MeshFilter>().sharedMesh = mesh;
+        gegner2.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
+        gegner2.transform.localScale = new Vector3(100f, 100f, 100f);
+        gegner2.transform.Rotate(90, 0, 0);
         gegner2.GetComponent<Renderer>().material.color = Color.yellow;
 
         gegner2.name = "Feind2";
-        SphereCollider box = gegner2.GetComponent(typeof(SphereCollider)) as SphereCollider;    //aktiviert den collider im cube
+        gegner2.tag = "Feind";
+        CapsuleCollider box = gegner2.GetComponent(typeof(CapsuleCollider)) as CapsuleCollider;    //aktiviert den collider im cube
+        box.radius = 0.03f;
+        box.height = 0.09f;
+        box.center = new Vector3(0, -0.03f, 0);
         box.isTrigger = true;
         GegnerScript aa = gegner2.AddComponent<GegnerScript>();
     }
     void spawnen3()
     {
-        gegner3 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        gegner3.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 5, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
-        gegner3.transform.localScale = new Vector3(10f, 10f, 10f);
+        gegner3 = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        gegner3.GetComponent<MeshFilter>().sharedMesh = mesh;
+        gegner3.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
+        gegner3.transform.localScale = new Vector3(100f, 100f, 100f);
+        gegner3.transform.Rotate(90, 0, 0);
         gegner3.GetComponent<Renderer>().material.color = Color.yellow;
 
         gegner3.name = "Feind3";
-        SphereCollider box = gegner3.GetComponent(typeof(SphereCollider)) as SphereCollider;    //aktiviert den collider im cube
+        gegner3.tag = "Feind";
+        CapsuleCollider box = gegner3.GetComponent(typeof(CapsuleCollider)) as CapsuleCollider;    //aktiviert den collider im cube
+        box.radius = 0.03f;
+        box.height = 0.09f;
+        box.center = new Vector3(0, -0.03f, 0);
         box.isTrigger = true;
         GegnerScript aa = gegner3.AddComponent<GegnerScript>();
     }
     void spawnen4()
     {
-        gegner4 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        gegner4.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 5, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
-        gegner4.transform.localScale = new Vector3(10f, 10f, 10f);
+        gegner4 = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        gegner4.GetComponent<MeshFilter>().sharedMesh = mesh;
+        gegner4.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
+        gegner4.transform.localScale = new Vector3(100f, 100f, 100f);
+        gegner4.transform.Rotate(90, 0, 0);
         gegner4.GetComponent<Renderer>().material.color = Color.yellow;
 
         gegner4.name = "Feind4";
-        SphereCollider box = gegner4.GetComponent(typeof(SphereCollider)) as SphereCollider;    //aktiviert den collider im cube
+        gegner4.tag = "Feind";
+        CapsuleCollider box = gegner4.GetComponent(typeof(CapsuleCollider)) as CapsuleCollider;    //aktiviert den collider im cube
+        box.radius = 0.03f;
+        box.height = 0.09f;
+        box.center = new Vector3(0,-0.03f,0);
         box.isTrigger = true;
         GegnerScript aa = gegner4.AddComponent<GegnerScript>();
     }
     void spawnen5()
     {
-        gegner5 = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        gegner5.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 5, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
-        gegner5.transform.localScale = new Vector3(10f, 10f, 10f);
+       gegner5 = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+        gegner5.GetComponent<MeshFilter>().sharedMesh = mesh;
+        gegner5.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
+        gegner5.transform.localScale = new Vector3(100f, 100f, 100f);
+        gegner5.transform.Rotate(90, 0, 0);
         gegner5.GetComponent<Renderer>().material.color = Color.yellow;
 
         gegner5.name = "Feind5";
-        SphereCollider box = gegner5.GetComponent(typeof(SphereCollider)) as SphereCollider;    //aktiviert den collider im cube
+        gegner5.tag = "Feind";
+        CapsuleCollider box = gegner5.GetComponent(typeof(CapsuleCollider)) as CapsuleCollider;    //aktiviert den collider im cube
+        box.radius = 0.03f;
+        box.height = 0.09f;
+        box.center = new Vector3(0, -0.03f, 0);
         box.isTrigger = true;
         GegnerScript aa = gegner5.AddComponent<GegnerScript>();
     }

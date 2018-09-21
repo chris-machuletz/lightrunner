@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GegnerScript : MonoBehaviour {
+    //Hier wird die Reaktion der Gegner mit dem Schuss verfolgt
 
     private Gegner gegner;
 
@@ -53,10 +54,10 @@ public class GegnerScript : MonoBehaviour {
                 gegner.tot5 = true;
             }
         }
-        if (collisionInfo.tag == "Player")   //tag oder name
+        /*if (collisionInfo.tag == "Player")   //tag oder name
         {
             Debug.Log("Gegner berührt");
             Application.LoadLevel(4);
-        }
+        }*/
     }
 }
