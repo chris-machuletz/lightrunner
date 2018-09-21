@@ -61,14 +61,14 @@ public class ship_manager : MonoBehaviour {
             if (Physics.Raycast(mouseRay, out hit) || Physics.Raycast(camRay, out hit)) //sucht sich entsprechende Eingabe aus und gibt den Schiffsnamen zurück
             {
                 if (hit.transform.name == "ship01") { 
-                    Debug.Log("ship01 selected");
+                    //Debug.Log("ship01 selected");
                     s1 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 1);
                     quelle.PlayOneShot(music2);
                 }
 
                 if (hit.transform.name == "ship01_neonframe") {
-                    Debug.Log("ship01_neonframe selected");
+                    //Debug.Log("ship01_neonframe selected");
                     s2 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 2);
                     quelle.PlayOneShot(music2);
@@ -76,7 +76,7 @@ public class ship_manager : MonoBehaviour {
 
                 if (hit.transform.name == "ship02")
                 {
-                    Debug.Log("ship02 selected");
+                    //Debug.Log("ship02 selected");
                     s3 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 3);
                     quelle.PlayOneShot(music2);
@@ -84,7 +84,7 @@ public class ship_manager : MonoBehaviour {
 
                 if (hit.transform.name == "ship03")
                 {
-                    Debug.Log("ship03 selected");
+                    //Debug.Log("ship03 selected");
                     s4 = true; //Coroutinen-Aktivierung
                     PlayerPrefs.SetInt("Schiff", 4);
                     quelle.PlayOneShot(music2);
