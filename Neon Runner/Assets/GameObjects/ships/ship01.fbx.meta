@@ -12,7 +12,22 @@ ModelImporter:
     3300000: //RootNode
     4300000: ship01
     6400000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship01
+    second: {fileID: 2100000, guid: cad4ad6692945204abddb7ea91e35005, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship01_blast
+    second: {fileID: 2100000, guid: 84cb5f9f43ec8114b86c697c0081be81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship01_glass
+    second: {fileID: 2100000, guid: 8ecfea8119041d14c9cafe271bebe576, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

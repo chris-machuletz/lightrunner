@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -88,19 +87,19 @@ public class Hauptmenü : MonoBehaviour {
     {
         quelle.PlayOneShot(music);
         yield return new WaitForSeconds(waitT); //wartet 
-        Application.LoadLevel(2);
+        SceneManager.LoadScene(2);
     }
     IEnumerator Map3()
     {
         quelle.PlayOneShot(music);
         yield return new WaitForSeconds(waitT); //wartet 
-        Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
     }
     IEnumerator Map4() 
     {
         quelle.PlayOneShot(music);
         yield return new WaitForSeconds(waitT); //wartet 
-        Application.LoadLevel(3);
+        SceneManager.LoadScene(3);
     }
     IEnumerator Map5()
     {
@@ -119,7 +118,7 @@ public class Hauptmenü : MonoBehaviour {
     {
         quelle.PlayOneShot(music);
         yield return new WaitForSeconds(waitT); //wartet 
-        Application.LoadLevel(5);
+        SceneManager.LoadScene(5);
     }
 }
 

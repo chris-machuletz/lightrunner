@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.045885578, g: 0.09172987, b: 0.28067908, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1680,9 +1680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1508edddb39a8f84ba6ca182888b6ff0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textureRender: {fileID: 1234211947}
-  meshFilter: {fileID: 242384016}
-  meshRenderer: {fileID: 242384015}
 --- !u!114 &1131960512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1695,7 +1692,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drawMode: 2
-  edit_LOD: 3
   noiseScale: 23
   octaves: 3
   persistance: 0.33
@@ -1764,22 +1760,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   autoUpdate: 1
-  regions:
-  - name: Water
-    range: 0
-    colour: {r: 0.13705944, g: 0.3267104, b: 0.8301887, a: 0}
-  - name: Sand
-    range: 0.4
-    colour: {r: 0.8207547, g: 0.81202227, b: 0.24390352, a: 0}
-  - name: Grass
-    range: 0.5
-    colour: {r: 0.03760237, g: 0.6132076, b: 0.045291096, a: 0}
-  - name: Rock
-    range: 0.6
-    colour: {r: 0.4056604, g: 0.31189927, b: 0.14509805, a: 0}
-  - name: Snow
-    range: 0.95
-    colour: {r: 1, g: 1, b: 1, a: 0}
 --- !u!4 &1131960513
 Transform:
   m_ObjectHideFlags: 0
@@ -2857,7 +2837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 053dfa668528d0349bf8c9f54b9e24ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abgrund: {fileID: 0}
 --- !u!4 &1794578210
 Transform:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -15,7 +14,7 @@ public class TrackSpawnManager : MonoBehaviour {
     private int anzLumenCubes = 40;
     private int anzLifeCubes = 2;
     private int anzIndestructableCubes = 1;
-    private int anzHoverCubes = 1;
+    //private int anzHoverCubes = 1;
 
     // public Material trackMaterial; // Material für Streckenteile
     private Transform playerTransform;
@@ -30,8 +29,8 @@ public class TrackSpawnManager : MonoBehaviour {
     private List<GameObject> activeLumenCubes;
     private List<GameObject> activeLifeCubes;
     private List<GameObject> activeIndestructableCubes;
-    private List<GameObject> activeHoverCubes;
-    bool rs_check = true;
+   // private List<GameObject> activeHoverCubes;
+  
 
     Scene scen; //Scenen-Element, um zu prüfen, ob der aktuelle Code im Menü ausgeführt wird, wo er deaktiviert werden soll
 
@@ -43,7 +42,7 @@ public class TrackSpawnManager : MonoBehaviour {
         activeLumenCubes = new List<GameObject>();
         activeLifeCubes = new List<GameObject>();
         activeIndestructableCubes = new List<GameObject>();
-        activeHoverCubes = new List<GameObject>();
+        //activeHoverCubes = new List<GameObject>();
 
         
 

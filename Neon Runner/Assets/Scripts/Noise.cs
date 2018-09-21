@@ -78,7 +78,7 @@ public static class Noise
         {
             for (int x = 0; x < width; x++)
             {
-
+                //Sorgt für den "Canyon"
                 if (x <= (height / 2) + 25 && x >= (height / 2) - 25)
                 {
                     noiseMap[x, y] = 0;

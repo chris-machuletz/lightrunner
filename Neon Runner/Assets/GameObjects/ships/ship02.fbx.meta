@@ -15,7 +15,32 @@ ModelImporter:
     4300000: ship2
     6400000: //RootNode
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship02_blast_cover
+    second: {fileID: 2100000, guid: 167a556677ed355499dc1b471b5b19ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship2_base.001
+    second: {fileID: 2100000, guid: 167a556677ed355499dc1b471b5b19ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship2_blast
+    second: {fileID: 2100000, guid: 84cb5f9f43ec8114b86c697c0081be81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship2_glass
+    second: {fileID: 2100000, guid: a33f0dd46d9127d47bd4308a5386a3c8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship2_neonframe
+    second: {fileID: 2100000, guid: 167a556677ed355499dc1b471b5b19ac, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -53,7 +78,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    swapUVChannels: 0
+    swapUVChannels: 1
     generateSecondaryUV: 0
     useFileUnits: 1
     optimizeMeshForGPU: 1

@@ -23,7 +23,7 @@ public class MapGenerator : MonoBehaviour {
 
     public const int mapChunkSize = 241; //241, da später weiter entfernte Chnuks mit weniger verticies dargestellt werden sollen. und die Formel ist width -1/i +1. und 240 ist gut teilbar. Gibt quasi länge und breite des Chunks an
     [Range(0,6)]
-    public int edit_LOD; // umso entfernter der Hintertgrund umso weniger Verticies werden verwendet. ggf unnötig in unserem Projekt wegen der Geschwindigkeit
+    //public int edit_LOD; // umso entfernter der Hintertgrund umso weniger Verticies werden verwendet. ggf unnötig in unserem Projekt wegen der Geschwindigkeit
     public float noiseScale;
 
     public int octaves;
@@ -39,30 +39,33 @@ public class MapGenerator : MonoBehaviour {
 
     public bool autoUpdate;
 
-    public TerrainType[] regions;
+    //public TerrainType[] regions;
     //erstellt eine neue Queue vom Typ ThreadInfo welcher vom typ MapData ist
     Queue<MapThreadInfo<MapData>> mapDataThradInfoQueue = new Queue<MapThreadInfo<MapData>>();
     Queue<MapThreadInfo<MeshData>> meshDataThreadInfoQueue = new Queue<MapThreadInfo<MeshData>>();
 
-    public void DrawInEditor()
-    {
-        //stellt die verschiedenen Maps dar, je nachdem welcher Drawmode selectet ist.
-       MapData mapData = GenerateMapData(Vector2.zero); // da jetzt ein Vector2 benötigt wird übergeben wir einfach den 0 Vector2
-        DrawMap display = FindObjectOfType<DrawMap>();
-       
-        if (drawMode == DrawMode.NoiseMap)
-        {
-            display.DrawTexture(TextureGenerator.TextureFromHeightMap(mapData.heightMap));
-        }
-        else if (drawMode == DrawMode.ColourMap)
-        {
-            display.DrawTexture(TextureGenerator.TextureFromColourMap(mapData.colourMap, mapChunkSize, mapChunkSize));
-        }
-        else if (drawMode == DrawMode.Mesh)
-        {
-            display.DrawMesh(MeshGenerator.GenerateTerrainMesh(mapData.heightMap, meshHeightMuliplier, meshHeightCurve, edit_LOD), TextureGenerator.TextureFromColourMap(mapData.colourMap, mapChunkSize, mapChunkSize));
-        }
-    }
+
+
+    // Für Game in der Laufzeit nicht benötigt. 
+    //public void DrawInEditor()
+    //{
+    //    //stellt die verschiedenen Maps dar, je nachdem welcher Drawmode selectet ist.
+    //   MapData mapData = GenerateMapData(Vector2.zero); // da jetzt ein Vector2 benötigt wird übergeben wir einfach den 0 Vector2
+    //    DrawMap display = FindObjectOfType<DrawMap>();
+
+    //    if (drawMode == DrawMode.NoiseMap)
+    //    {
+    //        display.DrawTexture(TextureGenerator.TextureFromHeightMap(mapData.heightMap));
+    //    }
+    //    else if (drawMode == DrawMode.ColourMap)
+    //    {
+    //        display.DrawTexture(TextureGenerator.TextureFromColourMap(mapData.colourMap, mapChunkSize, mapChunkSize));
+    //    }
+    //    else if (drawMode == DrawMode.Mesh)
+    //    {
+    //        display.DrawMesh(MeshGenerator.GenerateTerrainMesh(mapData.heightMap, meshHeightMuliplier, meshHeightCurve, edit_LOD), TextureGenerator.TextureFromColourMap(mapData.colourMap, mapChunkSize, mapChunkSize));
+    //    }
+    //}
 
 
     // ---------------> THREADING MapData <------------------
@@ -118,7 +121,7 @@ public class MapGenerator : MonoBehaviour {
             }
         }
 
-        if(meshDataThreadInfoQueue.Count > 0)
+        if (meshDataThreadInfoQueue.Count > 0)
         {
             for (int i = 0; i < meshDataThreadInfoQueue.Count; i++)
             {
@@ -138,24 +141,24 @@ public class MapGenerator : MonoBehaviour {
 
         Color[] colourMap = new Color[mapChunkSize* mapChunkSize];
       // loopt durch alle Pixel der Noise Map und setzt den Wert auf die Farbe der Region je nachdem in welcher er sich aufgrund seiner höhe befindet
-        for (int y = 0; y < mapChunkSize; y++)
-        {
-            for (int x = 0; x < mapChunkSize; x++)
-            {
-                float currentHeight = noiseMap[x, y];
-                for (int i = 0; i < regions.Length; i++)
-                {
-                    if(currentHeight >= regions[i].range)
-                    {
-                        colourMap[y * mapChunkSize + x] = regions[i].colour;
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }
+        //for (int y = 0; y < mapChunkSize; y++)
+        //{
+        //    for (int x = 0; x < mapChunkSize; x++)
+        //    {
+        //        float currentHeight = noiseMap[x, y];
+        //        for (int i = 0; i < regions.Length; i++)
+        //        {
+        //            if(currentHeight >= regions[i].range)
+        //            {
+        //                colourMap[y * mapChunkSize + x] = regions[i].colour;
+        //            }
+        //            else
+        //            {
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
         return new MapData(noiseMap, colourMap);
     }
 
@@ -190,13 +193,13 @@ public class MapGenerator : MonoBehaviour {
 }
 
 //Wird oben als Aray deklariert um die Regionen wie gewünscht einzustellen, welche für das aussehen der ColourMap verantwortlich sind. 
-[System.Serializable]
-public struct TerrainType
-{
-    public string name;
-    public float range;
-    public Color colour; 
-}
+//[System.Serializable]
+//public struct TerrainType
+//{
+//    public string name;
+//    public float range;
+//    public Color colour; 
+//}
 
 // enthält sowohl height als auch ColourMap. Wird in vorallem im BackgroundTerrain Skript verwendet. 
 public struct MapData
@@ -218,21 +221,21 @@ public struct MapData
 
 // Außerhalb des Editor werden die Funktionen nicht benötigt. 
 
- public class DrawMap : MonoBehaviour
-{
-    public Renderer textureRender;
-    public MeshFilter meshFilter;
-    public MeshRenderer meshRenderer;
+// public class DrawMap : MonoBehaviour
+//{
+//    public Renderer textureRender;
+//    public MeshFilter meshFilter;
+//    public MeshRenderer meshRenderer;
 
-    public void DrawMesh(MeshData data, Texture2D texture)
-    {
-        meshFilter.sharedMesh = data.CreateMesh();
-        meshRenderer.sharedMaterial.mainTexture = texture;
-    }
+//    public void DrawMesh(MeshData data, Texture2D texture)
+//    {
+//        meshFilter.sharedMesh = data.CreateMesh();
+//        meshRenderer.sharedMaterial.mainTexture = texture;
+//    }
 
-    public void DrawTexture(Texture2D texture)
-    {
-        textureRender.sharedMaterial.mainTexture = texture;
-        textureRender.transform.localScale = new Vector3(texture.width, 1, texture.height);
-    }
-}
+//    public void DrawTexture(Texture2D texture)
+//    {
+//        textureRender.sharedMaterial.mainTexture = texture;
+//        textureRender.transform.localScale = new Vector3(texture.width, 1, texture.height);
+//    }
+//}
