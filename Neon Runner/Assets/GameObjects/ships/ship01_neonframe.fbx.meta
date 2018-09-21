@@ -13,7 +13,27 @@ ModelImporter:
     3300000: //RootNode
     4300000: ship01_neon_frame
     6400000: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship01
+    second: {fileID: 2100000, guid: 167a556677ed355499dc1b471b5b19ac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship01_blast
+    second: {fileID: 2100000, guid: 84cb5f9f43ec8114b86c697c0081be81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship01_glass
+    second: {fileID: 2100000, guid: ff72874965d9f6d408fb56f9ec0bb1fb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship01_neonframe
+    second: {fileID: 2100000, guid: 614d17880006f454c9c5aac059c495de, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

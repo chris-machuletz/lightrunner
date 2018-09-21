@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -40,9 +38,13 @@ public class Lumen : MonoBehaviour {
 
         if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 0)
         {
-            Application.LoadLevel(4);
+            //Application.LoadLevel(4);
+            SceneManager.LoadScene(4);
+
         }
-	}
+       
+
+    }
 
     void SetCountText()
     {
@@ -67,7 +69,7 @@ public class Lumen : MonoBehaviour {
                 Destroy(collision.gameObject);
                 GameObject.Find("Ship").GetComponent<PlayerProps>().lifes++;
                 GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
-                AudioSource source = GetComponent<AudioSource>();
+                //AudioSource source = GetComponent<AudioSource>();
                 GetComponent<AudioSource>().PlayOneShot(lifeCollect);
             }
         }
@@ -76,7 +78,7 @@ public class Lumen : MonoBehaviour {
         {
             Destroy(collision.gameObject);
 
-            AudioSource source = GetComponent<AudioSource>();
+           // AudioSource source = GetComponent<AudioSource>();
             GetComponent<AudioSource>().PlayOneShot(indestructableCollect);
 
             StartCoroutine(GameObject.Find("Ship").GetComponent<PowerUpSpawnManager>().Indestructable());
@@ -106,7 +108,8 @@ public class Lumen : MonoBehaviour {
                 else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
                 {
 
-                    Application.LoadLevel(4);
+                    SceneManager.LoadScene(4);
+                   // Application.LoadLevel(4);
                 }
             }
 
@@ -122,7 +125,8 @@ public class Lumen : MonoBehaviour {
 
         if (collision.gameObject.tag == "track")
         {
-            Application.LoadLevel(4);
+           // Application.LoadLevel(4);
+            SceneManager.LoadScene(4);
         }
 
     }

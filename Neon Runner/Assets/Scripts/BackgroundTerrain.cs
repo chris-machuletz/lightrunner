@@ -1,6 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //######Inhalt Skript#####
 // Variablen für Chunksize, viewdst, und dst die sich ein Spieler bis zum nächsten Update bewegen muss. 
@@ -36,7 +36,7 @@ public class BackgroundTerrain : MonoBehaviour {
     static MapGenerator mapGenerator;
    
     //Liste mit allen Koordinaten und Chunks um unnötige Dopplungen zu vermeiden. 
-    Dictionary<Vector2, TerrainChunk> terrainChunkDictonary = new Dictionary<Vector2, TerrainChunk>();
+    Dictionary<Vector2, TerrainChunk> terrainChunkDictonary = new Dictionary<Vector2, TerrainChunk>(); // Eigentlich unnötig da wir uns nur nach vorne bewegen. 
     static List<TerrainChunk> terrainChunksVisibleLastUpdate; // Liste an Chunks die vorher sichtbar waren. ohne diese werden die Meshs die außerhalb der ViewDistance sind nachdem sich das Schiff bewegt hat nicht ausgeblendet.
 
     void Start()
@@ -49,7 +49,7 @@ public class BackgroundTerrain : MonoBehaviour {
 
     void Update()
     {
-
+        DeathToFalling();
         Position();
 
         if ((viewerPositionOld - viewerPosition).sqrMagnitude > sqrDstViewerHasToMove) // damit die Chunks nicht bei jedem Frame geupdated wird wird überprüft ob der Spieler sich eine gewisse Distanz bewegt hat.
@@ -73,6 +73,14 @@ public class BackgroundTerrain : MonoBehaviour {
         viewerPosition = new Vector2(viewer.position.x, viewer.position.z) / scale; // sezt die Aktuelle Position des Viewers(Transform object) auf die viewerPosition. Da sich die Kamera quasi bewegt wird sie hier die Position übergeben
     }
 
+    //    Der DeathScreen wird geladen sollte sich der Spieler außerhalb des gewünschten BEreichs bewegen.
+    public void DeathToFalling()
+    {
+        if (viewer.position.y < -20 || viewer.position.x < -160 || viewer.position.x > 160)
+        {
+            SceneManager.LoadScene(4);
+        }
+    }
 
 
     void UpdateVisibleChunks()

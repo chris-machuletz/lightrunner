@@ -1,6 +1,4 @@
 ﻿//test.cs zuständig für den Collider bzw Trigger
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,11 +10,11 @@ public class CharakterReaktion : MonoBehaviour {
     public AudioClip music;
     public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
 
-    private Scene scene;
+   // private Scene scene;
 
     private void Start()
     {
-        scene = SceneManager.GetActiveScene();
+       // scene = SceneManager.GetActiveScene();
     }
 
     void OnTriggerEnter(Collider collisionInfo)
@@ -34,7 +32,8 @@ public class CharakterReaktion : MonoBehaviour {
         }
         if (collisionInfo.name == "Abgrund")   //tag oder name
         {
-            Application.LoadLevel(4);
+            //Application.LoadLevel(4);
+            SceneManager.LoadScene(4);
         }
     }
 }

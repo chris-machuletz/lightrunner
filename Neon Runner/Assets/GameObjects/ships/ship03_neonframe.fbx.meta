@@ -15,7 +15,32 @@ ModelImporter:
     4300000: ship3_neon_frame
     6400000: //RootNode
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship3_blast
+    second: {fileID: 2100000, guid: 84cb5f9f43ec8114b86c697c0081be81, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship3_jet
+    second: {fileID: 2100000, guid: f2e919a450f643e44ac4aad33afa87ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship3_jet_color
+    second: {fileID: 2100000, guid: f2e919a450f643e44ac4aad33afa87ec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship3_main_col
+    second: {fileID: 2100000, guid: cad4ad6692945204abddb7ea91e35005, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ship3_window_col
+    second: {fileID: 2100000, guid: ff72874965d9f6d408fb56f9ec0bb1fb, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

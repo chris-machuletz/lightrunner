@@ -1,6 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ship_manager : MonoBehaviour {
 
@@ -104,7 +104,8 @@ public class ship_manager : MonoBehaviour {
 
         s1 = false; //setzt den bool auf false und löst damit wieder die Drehung vom Anfang aus
 
-        Application.LoadLevel(0);
+       // Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
     }
 
     IEnumerator turnS2() //coroutine für Drehung von Schiff 2
@@ -114,7 +115,8 @@ public class ship_manager : MonoBehaviour {
         yield return new WaitForSeconds(waitT); //wartet 
 
         s2 = false; //setzt den bool auf false und löst damit wieder die Drehung vom Anfang aus
-        Application.LoadLevel(0);
+       // Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
     }
 
     IEnumerator turnS3() //coroutine für Drehung von Schiff 3
@@ -124,7 +126,8 @@ public class ship_manager : MonoBehaviour {
         yield return new WaitForSeconds(waitT); //wartet 
 
         s3 = false; //setzt den bool auf false und löst damit wieder die Drehung vom Anfang aus
-        Application.LoadLevel(0);
+        //Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
     }
 
     IEnumerator turnS4() //coroutine für Drehung von Schiff 4
@@ -134,7 +137,8 @@ public class ship_manager : MonoBehaviour {
         yield return new WaitForSeconds(waitT); //wartet 
 
         s4 = false; //setzt den bool auf false und löst damit wieder die Drehung vom Anfang aus
-        Application.LoadLevel(0);
+        //Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
     }
 
 

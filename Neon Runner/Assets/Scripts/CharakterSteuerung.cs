@@ -15,8 +15,8 @@ public class CharakterSteuerung : MonoBehaviour
     private float bewegungszähler = 0;
 
     //schwenkbewegungen 
-    int schwenkung = 0;
-    int schwenkende = 3;
+    //int schwenkung = 0;
+    //int schwenkende = 3;
 
     public bool hover = true;           //darf er hovern?
     public bool inputHover = false;     //wird hovertaste gedrückt
