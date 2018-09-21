@@ -8,6 +8,9 @@ TagManager:
   - Collectible
   - Schiff
   - track
+  - Schuss
+  - SchussLicht
+  - Feind
   layers:
   - Default
   - TransparentFX
