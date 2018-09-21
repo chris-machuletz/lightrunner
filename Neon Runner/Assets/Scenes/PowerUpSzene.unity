@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.045885578, g: 0.09172987, b: 0.28067908, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3446,6 +3446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverleiste: {fileID: 1563900060}
   music: {fileID: 8300000, guid: c164402ea90c49043a3bb6e1223b4713, type: 3}
+  gegner: {fileID: 934131866}
   kollision: {fileID: 8300000, guid: 26ed761cb2476ca42ad4481dd7e5a7f6, type: 3}
 --- !u!1 &1956443035
 GameObject:
