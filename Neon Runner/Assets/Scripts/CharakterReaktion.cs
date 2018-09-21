@@ -15,7 +15,7 @@ public class CharakterReaktion : MonoBehaviour {
 
     private void Start()
     {
-       // scene = SceneManager.GetActiveScene();
+       //scene = SceneManager.GetActiveScene();
     }
 
     void OnTriggerEnter(Collider collisionInfo)
@@ -57,7 +57,7 @@ public class CharakterReaktion : MonoBehaviour {
             else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
             {
 
-                Application.LoadLevel(4);
+                SceneManager.LoadScene(4);
             }
         }
     }

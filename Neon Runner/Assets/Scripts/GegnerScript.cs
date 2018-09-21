@@ -18,7 +18,6 @@ public class GegnerScript : MonoBehaviour {
         {
             if (collisionInfo.tag == "Schuss")   //tag oder name
             {
-                Debug.Log("Gegner zerstört");
                 gegner.tot1 = true;
             }
         }
@@ -26,7 +25,6 @@ public class GegnerScript : MonoBehaviour {
         {
             if (collisionInfo.tag == "Schuss")   //tag oder name
             {
-                Debug.Log("Gegner zerstört");
                 gegner.tot2 = true;
             }
         }
@@ -34,7 +32,6 @@ public class GegnerScript : MonoBehaviour {
         {
             if (collisionInfo.tag == "Schuss")   //tag oder name
             {
-                Debug.Log("Gegner zerstört");
                 gegner.tot3 = true;
             }
         }
@@ -42,7 +39,6 @@ public class GegnerScript : MonoBehaviour {
         {
             if (collisionInfo.tag == "Schuss")   //tag oder name
             {
-                Debug.Log("Gegner zerstört");
                 gegner.tot4 = true;
             }
         }
@@ -50,14 +46,8 @@ public class GegnerScript : MonoBehaviour {
         {
             if (collisionInfo.tag == "Schuss")   //tag oder name
             {
-                Debug.Log("Gegner zerstört");
                 gegner.tot5 = true;
             }
         }
-        /*if (collisionInfo.tag == "Player")   //tag oder name
-        {
-            Debug.Log("Gegner berührt");
-            Application.LoadLevel(4);
-        }*/
     }
 }

@@ -143,6 +143,7 @@ public class CharakterSteuerung : MonoBehaviour
             Rigidbody body = schuss.AddComponent<Rigidbody>();  //aktiviert den collider im cube
             body.useGravity = false;
             kugel.isTrigger = true;
+            kugel.radius = 1;
             test aa = schuss.AddComponent<test>();
 
             //Leuchten des Cubes 
@@ -208,47 +209,7 @@ public class CharakterSteuerung : MonoBehaviour
         //alles auskommentierte war der verusch, die rückschwenk bewegung des schiffes auch in einer flüssigen bewegung zu machen
         //hat aber zu rotations bugs geführt
         if (velocity == 0)
-        { /*
-            if (schwenkende == 1)
-            {
-                bewegungszähler = 0;
-                schwenkende = 2;
-            }
-            if (schwenkung == 1)        //schwenkung = 1 bedeutet links, schwenkung = 2 bedeutet rechts
-            {
-                for (int i = 0; i <= 10; i++)
-                {
-                    this.transform.Rotate(-1, 0, 0);
-                    bewegungszähler = bewegungszähler + 1;
-                }
-               /* if (bewegungszähler <= 10)  //links
-                {
-                    this.transform.Rotate(-1, 0, 0);
-                    bewegungszähler = bewegungszähler + 1;
-                    
-                } else {
-                    bewegungszähler = 0;
-                    schwenkung = 3;
-                    schwenkende = 3;
-                } 
-                bewegungszähler = 0;
-                schwenkung = 3;
-                schwenkende = 3;
-            }
-            if (schwenkung == 2)        //schwenkung = 1 bedeutet links, schwenkung = 2 bedeutet rechts
-            {
-                if (bewegungszähler <= 10)  //links
-                {
-                    this.transform.Rotate(1, 0, 0);
-                    bewegungszähler = bewegungszähler + 1;
-                }
-                else
-                {
-                    bewegungszähler = 0;
-                    schwenkung = 3;
-                    schwenkende = 3;
-                }
-            } */
+        {
             bewegungszähler = 0;
             var rotationVector = transform.rotation.eulerAngles;
             rotationVector.x = 0;
@@ -288,14 +249,6 @@ public class CharakterSteuerung : MonoBehaviour
         moveDirection.x = velocity;
         moveDirection.y -= gravity * Time.deltaTime; //erzeugt eine Gravitation für den Charakter
         characterController.Move(moveDirection * Time.deltaTime);   //deltaTime damit die bewegungen nicht von PC unterschiedlich sind
-    }
-
-
-
-    //ohne funktion, vllt noch nötig??
-    void SetAnimation()
-    {
-
     }
 }
 

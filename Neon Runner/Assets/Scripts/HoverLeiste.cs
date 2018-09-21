@@ -21,7 +21,7 @@ public class HoverLeiste : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        aktuellHover = maxHover;
+        //aktuellHover = maxHover;
         aktuellFuel = 150f;
     }
 
