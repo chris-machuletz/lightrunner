@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.045885652, g: 0.09172999, b: 0.28067926, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -142,17 +142,17 @@ MonoBehaviour:
   indestructableCollect: {fileID: 0}
   hoverCubeCollect: {fileID: 0}
   colWithObstacle: 1
---- !u!122 &74351637
-Halo:
+--- !u!114 &74351637
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 74351631}
   m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4286611584
-  m_Size: 7
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee5bb9b47ebdaf4faee3a0aaa78de69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &103530342
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,17 +889,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 2d161c266372dac449259cd29fc2ccbd,
     type: 3}
   m_PrefabInternal: {fileID: 795413374}
---- !u!122 &553908224
-Halo:
+--- !u!114 &553908224
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 553908219}
   m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4286611584
-  m_Size: 7
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee5bb9b47ebdaf4faee3a0aaa78de69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &576892607
 Prefab:
   m_ObjectHideFlags: 0
@@ -1498,17 +1498,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b48ea153f2de0654f81e770c32883045,
     type: 3}
   m_PrefabInternal: {fileID: 1015334740}
---- !u!122 &1000815041
-Halo:
+--- !u!114 &1000815041
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1000815036}
   m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4286611584
-  m_Size: 7
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee5bb9b47ebdaf4faee3a0aaa78de69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1011476757
 GameObject:
   m_ObjectHideFlags: 0
@@ -3797,14 +3797,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 9c5b7be600e1a334ea4b72dcea2f9bf8,
     type: 3}
   m_PrefabInternal: {fileID: 1750739189}
---- !u!122 &2143953381
-Halo:
+--- !u!114 &2143953381
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2143953376}
   m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4286611584
-  m_Size: 7
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ee5bb9b47ebdaf4faee3a0aaa78de69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
