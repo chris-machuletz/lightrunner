@@ -8,6 +8,7 @@ public class GegnerScript : MonoBehaviour {
 
     private Gegner gegner;
     public AudioClip kollision;
+    //public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
 
     private void Start()
     {
@@ -82,6 +83,7 @@ public class GegnerScript : MonoBehaviour {
                 //gegner.collisionInfo.name.tot = true;
                 GameObject.Find("Ship").GetComponent<PlayerProps>().lifes--;
                 GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
+
                 //Hier soll ein Sound beim berühren entstehen, tuts aber noch nicht?!
                 GetComponent<AudioSource>().PlayOneShot(kollision);
 

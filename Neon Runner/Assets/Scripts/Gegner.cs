@@ -15,6 +15,8 @@ public class Gegner : MonoBehaviour {
     public GameObject gegner4;
     public GameObject gegner5;
 
+    public AudioClip kollision;
+
     //töten
     public bool tot1 = false;
     public bool tot2 = false;
@@ -44,30 +46,36 @@ public class Gegner : MonoBehaviour {
         //tot ???
         if (tot1 == true)
         {
+            //GetComponent<AudioSource>().PlayOneShot(kollision);   Sound versuch
             Destroy(gegner1);
             tot1 = false;
             spawnen1();
+
         }
         if (tot2 == true)
         {
+            //GetComponent<AudioSource>().PlayOneShot(kollision);
             Destroy(gegner2);
             tot2 = false;
             spawnen2();
         }
         if (tot3 == true)
         {
+            //GetComponent<AudioSource>().PlayOneShot(kollision);
             Destroy(gegner3);
             tot3 = false;
             spawnen3();
         }
         if (tot4 == true)
         {
+            //GetComponent<AudioSource>().PlayOneShot(kollision);
             Destroy(gegner4);
             tot4 = false;
             spawnen4();
         }
         if (tot5 == true)
         {
+            //GetComponent<AudioSource>().PlayOneShot(kollision);
             Destroy(gegner5);
             tot5 = false;
             spawnen5();
@@ -114,7 +122,7 @@ public class Gegner : MonoBehaviour {
         box.height = 0.09f;
         box.center = new Vector3(0, -0.03f, 0);
         box.isTrigger = true;
-        GegnerScript aa = gegner1.AddComponent<GegnerScript>();
+        gegner1.AddComponent<GegnerScript>();
     }
     void spawnen2()
     {
@@ -132,7 +140,7 @@ public class Gegner : MonoBehaviour {
         box.height = 0.09f;
         box.center = new Vector3(0, -0.03f, 0);
         box.isTrigger = true;
-        GegnerScript aa = gegner2.AddComponent<GegnerScript>();
+        gegner2.AddComponent<GegnerScript>();
     }
     void spawnen3()
     {
@@ -150,7 +158,7 @@ public class Gegner : MonoBehaviour {
         box.height = 0.09f;
         box.center = new Vector3(0, -0.03f, 0);
         box.isTrigger = true;
-        GegnerScript aa = gegner3.AddComponent<GegnerScript>();
+        gegner3.AddComponent<GegnerScript>();
     }
     void spawnen4()
     {
@@ -168,7 +176,7 @@ public class Gegner : MonoBehaviour {
         box.height = 0.09f;
         box.center = new Vector3(0,-0.03f,0);
         box.isTrigger = true;
-        GegnerScript aa = gegner4.AddComponent<GegnerScript>();
+        gegner4.AddComponent<GegnerScript>();
     }
     void spawnen5()
     {
@@ -186,7 +194,8 @@ public class Gegner : MonoBehaviour {
         box.height = 0.09f;
         box.center = new Vector3(0, -0.03f, 0);
         box.isTrigger = true;
-        GegnerScript aa = gegner5.AddComponent<GegnerScript>();
+        gegner5.AddComponent<GegnerScript>();
+        //GegnerScript aa = gegner5.AddComponent<GegnerScript>();
     }
 
 }

@@ -8,7 +8,6 @@ public class CharakterReaktion : MonoBehaviour {
 
     //einsammel sound
     public AudioClip music;
-    public AudioClip kollision;
     public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
 
    // private Scene scene;
