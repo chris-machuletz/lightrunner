@@ -188,4 +188,5 @@ public class Gegner : MonoBehaviour {
         box.isTrigger = true;
         GegnerScript aa = gegner5.AddComponent<GegnerScript>();
     }
+
 }
