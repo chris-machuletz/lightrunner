@@ -107,7 +107,7 @@ public class Lumen : MonoBehaviour {
                 }
                 else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
                 {
-
+                    //Debug.Log("vorher");
                     SceneManager.LoadScene(4);
                    // Application.LoadLevel(4);
                 }

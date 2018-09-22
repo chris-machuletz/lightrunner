@@ -43,8 +43,9 @@ public class TrackSpawnManager : MonoBehaviour {
         activeLifeCubes = new List<GameObject>();
         activeIndestructableCubes = new List<GameObject>();
         //activeHoverCubes = new List<GameObject>();
+      
+      
 
-        
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -59,9 +60,8 @@ public class TrackSpawnManager : MonoBehaviour {
             {
                 SpawnTrack();
 
-                gameObject.AddComponent<randomSpawn>();
-                gameObject.GetComponent<randomSpawn>().Test();
 
+                gameObject.GetComponent<randomSpawn>().Test();
                 SpawnLumenCubes();
                 DeleteLumenCubes();
 
@@ -87,7 +87,7 @@ public class TrackSpawnManager : MonoBehaviour {
             {
                 SpawnTrack();
 
-                gameObject.AddComponent<randomSpawn>();
+             
                 gameObject.GetComponent<randomSpawn>().Test();
 
                 DeleteTrack();

@@ -25,6 +25,7 @@ public class shiplight : MonoBehaviour {
         light.spotAngle = 95;
         light.intensity = 80;
         light.transform.Rotate(0, 0, 0.6f);
+        light.renderMode = LightRenderMode.ForcePixel;
 
         shipli.transform.position = gameObject.transform.position;
 
