@@ -82,12 +82,7 @@ public class randomSpawn : MonoBehaviour {
             RandomizeZ();
 
 
-            obstacl.transform.position = GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks[GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks.Count - 1].transform.position;
-
-
-            //tsm.GetComponent<TrackSpawnManager>();
-            //obstacl = tsm.activeTracks[tsm.activeTracks.Count-1];
-
+            obstacl.transform.position = GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks[GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks.Count - 1].transform.position; //Gleichsetzung der Hindernisposition mit der des letzten Streckenteils
 
             posVec = new Vector3(ranx, rany, ranz);//speichern von zufälligen Werten in Vector
             obstacl.transform.position += posVec;//zufällige Position zuweisen

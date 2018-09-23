@@ -21,7 +21,7 @@ public class cub : MonoBehaviour {
         float ransc = Random.Range(100, 800); //setzt Raum für zufällige Skalierung fest (wobei 100 = normalgröße)
         GameObject cu;
         int rndIndex = Random.Range(0, obstacles.Length);
-        //GameObject cu = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //GameObject cu = GameObject.CreatePrimitive(PrimitiveType.Cube); //Testhindernisform
 
 
         cu = Instantiate(obstacles[rndIndex]) as GameObject; //erzeugt ein hindernis aus dem array befüllt mit den einzelnen Hindernissen

@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class shiplight : MonoBehaviour {
 
-    
 
     // Use this for initialization
     public void Start()
     {
-        
         Shiplight();
     }
 
@@ -28,37 +26,12 @@ public class shiplight : MonoBehaviour {
         light.renderMode = LightRenderMode.ForcePixel;
 
         shipli.transform.position = gameObject.transform.position;
-
-        //gameObject.GetComponent<shiplight>();
-
-
-        //if (gameObject.name == "ship01")
-        //{
-        //    shiplight.transform.position = gameObject.transform.position;
-        //}
-
-        //if (gameObject.name == "ship01_neonframe")
-        //{
-        //    shiplight.transform.position = gameObject.transform.position;
-        //}
-
-        //if (gameObject.name == "ship02")
-        //{
-        //    shiplight.transform.position = gameObject.transform.position;
-        //}
-
-        //if (gameObject.name == "ship03")
-        //{
-        //    shiplight.transform.position = vec;
-        //    vec.y += 3;
-        //    shiplight.transform.position = vec;
-        //}
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        GameObject.Find("shipli").transform.position = gameObject.transform.position;
+        GameObject.Find("shipli").transform.position = gameObject.transform.position; //fügt Licht-Objekt der Position des Raumschiffs hinzu
     }
 }
