@@ -25,10 +25,6 @@ public class CharakterSteuerung : MonoBehaviour
     public Transform spawnPoint;
     public GameObject Feuer;
 
-    //schwenkbewegungen 
-    //int schwenkung = 0;
-    //int schwenkende = 3;
-
     public bool hover = true;           //darf er hovern?
     public bool inputHover = false;     //wird hovertaste gedrückt
     bool inputJump = false;             //springt er?
@@ -41,7 +37,6 @@ public class CharakterSteuerung : MonoBehaviour
     public GameObject Schiff2;
     public GameObject Schiff3;
     public GameObject Schiff4;
-   // public GameObject Schiff5;
 
     Vector3 moveDirection = Vector3.zero;
     CharacterController characterController;
@@ -79,29 +74,7 @@ public class CharakterSteuerung : MonoBehaviour
     void Update()
     {
 
-      /*  if (abschuss == true)
-        {
-            //Lösung    GameObject.FindGameObjectWithTag("Schuss").transform.position = new Vector3(GameObject.FindGameObjectWithTag("Schuss").transform.position.x, GameObject.FindGameObjectWithTag("Schuss").transform.position.y, n);
-            GameObject.FindGameObjectWithTag("Schuss").transform.position = new Vector3(GameObject.FindGameObjectWithTag("Player").transform.position.x, GameObject.FindGameObjectWithTag("Player").transform.position.y, n);
-            n = n + 4;
-            lightGameObject.transform.position = schuss.transform.position;
-            if (schuss.transform.position.z >= GameObject.FindGameObjectWithTag("Player").transform.position.z + 100)
-            {
-                Destroy(GameObject.FindWithTag("Schuss"));
-                Destroy(GameObject.FindWithTag("SchussLicht"));
-                abschuss = false;
-            }
-        } */
-     /*   if (schuss != null)
-        {
-            if (schuss.transform.position.z >= GameObject.FindGameObjectWithTag("Player").transform.position.z + 100)
-            {
-                Destroy(GameObject.FindWithTag("Schuss"));
-                Destroy(GameObject.FindWithTag("SchussLicht"));
-                abschuss = false;
-            }
-        } */
-
+  
         if (Time.time < animationDuration) // Verhindern, dass das Schiff bewegt wird, wenn die Kamera-Animation läuft (übernommen(nötig??))
         {
             characterController.Move(Vector3.forward * Time.deltaTime * velocity);
@@ -120,16 +93,11 @@ public class CharakterSteuerung : MonoBehaviour
     void InputCheck()
     {
         velocity = Input.GetAxis("Horizontal") * speed;      //nach links bedeutet - 1 und nach rechts bedeutet +1 so erkennt das prog den unterschied
-        
-        //besoffener code!!!!
+
         if (Input.GetKeyDown(KeyCode.F))
         {
-            //theo hier schuss ton einfügen!!!!
 
             GetComponent<AudioSource>().PlayOneShot(schussSound);
-
-            //quelle.PlayOneShot(kollision);  blaaa hier
-            //
 
             GetComponent<MeshFilter>().mesh = mesh = new Mesh();
 
@@ -144,17 +112,8 @@ public class CharakterSteuerung : MonoBehaviour
             body.useGravity = false;
             kugel.isTrigger = true;
             kugel.radius = 1;
-            test aa = schuss.AddComponent<test>();
+            schuss.AddComponent<test>();
 
-            //Leuchten des Cubes 
-            /*lightGameObject = new GameObject("Schusslicht");
-            lightGameObject.tag = "SchussLicht";
-            Light lightComp = lightGameObject.AddComponent<Light>();
-            lightComp.color = Color.red;
-            lightComp.intensity = 8.5f;
-            lightComp.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
-            lightGameObject.transform.position = schuss.transform.position;
-            */
             n = this.transform.position.z + 2;
             abschuss = true;
         }
@@ -167,8 +126,6 @@ public class CharakterSteuerung : MonoBehaviour
         {
             inputJump = false;
         }
-
-        // if (Input.GetButton("Jump")) wenn eine taste gedrückt gehalten wird 
 
         //hover bei gehaltener shift taste
         if (Input.GetButton("Fire3"))
@@ -183,7 +140,6 @@ public class CharakterSteuerung : MonoBehaviour
             else
             {
                 gravity = 10;
-                //inputHover = false;
             }
         } else
         {
@@ -205,9 +161,6 @@ public class CharakterSteuerung : MonoBehaviour
             }
         }
 
-        //schwenk bewegung des schiffes
-        //alles auskommentierte war der verusch, die rückschwenk bewegung des schiffes auch in einer flüssigen bewegung zu machen
-        //hat aber zu rotations bugs geführt
         if (velocity == 0)
         {
             bewegungszähler = 0;
@@ -217,33 +170,19 @@ public class CharakterSteuerung : MonoBehaviour
         }
         if (velocity < 0)
         {
-           /* if (schwenkende == 3)
-            {*/
                 if (bewegungszähler <= 10)  //links
                 {
                     this.transform.Rotate(1, 0, 0);
                     bewegungszähler = bewegungszähler + 1;
-                }/* else
-                {
-                    schwenkung = 1;
-                    schwenkende = 1;
                 }
-            }*/
         }
         if (velocity > 0)
         {
-            /*if (schwenkende == 3)
-            {*/
                 if (bewegungszähler <= 10)  //rechts
                 {
                     this.transform.Rotate(-1, 0, 0);
                     bewegungszähler = bewegungszähler + 1;
-                } /*else
-                {
-                    schwenkung = 2;
-                    schwenkende = 1;
-                }*/
-           // }
+                } 
         }
 
         moveDirection.x = velocity;

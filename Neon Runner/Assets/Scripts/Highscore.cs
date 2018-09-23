@@ -14,19 +14,6 @@ public class Highscore : MonoBehaviour {
         PlayerPrefs.DeleteKey("Score");
     }
 
-    /*  zählt pkt pekr knopf druck bsp code nur!!
-    public void RollDice () //bei jedem klick eine zufalls zahl
-    {
-        int number = Random.Range(1, 7);
-        pktzahl.text = number.ToString();
-
-        if (number > PlayerPrefs.GetInt("HighScore", 0))
-        {
-            PlayerPrefs.SetInt("HighScore", number);
-            highScore.text = number.ToString();
-        }
-    }
-    */
     void FixedUpdate()
     {
         if (zähler >= 1)    //zeitverzögerung zählt die pkt
