@@ -195,7 +195,7 @@ public class modifications : MonoBehaviour {
     
     IEnumerator XmRight() //Coroutine für Rechtsbewegung
     {
-        yield return new WaitForSeconds(5); //wartet eine zufällige Zeit zwischen 0 und 5 Sekunden bevor es die Funktion ausführt
+        yield return new WaitForSeconds(5); //wartet 5 Sekunden bevor es die Funktion ausführt
 
         if (obj.transform.position != tarVecXpos) //Funktion wird solange ausgeführt, bis es die Zielposition erreicht hat
         {
@@ -205,7 +205,7 @@ public class modifications : MonoBehaviour {
 
     IEnumerator XmLeft() //Coroutine für Linksbewegung
     {
-        yield return new WaitForSeconds(5); //wartet eine zufällige Zeit zwischen 0 und 5 Sekunden bevor es die Funktion ausführt
+        yield return new WaitForSeconds(5); //wartet 5 Sekunden bevor es die Funktion ausführt
         
         if (obj.transform.position != tarVecXneg) //Funktion wird solange ausgeführt, bis es die Zielposition erreicht hat
         {
@@ -226,7 +226,7 @@ public class modifications : MonoBehaviour {
 
     IEnumerator YmUp() //Coroutine für Bewegung nach oben
     {
-        yield return new WaitForSeconds(5); //wartet eine zufällige Zeit zwischen 0 und 5 Sekunden bevor es die Funktion ausführt
+        yield return new WaitForSeconds(5); //wartet 5 Sekunden bevor es die Funktion ausführt
         
         if (obj.transform.position != tarVecYpos) //Funktion wird solange ausgeführt, bis es die Zielposition erreicht hat
         {
@@ -236,7 +236,7 @@ public class modifications : MonoBehaviour {
 
     IEnumerator YmDown() //Coroutine für Bewegung nach unten
     {
-        yield return new WaitForSeconds(5); //wartet eine zufällige Zeit zwischen 0 und 5 Sekunden bevor es die Funktion ausführt
+        yield return new WaitForSeconds(5); //wartet 5 Sekunden bevor es die Funktion ausführt
         
         if (obj.transform.position != tarVecYneg) //Funktion wird solange ausgeführt, bis es die Zielposition erreicht hat
         {
@@ -250,16 +250,7 @@ public class modifications : MonoBehaviour {
 
         if (xrb == true) //löst die entsprechende Funktion nur aus, wenn sie auch ausgewählt wurde
         {
-
            StartCoroutine("XmRight"); //führt Coroutine aus
-
-
-
-            //ALTER WEG OHNE WARTEZEIT
-            //if (obj.transform.position != tarVecXpos) //Funktion wird solange ausgeführt, bis es die Zielposition erreicht hat
-            //{
-            //    XmoveRight();
-            //}
         }
 
 

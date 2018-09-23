@@ -3530,7 +3530,7 @@ MonoBehaviour:
   Schiff2: {fileID: 553908219}
   Schiff3: {fileID: 2143953376}
   Schiff4: {fileID: 1000815036}
-  schussSound: {fileID: 8300000, guid: eb11f0187274e484cb9fe46eda184190, type: 3}
+  schussSound: {fileID: 8300000, guid: 535504574317cc84b908c6e2f4e8f52b, type: 3}
 --- !u!114 &1955052171
 MonoBehaviour:
   m_ObjectHideFlags: 0
