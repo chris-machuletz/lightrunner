@@ -1327,7 +1327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   test: {fileID: 0}
   mesh: {fileID: 4300002, guid: e45be6e04f06ce341b286fc8b1c80a37, type: 3}
-  mats: {fileID: 2100000, guid: 000df850c7851c04aabc270b532bfbc4, type: 2}
+  mats: {fileID: 2100000, guid: cfe0d50768fbeec4cbb4ea5bbb88b979, type: 2}
   gegner1: {fileID: 0}
   gegner2: {fileID: 0}
   gegner3: {fileID: 0}
@@ -3530,6 +3530,7 @@ MonoBehaviour:
   Schiff2: {fileID: 553908219}
   Schiff3: {fileID: 2143953376}
   Schiff4: {fileID: 1000815036}
+  schussSound: {fileID: 8300000, guid: cb838db426bd3ab4287b8cd95d77465c, type: 3}
 --- !u!114 &1955052171
 MonoBehaviour:
   m_ObjectHideFlags: 0

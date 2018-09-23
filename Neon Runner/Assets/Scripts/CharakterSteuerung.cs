@@ -46,6 +46,8 @@ public class CharakterSteuerung : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     CharacterController characterController;
 
+    public AudioClip schussSound;
+
     void Start()
     {
         //GUI test = LeftShift;
@@ -114,6 +116,7 @@ public class CharakterSteuerung : MonoBehaviour
         Move();
     }
 
+
     void InputCheck()
     {
         velocity = Input.GetAxis("Horizontal") * speed;      //nach links bedeutet - 1 und nach rechts bedeutet +1 so erkennt das prog den unterschied
@@ -122,6 +125,9 @@ public class CharakterSteuerung : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             //theo hier schuss ton einfügen!!!!
+
+            GetComponent<AudioSource>().PlayOneShot(schussSound);
+
             //quelle.PlayOneShot(kollision);  blaaa hier
             //
 
@@ -150,7 +156,7 @@ public class CharakterSteuerung : MonoBehaviour
             lightGameObject.transform.position = schuss.transform.position;
             */
             n = this.transform.position.z + 2;
-            abschuss = true; 
+            abschuss = true;
         }
         //!!!!!!!!!!!!!!!!!!!!!
         if (Input.GetKeyDown(KeyCode.Space))

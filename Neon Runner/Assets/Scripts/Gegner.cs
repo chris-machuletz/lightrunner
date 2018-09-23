@@ -113,7 +113,16 @@ public class Gegner : MonoBehaviour {
         gegner1.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
         gegner1.transform.localScale = new Vector3(100f, 100f, 100f);
         gegner1.transform.Rotate(90, 0, 0);
-        gegner1.GetComponent<Renderer>().material.color = Color.yellow;
+        gegner1.GetComponent<Renderer>().material = mats;
+
+        Light light1 = gegner1.AddComponent<Light>();
+        light1.color = new Color(235, 134, 0);
+        light1.type = LightType.Point;
+        light1.intensity = 0.15f;
+        light1.transform.Rotate(0, 0, 0.6f);
+        light1.renderMode = LightRenderMode.ForcePixel;
+        light1.transform.position = gegner1.transform.position;
+        light1.transform.parent = gegner1.transform;
 
         gegner1.name = "Feind1";
         gegner1.tag = "Feind";
@@ -131,7 +140,15 @@ public class Gegner : MonoBehaviour {
         gegner2.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
         gegner2.transform.localScale = new Vector3(100f, 100f, 100f);
         gegner2.transform.Rotate(90, 0, 0);
-        gegner2.GetComponent<Renderer>().material.color = Color.yellow;
+        gegner2.GetComponent<Renderer>().material = mats;
+
+        Light light2 = gegner2.AddComponent<Light>();
+        light2.color = new Color(235, 134, 0);
+        light2.type = LightType.Point;
+        light2.intensity = 0.15f;
+        light2.transform.Rotate(0, 0, 0.6f);
+        light2.renderMode = LightRenderMode.ForcePixel;
+
 
         gegner2.name = "Feind2";
         gegner2.tag = "Feind";
@@ -149,7 +166,14 @@ public class Gegner : MonoBehaviour {
         gegner3.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
         gegner3.transform.localScale = new Vector3(100f, 100f, 100f);
         gegner3.transform.Rotate(90, 0, 0);
-        gegner3.GetComponent<Renderer>().material.color = Color.yellow;
+        gegner3.GetComponent<Renderer>().material = mats;
+
+        Light light3 = gegner3.AddComponent<Light>();
+        light3.color = new Color(235, 134, 0);
+        light3.type = LightType.Point;
+        light3.intensity = 0.15f;
+        light3.transform.Rotate(0, 0, 0.6f);
+        light3.renderMode = LightRenderMode.ForcePixel;
 
         gegner3.name = "Feind3";
         gegner3.tag = "Feind";
@@ -167,7 +191,14 @@ public class Gegner : MonoBehaviour {
         gegner4.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
         gegner4.transform.localScale = new Vector3(100f, 100f, 100f);
         gegner4.transform.Rotate(90, 0, 0);
-        gegner4.GetComponent<Renderer>().material.color = Color.yellow;
+        gegner4.GetComponent<Renderer>().material = mats;
+
+        Light light4 = gegner4.AddComponent<Light>();
+        light4.color = new Color(235, 134, 0);
+        light4.type = LightType.Point;
+        light4.intensity = 0.15f;
+        light4.transform.Rotate(0, 0, 0.6f);
+        light4.renderMode = LightRenderMode.ForcePixel;
 
         gegner4.name = "Feind4";
         gegner4.tag = "Feind";
@@ -185,7 +216,14 @@ public class Gegner : MonoBehaviour {
         gegner5.transform.position = new Vector3(Random.Range(-100.0f, 100.0f), 3, Random.Range(GameObject.FindGameObjectWithTag("Player").transform.position.z + 500, GameObject.FindGameObjectWithTag("Player").transform.position.z + entfernung)); //random spawn für cube
         gegner5.transform.localScale = new Vector3(100f, 100f, 100f);
         gegner5.transform.Rotate(90, 0, 0);
-        gegner5.GetComponent<Renderer>().material.color = Color.yellow;
+        gegner5.GetComponent<Renderer>().material = mats;
+
+        Light light5 = gegner5.AddComponent<Light>();
+        light5.color = new Color(235, 134, 0);
+        light5.type = LightType.Point;
+        light5.intensity = 0.15f;
+        light5.transform.Rotate(0, 0, 0.6f);
+        light5.renderMode = LightRenderMode.ForcePixel;
 
         gegner5.name = "Feind5";
         gegner5.tag = "Feind";
