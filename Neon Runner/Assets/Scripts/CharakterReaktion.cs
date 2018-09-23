@@ -9,8 +9,9 @@ public class CharakterReaktion : MonoBehaviour {
     //einsammel sound
     public AudioClip music;
     public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
+    public AudioClip kollision;
 
-   // private Scene scene;
+    // private Scene scene;
 
     private void Start()
     {
@@ -33,6 +34,10 @@ public class CharakterReaktion : MonoBehaviour {
         if (collisionInfo.name == "Abgrund")   //tag oder name
         {
             SceneManager.LoadScene(4);
+        }
+        if (collisionInfo.tag == "Feind")
+        {
+            quelle.PlayOneShot(kollision);  //tot sound
         }
     }
 }

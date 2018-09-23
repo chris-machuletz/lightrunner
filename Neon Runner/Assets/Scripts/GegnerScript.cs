@@ -8,13 +8,15 @@ public class GegnerScript : MonoBehaviour {
 
     private Gegner gegner;
     public AudioClip kollision;
-    //public AudioSource quelle { get { return GetComponent<AudioSource>(); } }
 
     private void Start()
     {
         gameObject.AddComponent<AudioSource>();
         kollision = GameObject.Find("Ship").GetComponent<Lumen>().kollision;
         gegner = GameObject.Find("GegnerSpawner").GetComponent<Gegner>();
+
+        //änderung wegen sound (,,,)
+        GetComponent<AudioSource>().clip = kollision;
     }
 
     void OnTriggerEnter(Collider collisionInfo)
@@ -80,12 +82,8 @@ public class GegnerScript : MonoBehaviour {
                 {
                     gegner.tot5 = true;
                 }
-                //gegner.collisionInfo.name.tot = true;
                 GameObject.Find("Ship").GetComponent<PlayerProps>().lifes--;
                 GameObject.Find("Ship").GetComponent<PlayerProps>().setLifeCubes();
-
-                //Hier soll ein Sound beim berühren entstehen, tuts aber noch nicht?!
-                GetComponent<AudioSource>().PlayOneShot(kollision);
 
                 if ((GameObject.Find("Ship").GetComponent<CharakterSteuerung>().vorwärtsspeed * 0.75f) <= 50) //Berechnung der neuen Spielergeschwindigkeit
                 {

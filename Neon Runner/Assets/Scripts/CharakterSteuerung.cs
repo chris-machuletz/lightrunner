@@ -67,9 +67,6 @@ public class CharakterSteuerung : MonoBehaviour
             case 4:
                 Schiff4.SetActive(true);
                 break;
-          //  case 5:
-            //    Schiff5.SetActive(true);
-            //    break;
             default:
                 Schiff1.SetActive(true);
                 break;
@@ -124,13 +121,10 @@ public class CharakterSteuerung : MonoBehaviour
         //besoffener code!!!!
         if (Input.GetKeyDown(KeyCode.F))
         {
-         /*   Feuer = Instantiate(laserPrefab, spawnPoint.position + new Vector3(0,0,10), Quaternion.identity);
-            Feuer.tag = "Schuss";
-            abschuss = true;
-            n = this.transform.position.z + 1;
-            //laser.transform.position = */
+            //theo hier schuss ton einfügen!!!!
+            //quelle.PlayOneShot(kollision);  blaaa hier
+            //
 
-            
             GetComponent<MeshFilter>().mesh = mesh = new Mesh();
 
             schuss = GameObject.CreatePrimitive(PrimitiveType.Sphere);

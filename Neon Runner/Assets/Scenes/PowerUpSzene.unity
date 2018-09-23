@@ -3543,6 +3543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hoverleiste: {fileID: 1563900060}
   music: {fileID: 8300000, guid: c164402ea90c49043a3bb6e1223b4713, type: 3}
+  kollision: {fileID: 8300000, guid: 26ed761cb2476ca42ad4481dd7e5a7f6, type: 3}
 --- !u!1 &1956443035
 GameObject:
   m_ObjectHideFlags: 0
