@@ -1,6 +1,11 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+// http://flafla2.github.io/2014/08/09/perlinnoise.html
+//https://www.youtube.com/watch?v=vFvwyu_ZKfU
+//https://www.youtube.com/channel/UCmtyQOKKmrMVaKuRXz02jbQ
+
+
 
 //######Inhalt Skript#####
 // Variablen für Chunksize, viewdst, und dst die sich ein Spieler bis zum nächsten Update bewegen muss. 

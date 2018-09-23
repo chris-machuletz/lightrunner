@@ -1,4 +1,7 @@
-﻿Shader "Custom/Wireframe" {
+﻿//Shader von Shaders Lab mit leichten anpassungen. 
+//http://www.shaderslab.com/demo-23---wireframe-like.html
+
+Shader "Custom/Wireframe" {
 	Properties{
 		_LineColor("LineColor", Color) = (1, 1, 1, 1)
 		_MainColor("_MainColor", Color) = (1, 1, 1, 1)
