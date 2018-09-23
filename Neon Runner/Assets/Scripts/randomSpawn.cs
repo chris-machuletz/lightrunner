@@ -35,7 +35,7 @@ public class randomSpawn : MonoBehaviour {
         return ranz;
     }
 
-    public int NumberPlusOne = 20;
+    public int NumberPlusOne = 15;
 
     // Use this for initialization
     public void Test()
