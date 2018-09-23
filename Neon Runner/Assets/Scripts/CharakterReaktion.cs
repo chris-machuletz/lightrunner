@@ -33,7 +33,7 @@ public class CharakterReaktion : MonoBehaviour {
         }
         if (collisionInfo.name == "Abgrund")   //tag oder name
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(5);
         }
         if (collisionInfo.tag == "Feind")
         {

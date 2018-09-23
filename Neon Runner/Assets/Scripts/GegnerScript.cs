@@ -97,7 +97,7 @@ public class GegnerScript : MonoBehaviour {
             else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
             {
 
-                SceneManager.LoadScene(4);
+                SceneManager.LoadScene(5);
             }
         }
     }

@@ -83,7 +83,7 @@ public class BackgroundTerrain : MonoBehaviour {
     {
         if (viewer.position.y < -20 || viewer.position.x < -160 || viewer.position.x > 160)
         {
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(5);
         }
     }
 

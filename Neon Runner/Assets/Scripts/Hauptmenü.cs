@@ -81,25 +81,25 @@ public class Hauptmenü : MonoBehaviour {
     {
         quelle.PlayOneShot(music);
         yield return new WaitForSeconds(waitT); //wartet 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
     IEnumerator Map2()
     {
         quelle.PlayOneShot(music);
         yield return new WaitForSeconds(waitT); //wartet 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
     IEnumerator Map3()
     {
         quelle.PlayOneShot(music);
         yield return new WaitForSeconds(waitT); //wartet 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
     IEnumerator Map4() 
     {
         quelle.PlayOneShot(music);
         yield return new WaitForSeconds(waitT); //wartet 
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
     IEnumerator Map5()
     {
@@ -118,7 +118,7 @@ public class Hauptmenü : MonoBehaviour {
     {
         quelle.PlayOneShot(music);
         yield return new WaitForSeconds(waitT); //wartet 
-        SceneManager.LoadScene(5);
+        SceneManager.LoadScene(6);
     }
 }
 

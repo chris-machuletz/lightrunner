@@ -39,7 +39,7 @@ public class Lumen : MonoBehaviour {
         if (GameObject.Find("Ship").GetComponent<PlayerProps>().lumen <= 0)
         {
             //Application.LoadLevel(4);
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(5);
 
         }
        
@@ -108,7 +108,7 @@ public class Lumen : MonoBehaviour {
                 else // Wenn keine Leben mehr vorhanden sind, ist das Spiel zu Ende
                 {
                     //Debug.Log("vorher");
-                    SceneManager.LoadScene(4);
+                    SceneManager.LoadScene(5);
                    // Application.LoadLevel(4);
                 }
             }
@@ -126,7 +126,7 @@ public class Lumen : MonoBehaviour {
         if (collision.gameObject.tag == "track")
         {
            // Application.LoadLevel(4);
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(5);
         }
 
     }
