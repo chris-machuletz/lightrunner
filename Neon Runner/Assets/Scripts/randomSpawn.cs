@@ -64,9 +64,6 @@ public class randomSpawn : MonoBehaviour {
 
             obstacls.Add(obstacl);  //fügt grade erschaffenes obstacle der Liste hinzu
 
-
-
-
             if (obstacls.Count >= 350) //Zerstörung der Obstacles, wenn mehr als 350 Elemente existieren
             {
                 for (int i = 0; i < 10; i++)
@@ -80,7 +77,6 @@ public class randomSpawn : MonoBehaviour {
             RandomizeX();
             RandomizeY();
             RandomizeZ();
-
 
             obstacl.transform.position = GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks[GameObject.Find("TrackSpawnManager").GetComponent<TrackSpawnManager>().activeTracks.Count - 1].transform.position; //Gleichsetzung der Hindernisposition mit der des letzten Streckenteils
 
